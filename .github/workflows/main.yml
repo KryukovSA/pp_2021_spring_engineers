@@ -25,7 +25,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -D USE_SEQ=ON -D USE_MPI=ON -D USE_OMP=ON -D USE_TBB=ON -D USE_STD=ON -D CMAKE_BUILD_TYPE=RELEASE ..
+        cmake -D USE_SEQ=ON -D USE_MPI=OFF -D USE_OMP=ON -D USE_TBB=ON -D USE_STD=ON -D CMAKE_BUILD_TYPE=RELEASE ..
         cmake --build . --config -j4
         cd ..
       env:
@@ -55,7 +55,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -D USE_SEQ=ON -D USE_MPI=ON -D USE_OMP=ON -D USE_TBB=ON -D USE_STD=ON -D CMAKE_BUILD_TYPE=RELEASE ..
+        cmake -D USE_SEQ=ON -D USE_MPI=OFF -D USE_OMP=ON -D USE_TBB=ON -D USE_STD=ON -D CMAKE_BUILD_TYPE=RELEASE ..
         cmake --build . --config -j4
         cd ..
       env:
@@ -86,7 +86,7 @@ jobs:
         export CXXFLAGS="$CXXFLAGS -I$(brew --prefix libomp)/include -I$(brew --prefix tbb)/include"
         mkdir build
         cd build
-        cmake -D USE_SEQ=ON -D USE_MPI=ON -D USE_OMP=ON -D USE_TBB=ON -D USE_STD=ON -D CMAKE_BUILD_TYPE=RELEASE ..
+        cmake -D USE_SEQ=ON -D USE_MPI=OFF -D USE_OMP=ON -D USE_TBB=ON -D USE_STD=ON -D CMAKE_BUILD_TYPE=RELEASE ..
         cmake --build . --config -j4
         cd ..
     - name: Run tests
@@ -113,7 +113,7 @@ jobs:
       run: |
         set PATH=C:\Program Files\Microsoft MPI\Bin;%PATH%
         mkdir build
-        cd build && cmake -G "Visual Studio 16 2019" -D USE_SEQ=ON -D USE_MPI=ON -D USE_OMP=ON -D USE_TBB=ON -D USE_STD=ON -D MPI_C_INCLUDE_PATH:PATH="%MPI_HOME%/Include" -D MPI_C_LIBRARIES:PATH="%MPI_HOME%/Lib/x86/msmpi.lib" -D MPI_CXX_INCLUDE_PATH:PATH="%MPI_HOME%/Include" -D MPI_CXX_LIBRARIES:PATH="%MPI_HOME%/Lib/x86/msmpi.lib" .. -A Win32 && cmake --build .
+        cd build && cmake -G "Visual Studio 16 2019" -D USE_SEQ=ON -D USE_MPI=OFF -D USE_OMP=ON -D USE_TBB=ON -D USE_STD=ON -D MPI_C_INCLUDE_PATH:PATH="%MPI_HOME%/Include" -D MPI_C_LIBRARIES:PATH="%MPI_HOME%/Lib/x86/msmpi.lib" -D MPI_CXX_INCLUDE_PATH:PATH="%MPI_HOME%/Include" -D MPI_CXX_LIBRARIES:PATH="%MPI_HOME%/Lib/x86/msmpi.lib" .. -A Win32 && cmake --build .
       env:
         MPI_HOME: C:/Program Files (x86)/Microsoft SDKs/MPI
       shell: cmd
