@@ -1,6 +1,8 @@
+// Copyright 2021 Kochankov Ilya
 #include <random>
 #include <vector>
-#include "shell_sort.h"
+#include <algorithm>
+#include "modules/task_1/kochankov_i_shell_sort_simple/shell_sort_simple.h"
 
 
 std::vector<double> getRandomVector(int sz) {
@@ -14,7 +16,7 @@ std::vector<double> getRandomVector(int sz) {
 std::vector<double> shell_sort(const std::vector<double>& vec) {
     std::vector<double> copy(vec);
     for (int step = copy.size() / 2; step != 0; step /= 2) {
-        for (int i = step; i < int(copy.size()); i++) {
+        for (int i = step; i < static_cast<int>(copy.size()); i++) {
             for (int j = i - step; j >= 0 && copy[j] > copy[j + step]; j -= step) {
                 double x = copy[j];
                 copy[j] = copy[j + step];

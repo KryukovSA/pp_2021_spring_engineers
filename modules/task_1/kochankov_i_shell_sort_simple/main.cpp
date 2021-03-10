@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 #include <vector>
 #include <algorithm>
-#include "shell_sort.h"
+#include "./shell_sort_simple.h"
 
 TEST(getRandomVector, no_exceptions) {
     ASSERT_NO_THROW(getRandomVector(100));
@@ -14,7 +14,7 @@ TEST(getRandomVector, wrong_size) {
 
 TEST(getRandomVector, works) {
     auto vect = getRandomVector(100);
-    ASSERT_EQ(int(vect.size()), 100);
+    ASSERT_EQ(static_cast<int>(vect.size()), 100);
 }
 
 TEST(shell_sort, no_exceptions) {
@@ -113,7 +113,7 @@ TEST(merge, works_random_size_1) {
     auto vect_a = getRandomVector(1);
     auto vect_b = getRandomVector(1);
     auto merged = merge(vect_a, vect_b);
-    for (int i = 0; i < int(vect_a.size()) - 1; ++i) {
+    for (int i = 0; i < static_cast<int>(vect_a.size()) - 1; ++i) {
         ASSERT_TRUE(merged[i] <= merged[i+1]);
     }
 }
@@ -124,7 +124,7 @@ TEST(merge, works_random_size_5) {
     vect_a = shell_sort(vect_a);
     vect_b = shell_sort(vect_b);
     auto merged = merge(vect_a, vect_b);
-    for (int i = 0; i < int(vect_a.size()) - 1; ++i) {
+    for (int i = 0; i < static_cast<int>(vect_a.size()) - 1; ++i) {
         ASSERT_TRUE(merged[i] <= merged[i+1]);
     }
 }
@@ -135,7 +135,7 @@ TEST(merge, works_random_size_100) {
     vect_a = shell_sort(vect_a);
     vect_b = shell_sort(vect_b);
     auto merged = merge(vect_a, vect_b);
-    for (int i = 0; i < int(vect_a.size()) - 1; ++i) {
+    for (int i = 0; i < static_cast<int>(vect_a.size()) - 1; ++i) {
         ASSERT_TRUE(merged[i] <= merged[i+1]);
     }
 }
@@ -146,7 +146,7 @@ TEST(merge, works_random_size_1000) {
     vect_a = shell_sort(vect_a);
     vect_b = shell_sort(vect_b);
     auto merged = merge(vect_a, vect_b);
-    for (int i = 0; i < int(vect_a.size()) - 1; ++i) {
+    for (int i = 0; i < static_cast<int>(vect_a.size()) - 1; ++i) {
         ASSERT_TRUE(merged[i] <= merged[i+1]);
     }
 }
