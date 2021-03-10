@@ -1,7 +1,7 @@
 get_filename_component(ProjectId ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
-if ( USE_OMP )
-    set(ProjectId "${ProjectId}_omp")
+if ( USE_SEQ )
+    set(ProjectId "${ProjectId}_seq")
     project( ${ProjectId} )
     message( STATUS "-- " ${ProjectId} )
 
@@ -52,6 +52,6 @@ if ( USE_OMP )
             ${ProjectId}
             ${ARGS_FOR_CHECK_COUNT_TESTS}
     )
-else( USE_OMP )
+else( USE_SEQ )
     message( STATUS "-- ${ProjectId} - NOT BUILD!"  )
-endif( USE_OMP )
+endif( USE_SEQ )
