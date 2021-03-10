@@ -2,7 +2,7 @@
 #include <random>
 #include <vector>
 #include <algorithm>
-#include "../../../modules/test_taskstask_1/kochankov_i_shell_sort_simple/shell_sort_simple.h"
+#include "../../../modules/task_1/kochankov_i_shell_sort_simple/shell_sort_simple.h"
 
 
 std::vector<double> getRandomVector(int sz) {
