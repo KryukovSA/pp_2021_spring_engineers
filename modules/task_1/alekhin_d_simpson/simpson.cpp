@@ -5,7 +5,6 @@
 double simpsonMethod(std::vector<std::pair<double, double>> scope,
   std::function<double(std::vector<double>)> func,
   int precision) {
-
   if (scope.size() == 0) {
     throw "Error: scope can't be empty!";
   }

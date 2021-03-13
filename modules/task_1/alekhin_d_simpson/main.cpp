@@ -52,15 +52,15 @@ TEST(Functions_Test, Function_F1_Test3) {
 
 TEST(Input_Data_Test, Scope_Interval_Test1) {
   std::vector<std::pair<double, double>> scope =
-  { std::make_pair<double, double>(1, 0) };
+  { std::make_pair(1, 0) };
 
   EXPECT_ANY_THROW(simpsonMethod(scope, f1, 10));
 }
 
 TEST(Input_Data_Test, Scope_Interval_Test2) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(-1, 1),
-    std::make_pair<double, double>(1, 0) };
+    std::make_pair(-1, 1),
+    std::make_pair(1, 0) };
 
   EXPECT_ANY_THROW(simpsonMethod(scope, f1, 10));
 }
@@ -73,94 +73,94 @@ TEST(Input_Data_Test, Scope_Interval_Test3) {
 
 TEST(Input_Data_Test, Precision_Test) {
   std::vector<std::pair<double, double>> scope =
-  { std::make_pair<double, double>(0, 10) };
+  { std::make_pair(0, 10) };
 
   EXPECT_ANY_THROW(simpsonMethod(scope, f1, 0));
 }
 
 TEST(Simpson_Method_Test, Simpson_Test1) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(0, 10) };
+    std::make_pair(0, 10) };
 
   EXPECT_DOUBLE_EQ(50, simpsonMethod(scope, f1, 10));
 }
 
 TEST(Simpson_Method_Test, Simpson_Test2) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(-5, 5),
-    std::make_pair<double, double>(-5, 5) };
+    std::make_pair(-5, 5),
+    std::make_pair(-5, 5) };
 
   EXPECT_DOUBLE_EQ(0, simpsonMethod(scope, f2, 2));
 }
 
 TEST(Simpson_Method_Test, Simpson_Test3) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(0, 8) };
+    std::make_pair(0, 8) };
 
   EXPECT_DOUBLE_EQ(32, simpsonMethod(scope, f2, 16));
 }
 
 TEST(Simpson_Method_Test, Simpson_Test4) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(0, 8),
-    std::make_pair<double, double>(0, 8) };
+    std::make_pair(0, 8),
+    std::make_pair(0, 8) };
 
   EXPECT_DOUBLE_EQ(512, simpsonMethod(scope, f2, 16));
 }
 
 TEST(Simpson_Method_Test, Simpson_Test5) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(0, 8),
-    std::make_pair<double, double>(0, 8) };
+    std::make_pair(0, 8),
+    std::make_pair(0, 8) };
 
   EXPECT_DOUBLE_EQ(512, simpsonMethod(scope, f2, 2));
 }
 
 TEST(Simpson_Method_Test, Simpson_Test6) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(0, 8),
-    std::make_pair<double, double>(0, 8) };
+    std::make_pair(0, 8),
+    std::make_pair(0, 8) };
 
   EXPECT_DOUBLE_EQ(512, simpsonMethod(scope, f2, 8));
 }
 
 TEST(Simpson_Method_Test, Simpson_Test7) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(-3, 12),
-    std::make_pair<double, double>(7, 9) };
+    std::make_pair(-3, 12),
+    std::make_pair(7, 9) };
 
   EXPECT_DOUBLE_EQ(375, simpsonMethod(scope, f2, 20));
 }
 
 TEST(Simpson_Method_Test, Simpson_Test8) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(-3, 12),
-    std::make_pair<double, double>(7, 9),
-    std::make_pair<double, double>(0, 5) };
+    std::make_pair(-3, 12),
+    std::make_pair(7, 9),
+    std::make_pair(0, 5) };
 
   EXPECT_NEAR(2250, simpsonMethod(scope, f2, 1000), 1);
 }
 
 TEST(Simpson_Method_Test, Simpson_Test9) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(5, 10),
-    std::make_pair<double, double>(-10, -5),
-    std::make_pair<double, double>(0, 2) };
+    std::make_pair(5, 10),
+    std::make_pair(-10, -5),
+    std::make_pair(0, 2) };
 
   EXPECT_NEAR(35.4, simpsonMethod(scope, f3, 10), 0.1);
 }
 
 TEST(Simpson_Method_Test, Simpson_Test10) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(5, 10),
-    std::make_pair<double, double>(-10, -5) };
+    std::make_pair(5, 10),
+    std::make_pair(-10, -5) };
 
   EXPECT_NEAR(0, simpsonMethod(scope, f3, 10), 0.1);
 }
 
 TEST(Simpson_Method_Test, Simpson_Test11) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(5, 10) };
+    std::make_pair(5, 10) };
 
   EXPECT_NEAR(1.12, simpsonMethod(scope, f3, 10), 0.01);
 }
