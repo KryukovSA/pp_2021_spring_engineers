@@ -1,6 +1,9 @@
 // Copyright 2021 Alekhin Denis
 #include <gtest/gtest.h>
+#include <math.h>
 #include "../../modules/task_1/alekhin_d_simpson/simpson.h"
+
+#define PI 3.14159265
 
 // y = x1( * x2 * ...)
 std::function<double(std::vector<double>)> f1 = [](std::vector<double> arg) {
@@ -16,6 +19,15 @@ std::function<double(std::vector<double>)> f2 = [](std::vector<double> arg) {
   double result = 0;
   for (size_t i = 0; i < arg.size(); i++) {
     result += arg[i];
+  }
+  return result;
+};
+
+// y = sin(x1)( + sin(x2) + ...)
+std::function<double(std::vector<double>)> f3 = [](std::vector<double> arg) {
+  double result = 0;
+  for (size_t i = 0; i < arg.size(); i++) {
+    result += sin(arg[i]);
   }
   return result;
 };
@@ -93,5 +105,62 @@ TEST(Simpson_Method_Test, Simpson_Test4) {
     std::make_pair<double, double>(0, 8),
     std::make_pair<double, double>(0, 8) };
 
-  EXPECT_DOUBLE_EQ(64, simpsonMethod(scope, f2, 16));
+  EXPECT_DOUBLE_EQ(512, simpsonMethod(scope, f2, 16));
+}
+
+TEST(Simpson_Method_Test, Simpson_Test5) {
+  std::vector<std::pair<double, double>> scope = {
+    std::make_pair<double, double>(0, 8),
+    std::make_pair<double, double>(0, 8) };
+
+  EXPECT_DOUBLE_EQ(512, simpsonMethod(scope, f2, 2));
+}
+
+TEST(Simpson_Method_Test, Simpson_Test6) {
+  std::vector<std::pair<double, double>> scope = {
+    std::make_pair<double, double>(0, 8),
+    std::make_pair<double, double>(0, 8) };
+
+  EXPECT_DOUBLE_EQ(512, simpsonMethod(scope, f2, 8));
+}
+
+TEST(Simpson_Method_Test, Simpson_Test7) {
+  std::vector<std::pair<double, double>> scope = {
+    std::make_pair<double, double>(-3, 12),
+    std::make_pair<double, double>(7, 9) };
+
+  EXPECT_DOUBLE_EQ(375, simpsonMethod(scope, f2, 20));
+}
+
+TEST(Simpson_Method_Test, Simpson_Test8) {
+  std::vector<std::pair<double, double>> scope = {
+    std::make_pair<double, double>(-3, 12),
+    std::make_pair<double, double>(7, 9),
+    std::make_pair<double, double>(0, 5) };
+
+  EXPECT_NEAR(2250, simpsonMethod(scope, f2, 1000), 1);
+}
+
+TEST(Simpson_Method_Test, Simpson_Test9) {
+  std::vector<std::pair<double, double>> scope = {
+    std::make_pair<double, double>(5, 10),
+    std::make_pair<double, double>(-10, -5),
+    std::make_pair<double, double>(0, 2) };
+
+  EXPECT_NEAR(35.4, simpsonMethod(scope, f3, 10), 0.1);
+}
+
+TEST(Simpson_Method_Test, Simpson_Test10) {
+  std::vector<std::pair<double, double>> scope = {
+    std::make_pair<double, double>(5, 10),
+    std::make_pair<double, double>(-10, -5)};
+
+  EXPECT_NEAR(0, simpsonMethod(scope, f3, 10), 0.1);
+}
+
+TEST(Simpson_Method_Test, Simpson_Test11) {
+  std::vector<std::pair<double, double>> scope = {
+    std::make_pair<double, double>(5, 10)};
+
+  EXPECT_NEAR(1.12, simpsonMethod(scope, f3, 10), 0.01);
 }

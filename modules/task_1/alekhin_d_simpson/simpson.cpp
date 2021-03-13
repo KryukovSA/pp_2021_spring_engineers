@@ -18,19 +18,22 @@ double simpsonMethod(std::vector<std::pair<double, double>> scope,
     throw "Error: precision can't be less than 1";
   }
 
-  int countOfDimentions = scope.size();
-  std::vector<double> h(countOfDimentions);
-  double hComp = 1;
-  for (size_t i = 0; i < countOfDimentions; i++) {
+  int dimention = scope.size();
+  std::vector<double> 
+    h(dimention),
+    a(dimention),
+    b(dimention);
+  for (size_t i = 0; i < dimention; i++) {
     h[i] = (scope[i].second - scope[i].first) / precision;
-    hComp *= h[i];
+    a[i] = scope[i].first;
+    b[i] = scope[i].second;
   }
 
   double evenSum = 0, oddSum = 0;
-  std::vector<double> point(countOfDimentions);
+  std::vector<double> point(a);
   for (size_t i = 1; i < precision; i++) {
-    for (size_t j = 0; j < countOfDimentions; j++) {
-      point[j] = scope[j].first + h[j] * i;
+    for (size_t j = 0; j < dimention; j++) {
+      point[j] += h[j];
     }
     if (i % 2 == 0) {
       evenSum += func(point);
@@ -39,13 +42,13 @@ double simpsonMethod(std::vector<std::pair<double, double>> scope,
     }
   }
 
-  std::vector<double> a(countOfDimentions), b(countOfDimentions);
-  for (size_t i = 0; i < countOfDimentions; i++) {
-    a[i] = scope[i].first;
-    b[i] = scope[i].second;
+  double result = func(a) + func(b) + 2.0 * evenSum + 4.0 * oddSum;
+
+  for (size_t i = 0; i < dimention; i++) {
+    result *= b[i] - a[i];
   }
 
-  double result = hComp * (func(a) + func(b) + 2.0 * evenSum + 4.0 * oddSum) / 3.0;
+  result /= 3.0 * precision;
 
   return result;
 }
