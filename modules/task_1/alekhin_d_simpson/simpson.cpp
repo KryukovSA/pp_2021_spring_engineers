@@ -2,10 +2,10 @@
 
 #include "../../modules/task_1/alekhin_d_simpson/simpson.h"
 
-double simpsonMethod(std::vector<std::pair<double, double>> scope, 
-  std::function<double(std::vector<double>)> func, 
+double simpsonMethod(std::vector<std::pair<double, double>> scope,
+  std::function<double(std::vector<double>)> func,
   int precision) {
-  
+
   if (scope.size() == 0) {
     throw "Error: scope can't be empty!";
   }
@@ -19,11 +19,11 @@ double simpsonMethod(std::vector<std::pair<double, double>> scope,
   }
 
   int dimention = scope.size();
-  std::vector<double> 
+  std::vector<double>
     h(dimention),
     a(dimention),
     b(dimention);
-  for (size_t i = 0; i < dimention; i++) {
+  for (int i = 0; i < dimention; i++) {
     h[i] = (scope[i].second - scope[i].first) / precision;
     a[i] = scope[i].first;
     b[i] = scope[i].second;
@@ -31,8 +31,8 @@ double simpsonMethod(std::vector<std::pair<double, double>> scope,
 
   double evenSum = 0, oddSum = 0;
   std::vector<double> point(a);
-  for (size_t i = 1; i < precision; i++) {
-    for (size_t j = 0; j < dimention; j++) {
+  for (int i = 1; i < precision; i++) {
+    for (int j = 0; j < dimention; j++) {
       point[j] += h[j];
     }
     if (i % 2 == 0) {
@@ -44,7 +44,7 @@ double simpsonMethod(std::vector<std::pair<double, double>> scope,
 
   double result = func(a) + func(b) + 2.0 * evenSum + 4.0 * oddSum;
 
-  for (size_t i = 0; i < dimention; i++) {
+  for (int i = 0; i < dimention; i++) {
     result *= b[i] - a[i];
   }
 

@@ -53,7 +53,7 @@ TEST(Functions_Test, Function_F1_Test3) {
 TEST(Input_Data_Test, Scope_Interval_Test1) {
   std::vector<std::pair<double, double>> scope =
   { std::make_pair<double, double>(1, 0) };
-  
+
   EXPECT_ANY_THROW(simpsonMethod(scope, f1, 10));
 }
 
@@ -72,22 +72,22 @@ TEST(Input_Data_Test, Scope_Interval_Test3) {
 }
 
 TEST(Input_Data_Test, Precision_Test) {
-  std::vector<std::pair<double, double>> scope = 
+  std::vector<std::pair<double, double>> scope =
   { std::make_pair<double, double>(0, 10) };
 
   EXPECT_ANY_THROW(simpsonMethod(scope, f1, 0));
 }
 
 TEST(Simpson_Method_Test, Simpson_Test1) {
-  std::vector<std::pair<double, double>> scope = { 
-    std::make_pair<double, double>(0, 10)};
+  std::vector<std::pair<double, double>> scope = {
+    std::make_pair<double, double>(0, 10) };
 
   EXPECT_DOUBLE_EQ(50, simpsonMethod(scope, f1, 10));
 }
 
 TEST(Simpson_Method_Test, Simpson_Test2) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(-5, 5), 
+    std::make_pair<double, double>(-5, 5),
     std::make_pair<double, double>(-5, 5) };
 
   EXPECT_DOUBLE_EQ(0, simpsonMethod(scope, f2, 2));
@@ -153,14 +153,14 @@ TEST(Simpson_Method_Test, Simpson_Test9) {
 TEST(Simpson_Method_Test, Simpson_Test10) {
   std::vector<std::pair<double, double>> scope = {
     std::make_pair<double, double>(5, 10),
-    std::make_pair<double, double>(-10, -5)};
+    std::make_pair<double, double>(-10, -5) };
 
   EXPECT_NEAR(0, simpsonMethod(scope, f3, 10), 0.1);
 }
 
 TEST(Simpson_Method_Test, Simpson_Test11) {
   std::vector<std::pair<double, double>> scope = {
-    std::make_pair<double, double>(5, 10)};
+    std::make_pair<double, double>(5, 10) };
 
   EXPECT_NEAR(1.12, simpsonMethod(scope, f3, 10), 0.01);
 }
