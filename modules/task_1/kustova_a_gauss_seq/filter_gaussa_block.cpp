@@ -35,7 +35,8 @@ std::vector<float> createGaussianKernel(int radius, float sigma) {
     return kernel;
 }
 
-int calculateNewPixelColor(std::vector<int> img, int width, int height, int x, int y, int radius, std::vector<float> kernel) {
+int calculateNewPixelColor(std::vector<int> img, int width, int height, 
+	int x, int y, int radius, std::vector<float> kernel) {
     int size = radius * 2 + 1;
     double sumColor = 0;
     for (int l = -radius; l <= radius; l++) {
