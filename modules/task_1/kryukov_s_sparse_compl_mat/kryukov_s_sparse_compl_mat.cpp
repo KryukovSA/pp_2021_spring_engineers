@@ -4,8 +4,9 @@
 #include <vector>
 #include "../../../modules/task_1/kryukov_s_sparse_compl_mat/kryukov_s_sparse_compl_mat.h"
 
-void createSparseMat(int size_,
-    const std::vector<std::complex<double>> &vectMat, crs_mat &matrix) {
+crs_mat createSparseMat(int size_,
+    const std::vector<std::complex<double>> &vectMat) {
+    crs_mat matrix;
     matrix.size = size_;
     matrix.rowNum.push_back(0);
     for (int i = 0; i < size_; i++) {
@@ -17,9 +18,11 @@ void createSparseMat(int size_,
         }
         matrix.rowNum.push_back(matrix.colNum.size());
     }
+    return matrix;
 }
 
-void transposeMatrixGustavson(crs_mat matr, crs_mat &TrMat) {
+crs_mat transposeMatrixGustavson(crs_mat matr) {
+    crs_mat TrMat;
     std::vector<std::vector<std::complex<double>>> storageValue(matr.size);
     std::vector<std::vector<int>> storageCol(matr.size);
     TrMat.rowNum.push_back(0);
@@ -39,18 +42,18 @@ void transposeMatrixGustavson(crs_mat matr, crs_mat &TrMat) {
         sum += static_cast<int>(storageCol[i].size());
         TrMat.rowNum.push_back(sum);
     }
+    return TrMat;
 }
 
-void multiplicateMatrix(crs_mat A, crs_mat B, crs_mat &C) {
+crs_mat multiplicateMatrix(crs_mat A, crs_mat B) {
+    crs_mat C;
     if (A.size != B.size)
         throw(std::string)"incorrect size";
     std::vector<std::complex<double>> matC_val;
     std::vector<int> matC_colNum;
     std::vector<int> matC_rowNum;
-
-    transposeMatrixGustavson(A, B);
+    B = transposeMatrixGustavson(B);
     matC_rowNum.push_back(0);
-
     for (int rowA = 0; rowA < A.size; rowA++) {
         for (int rowB = 0; rowB < A.size; rowB++) {
             std::complex<double> scalsum = 0;
@@ -76,4 +79,5 @@ void multiplicateMatrix(crs_mat A, crs_mat B, crs_mat &C) {
     for (int i = 0; i <= A.size; i++) {
         C.rowNum.push_back(matC_rowNum[i]);
     }
+    return C;
 }
