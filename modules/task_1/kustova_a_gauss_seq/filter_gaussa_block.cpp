@@ -2,7 +2,11 @@
 #include <math.h>
 #include <iostream>
 #include <vector>
+<<<<<<< HEAD
 #include "../../../modules/task_1/kustova_a_gauss_seq/filter_gaussa_block.h"
+=======
+#include "filter_gaussa_block.h"
+>>>>>>> 8b0a7b69079fe1dfea02af0c88f6dd62a0631016
 int ** gaussianFilter(int ** img, int width, int height, int radius, float sigma) {
     int ** resultImage = new int*[height];
     for (int i = 0; i < height; i++) {
