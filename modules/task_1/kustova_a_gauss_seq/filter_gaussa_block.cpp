@@ -1,4 +1,4 @@
-// Copiright 2021 Kustova Anastasiya
+// Copyright 2021 Kustova Anastasiya
 #include "filter_gaussa_block.h"
 #include <iostream>
 #include <math.h>
