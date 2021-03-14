@@ -1,4 +1,4 @@
-// Ñopyright 2021 Kustova Anastasiya
+// Copyright 2021 Kustova Anastasiya
 #include <gtest/gtest.h>
 #include <math.h>
 #include<vector>
@@ -167,15 +167,15 @@ TEST(Jacoby_Method, Test_creating_Gaussian_Kernel) {
     int radius = 1;
     float sigma = 5.0;
     std::vector<float> kernel1(9);
-    kernel1[0] = (float)0.109629683;
-    kernel1[1] = (float)0.111844353;
-    kernel1[2] = (float)0.109629683;
-    kernel1[3] = (float)0.111844353;
-    kernel1[4] = (float)0.114103757;
-    kernel1[5] = (float)0.111844353;
-    kernel1[6] = (float)0.109629683;
-    kernel1[7] = (float)0.111844353;
-    kernel1[8] = (float)0.109629683;
+    kernel1[0] = static_cast<float>(0.109629683);
+    kernel1[1] = static_cast<float>(0.111844353);
+    kernel1[2] = static_cast<float>(0.109629683);
+    kernel1[3] = static_cast<float>(0.111844353);
+    kernel1[4] = static_cast<float>(0.114103757);
+    kernel1[5] = static_cast<float>(0.111844353);
+    kernel1[6] = static_cast<float>(0.109629683);
+    kernel1[7] = static_cast<float>(0.111844353);
+    kernel1[8] = static_cast<float>(0.109629683);
     std::vector<float> kernel2 = createGaussianKernel(radius, sigma);
     for (int i = 0; i < 9; i++) {
         ASSERT_NEAR(kernel1[i], kernel2[i], 0.001);
