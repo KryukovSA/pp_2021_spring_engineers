@@ -5,7 +5,7 @@
 #include "../../../modules/task_1/kustova_a_gauss_seq/filter_gaussa_block.h"
 
 std::vector<int> gaussianFilter(std::vector<int> img, int width, int height, int radius, float sigma) {
-	std::vector<int> resultImage(height * width);
+    std::vector<int> resultImage(height * width);
     int size = 2 * radius + 1;
     std::vector<float> kernel(size * size);
     kernel = createGaussianKernel(radius, sigma);
@@ -35,8 +35,8 @@ std::vector<float> createGaussianKernel(int radius, float sigma) {
     return kernel;
 }
 
-int calculateNewPixelColor(std::vector<int> img, int width, int height, 
-	int x, int y, int radius, std::vector<float> kernel) {
+int calculateNewPixelColor(std::vector<int> img, int width, int height,
+    int x, int y, int radius, std::vector<float> kernel) {
     int size = radius * 2 + 1;
     double sumColor = 0;
     for (int l = -radius; l <= radius; l++) {
