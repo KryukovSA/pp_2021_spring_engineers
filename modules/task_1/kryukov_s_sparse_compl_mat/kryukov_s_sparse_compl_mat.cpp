@@ -72,7 +72,7 @@ crs_mat multiplicateMatrix(crs_mat A, crs_mat B) {
         }
         matC_rowNum.push_back(matC_val.size() + matC_rowNum[rowA]);
     }
-    for (unsigned int j = 0; j < static_cast<int>(matC_colNum.size()); j++) {
+    for (int j = 0; j < static_cast<int>(matC_colNum.size()); j++) {
         C.colNum.push_back(matC_colNum[j]);
         C.val.push_back(matC_val[j]);
     }
