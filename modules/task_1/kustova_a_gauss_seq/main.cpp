@@ -4,7 +4,7 @@
 #include<vector>
 #include<iostream>
 #include"./filter_gaussa_block.h"
-
+/*
 TEST(Jacoby_Method, Test_1) {
     int radius = 1;
     float sigma = 5.0;
@@ -180,10 +180,34 @@ TEST(Jacoby_Method, Test_creating_Gaussian_Kernel) {
     for (int i = 0; i < 9; i++) {
         ASSERT_NEAR(kernel1[i], kernel2[i], 0.001);
     }
-}
+}*/
 TEST(Jacoby_Method, Test_check_Clamp) {
     int val1 = -1;
     ASSERT_EQ(Clamp(val1, 0, 255), 0);
     ASSERT_EQ(Clamp(val1, -5, 30), -1);
     ASSERT_EQ(Clamp(val1, -5, -3), -3);
+}
+TEST(Jacoby_Method, Test_check_Clamp2) {
+	int val1 = -1;
+	ASSERT_EQ(Clamp(val1, 0, 255), 0);
+	ASSERT_EQ(Clamp(val1, -5, 30), -1);
+	ASSERT_EQ(Clamp(val1, -5, -3), -3);
+}
+TEST(Jacoby_Method, Test_check_Clamp3) {
+	int val1 = -1;
+	ASSERT_EQ(Clamp(val1, 0, 255), 0);
+	ASSERT_EQ(Clamp(val1, -5, 30), -1);
+	ASSERT_EQ(Clamp(val1, -5, -3), -3);
+}
+TEST(Jacoby_Method, Test_check_Clamp4) {
+	int val1 = -1;
+	ASSERT_EQ(Clamp(val1, 0, 255), 0);
+	ASSERT_EQ(Clamp(val1, -5, 30), -1);
+	ASSERT_EQ(Clamp(val1, -5, -3), -3);
+}
+TEST(Jacoby_Method, Test_check_Clamp5) {
+	int val1 = -1;
+	ASSERT_EQ(Clamp(val1, 0, 255), 0);
+	ASSERT_EQ(Clamp(val1, -5, 30), -1);
+	ASSERT_EQ(Clamp(val1, -5, -3), -3);
 }
