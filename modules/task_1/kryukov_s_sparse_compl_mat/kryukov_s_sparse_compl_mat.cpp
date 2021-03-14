@@ -30,7 +30,7 @@ void transposeMatrixGustavson(crs_mat matr, crs_mat &TrMat) {
         }
     }
     for (int i = 0; i < matr.size; i++)
-        for (int j = 0; j < storageCol[i].size(); j++) {
+        for (int j = 0; j < static_cast<int>storageCol[i].size(); j++) {
             TrMat.colNum.push_back(storageCol[i][j]);
             TrMat.val.push_back(storageValue[i][j]);
         }
@@ -69,8 +69,7 @@ void multiplicateMatrix(crs_mat A, crs_mat B, crs_mat &C) {
         }
         matC_rowNum.push_back(matC_val.size() + matC_rowNum[rowA]);
     }
-
-    for (unsigned int j = 0; j < matC_colNum.size(); j++) {
+    for (unsigned int j = 0; j < static_cast<int>matC_colNum.size(); j++) {
         C.colNum.push_back(matC_colNum[j]);
         C.val.push_back(matC_val[j]);
     }
