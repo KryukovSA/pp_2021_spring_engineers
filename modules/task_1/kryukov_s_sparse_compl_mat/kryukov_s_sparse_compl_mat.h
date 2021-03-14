@@ -8,8 +8,10 @@
 #include <complex>
 
 struct crs_mat {
+	int size;
 	std::vector<std::complex<double>> val;
 	std::vector<int> colNum, rowMum;
+
 
 };
 
