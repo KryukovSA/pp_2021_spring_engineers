@@ -1,9 +1,8 @@
 // Copyright 2021 Kustova Anastasiya
-#include "filter_gaussa_block.h"
 #include <math.h>
 #include <iostream>
 #include <vector>
-
+#include "../../../modules/task_1/kustova_a_gauss_seq/filter_gaussa_block.h"
 int ** gaussianFilter(int ** img, int width, int height, int radius, float sigma) {
     int ** resultImage = new int*[height];
     for (int i = 0; i < height; i++) {
@@ -26,7 +25,7 @@ std::vector<float> createGaussianKernel(int radius, float sigma) {
     float norm = 0;
     for (int i = -radius; i <= radius; i++) {
         for (int j = -radius; j <= radius; j++) {
-            kernel[(i + radius)* size + j + radius] = (float)(exp(-(i * i + j * j) / (2 * sigma * sigma)));
+            kernel[(i + radius)* size + j + radius] = static_cast<float>(exp(-(i * i + j * j) / (2 * sigma * sigma)));
             norm = norm + kernel[(i + radius) * size + j + radius];
         }
     }
@@ -49,7 +48,7 @@ int calculateNewPixelColor(int ** img, int width, int height, int x, int y, int 
             sumColor += neighborColor * kernel[(k + radius) * size + l + radius];
         }
     }
-    return Clamp((int)sumColor, 0, 255);
+    return Clamp(static_cast<int>(sumColor), 0, 255);
 }
 int Clamp(int value, int min, int max) {
     if (value < min) {
