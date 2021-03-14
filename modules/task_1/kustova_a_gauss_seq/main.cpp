@@ -5,7 +5,6 @@
 #include<iostream>
 #include"./filter_gaussa_block.h"
 
-
 TEST(Jacoby_Method, Test_1) {
 	int radius = 1;
 	float sigma = 5.0;
