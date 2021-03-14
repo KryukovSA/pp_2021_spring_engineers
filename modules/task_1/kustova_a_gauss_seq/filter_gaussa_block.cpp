@@ -4,7 +4,7 @@
 #include <vector>
 #include "../../../modules/task_1/kustova_a_gauss_seq/filter_gaussa_block.h"
 
-std::vector<int> gaussianFilter(std::vector<int> & img, int width, int height, int radius, float sigma) {
+std::vector<int> gaussianFilter(const std::vector<int> & img, int width, int height, int radius, float sigma) {
     std::vector<int> resultImage(height * width);
     int size = 2 * radius + 1;
     std::vector<float> kernel(size * size);
