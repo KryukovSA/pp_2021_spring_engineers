@@ -10,7 +10,7 @@ TEST(seq_version, correct_create_sparse_mat) {
 	std::vector<std::complex<double>> standartMat = {
 		{0, 0}, {0, 2}, {0, 0},
 		{0, 1}, {0, 0}, {0, 0},
-		{0, 0}, {0, 1}, {0, 0},
+		{0, 0}, {0, 1}, {0, 0}
 	};
 	crs_mat sparseMat;
 	createSparseMat(size, standartMat, sparseMat);
@@ -24,9 +24,71 @@ TEST(seq_version, correct_create_sparse_mat) {
 }
 
 TEST(seq_version, correct_transpose_mat) {
-	
+	int size = 3;
+	std::vector<std::complex<double>> standartMat = {
+		{0, 0}, {0, 2}, {0, 0},
+		{0, 1}, {0, 0}, {0, 0},
+		{0, 0}, {0, 1}, {0, 0}
+	};
+	crs_mat TransponationMat, sparseMat;
+	createSparseMat(size, standartMat, sparseMat);
+	transposeMatrixGustavson(sparseMat, TransponationMat);
+	std::vector<int> rightRowNum = { 0, 1, 3, 3 };
+	ASSERT_EQ(TransponationMat.rowNum, rightRowNum);
 }
 
+TEST(seq_version, correct_transpose_mat2) {
+	int size = 4;
+	std::vector<std::complex<double>> standartMat = {
+		{0, 0}, {0, 2}, {0, 0}, {0, 0},
+		{0, 1}, {0, 0}, {0, 0}, {0, 3},
+		{0, 0}, {0, 1}, {0, 0}, {0, 0},
+		{0, 0}, {0, 0}, {0, 0}, {0, 0}
+	};
+	crs_mat TransponationMat, sparseMat;
+	createSparseMat(size, standartMat, sparseMat);
+	transposeMatrixGustavson(sparseMat, TransponationMat);
+	std::vector<int> rightRowNum = { 0, 1, 3, 3, 4 };
+	ASSERT_EQ(TransponationMat.rowNum, rightRowNum);
+}
+
+TEST(seq_version, check_multiplic) {
+	int size = 2;
+	std::vector<std::complex<double>> standartMat1 = {
+		{0, 0}, {2, 0},
+		{1, 0}, {0, 0}
+	};
+	std::vector<std::complex<double>> standartMat2 = {
+		{0, 0}, {2, 0},
+		{2, 0}, {0, 0}
+	};
+
+	crs_mat SparseMat1, SparseMat2, SparseMatResult;
+	createSparseMat(size, standartMat1, SparseMat1);
+	createSparseMat(size, standartMat2, SparseMat2);
+	multiplicateMatrix(SparseMat1, SparseMat2, SparseMatResult);
+	std::vector<std::complex<double>> rightVal = { {4, 0}, {2, 0} };
+	ASSERT_EQ(SparseMatResult.val, rightVal);
+}
+
+TEST(seq_version, check_multiplic2) {
+	int size = 2;
+	std::vector<std::complex<double>> standartMat1 = {
+		{0, 0}, {0, 0},
+		{0, 0}, {0, 0}
+	};
+	std::vector<std::complex<double>> standartMat2 = {
+		{0, 0}, {2, 0},
+		{2, 0}, {0, 0}
+	};
+
+	crs_mat SparseMat1, SparseMat2, SparseMatResult;
+	createSparseMat(size, standartMat1, SparseMat1);
+	createSparseMat(size, standartMat2, SparseMat2);
+	multiplicateMatrix(SparseMat1, SparseMat2, SparseMatResult);
+	std::vector<std::complex<double>> rightVal = {};
+	ASSERT_EQ(SparseMatResult.val, rightVal);
+}
 
 int main(int argc, char **argv) {
 	::testing::InitGoogleTest(&argc, argv);

@@ -19,6 +19,71 @@ void createSparseMat(int size_, const std::vector<std::complex<double>> &vectMat
 	}
 }
 
-void transposeMatrix(crs_mat matr, crs_mat &TrMat) {
+void transposeMatrixGustavson(crs_mat matr, crs_mat &TrMat) {
 
+	std::vector<std::vector<std::complex<double>>> storageValue(matr.size);
+	std::vector<std::vector<int>> storageCol(matr.size);
+	TrMat.rowNum.push_back(0);
+	for (int i = 0; i < matr.size; i++) {
+		for (int j = matr.rowNum[i]; j < matr.rowNum[i + 1]; j++) {
+			storageValue[matr.colNum[j]].push_back(matr.val[j]);
+			storageCol[matr.colNum[j]].push_back(i);
+		}
+	}
+	for (int i = 0; i < matr.size; i++)
+		for (int j = 0; j < storageCol[i].size(); j++) {
+			TrMat.colNum.push_back(storageCol[i][j]);
+			TrMat.val.push_back(storageValue[i][j]);
+		}
+	
+	int sum = 0;
+	for (int i = 0; i < matr.size; i++) {
+		sum += int(storageCol[i].size());
+		TrMat.rowNum.push_back(sum);
+	}
 }
+
+void multiplicateMatrix(crs_mat A, crs_mat B, crs_mat &C) {
+	if (A.size != B.size)
+		throw(std::string)"incorrect size";
+	std::vector<std::complex<double>> matC_val;
+	std::vector<int> matC_colNum;
+	std::vector<int> matC_rowNum;
+
+	transposeMatrixGustavson(A, B);
+	matC_rowNum.push_back(0);
+
+	for (int rowA = 0; rowA < A.size; rowA++) {
+		for (int rowB = 0; rowB < A.size; rowB++) {
+			std::complex<double> scalsum = 0;
+			for (int k = A.rowNum[rowA]; k < A.rowNum[rowA + 1]; k++)
+			{
+				for (int n = B.rowNum[rowB]; n < B.rowNum[rowB + 1]; n++)
+				{
+					if (A.colNum[k] == B.colNum[n])
+					{
+						scalsum += A.val[k] * B.val[n];
+						break;
+					}
+				}
+			}
+
+			if (std::abs(scalsum) >= DBL_MIN)
+			{
+				matC_val.push_back(scalsum);
+				matC_colNum.push_back(rowB);
+			}
+		}
+		matC_rowNum.push_back(matC_val.size() + matC_rowNum[rowA]);
+	}
+
+	for (unsigned int j = 0; j < matC_colNum.size(); j++)
+	{
+		C.colNum.push_back(matC_colNum[j]);
+		C.val.push_back(matC_val[j]);
+	}
+	for (int i = 0; i <= A.size; i++) {
+		C.rowNum.push_back(matC_rowNum[i]);
+	}
+}
+
