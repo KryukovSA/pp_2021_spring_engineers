@@ -188,26 +188,26 @@ TEST(Jacoby_Method, Test_check_Clamp) {
     ASSERT_EQ(Clamp(val1, -5, -3), -3);
 }
 TEST(Jacoby_Method, Test_check_Clamp2) {
-	int val1 = -1;
-	ASSERT_EQ(Clamp(val1, 0, 255), 0);
-	ASSERT_EQ(Clamp(val1, -5, 30), -1);
-	ASSERT_EQ(Clamp(val1, -5, -3), -3);
+    int val1 = -1;
+    ASSERT_EQ(Clamp(val1, 0, 255), 0);
+    ASSERT_EQ(Clamp(val1, -5, 30), -1);
+    ASSERT_EQ(Clamp(val1, -5, -3), -3);
 }
 TEST(Jacoby_Method, Test_check_Clamp3) {
-	int val1 = -1;
-	ASSERT_EQ(Clamp(val1, 0, 255), 0);
-	ASSERT_EQ(Clamp(val1, -5, 30), -1);
-	ASSERT_EQ(Clamp(val1, -5, -3), -3);
+    int val1 = -1;
+    ASSERT_EQ(Clamp(val1, 0, 255), 0);
+    ASSERT_EQ(Clamp(val1, -5, 30), -1);
+    ASSERT_EQ(Clamp(val1, -5, -3), -3);
 }
 TEST(Jacoby_Method, Test_check_Clamp4) {
-	int val1 = -1;
-	ASSERT_EQ(Clamp(val1, 0, 255), 0);
-	ASSERT_EQ(Clamp(val1, -5, 30), -1);
-	ASSERT_EQ(Clamp(val1, -5, -3), -3);
+    int val1 = -1;
+    ASSERT_EQ(Clamp(val1, 0, 255), 0);
+    ASSERT_EQ(Clamp(val1, -5, 30), -1);
+    ASSERT_EQ(Clamp(val1, -5, -3), -3);
 }
 TEST(Jacoby_Method, Test_check_Clamp5) {
-	int val1 = -1;
-	ASSERT_EQ(Clamp(val1, 0, 255), 0);
-	ASSERT_EQ(Clamp(val1, -5, 30), -1);
-	ASSERT_EQ(Clamp(val1, -5, -3), -3);
+    int val1 = -1;
+    ASSERT_EQ(Clamp(val1, 0, 255), 0);
+    ASSERT_EQ(Clamp(val1, -5, 30), -1);
+    ASSERT_EQ(Clamp(val1, -5, -3), -3);
 }
