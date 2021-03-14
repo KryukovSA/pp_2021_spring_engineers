@@ -31,6 +31,7 @@ TEST(Jacoby_Method, Test_can_gaussian_filter) {
     image1_decimal[7][0] = 6;    image1_decimal[7][1] = 50; image1_decimal[7][2] = 2; image1_decimal[7][3] = 4;
     image1_decimal[7][4] = 3;    image1_decimal[7][5] = 9; image1_decimal[7][6] = 1; image1_decimal[7][7] = 4;
     ASSERT_NO_THROW(gaussianFilter(image1_decimal, height, width, radius, sigma));
+    free(image1_decimal);
 }
 TEST(Jacoby_Method, Test_can_calculate_NewPixelColor2) {}
 TEST(Jacoby_Method, Test_can_calculate_NewPixelColo23r) {}
