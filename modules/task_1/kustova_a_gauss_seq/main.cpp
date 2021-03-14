@@ -74,7 +74,7 @@ TEST(Jacoby_Method, Test_check_gaussian_filter) {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             ASSERT_EQ(image2_decimal[i * width + j], check[i * width + j]);
-        }        
+        }
     }
 }
 TEST(Jacoby_Method, Test_can_Clamp) {
