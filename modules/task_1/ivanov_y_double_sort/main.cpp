@@ -5,28 +5,28 @@
 #include "./sort_double.h"
 
 TEST(Local_compare, Test_works_byte_sort) {
-    int size = 100;
+    const int size = 100;
     double* vec = generateDouble(size);
     ASSERT_NO_THROW(loc_sort(vec, size));
     delete[] vec;
 }
 
 TEST(Local_compare, Test_works_bubble_sort) {
-    int size = 100;
+    const int size = 100;
     double* vec = generateDouble(size);
     ASSERT_NO_THROW(BubbleForCompare(vec, size));
     delete[] vec;
 }
 
 TEST(Local_compare, Test_size_one_no_exceptions) {
-    int size = 1;
+    const int size = 1;
     double* vec = generateDouble(size);
     ASSERT_NO_THROW(loc_sort(vec, size));
     delete[] vec;
 }
 
 TEST(Local_compare, Test_size_four_eq_real_sort_mas) {
-    int size = 4;
+    const int size = 4;
     double* vec = generateDouble(size);
     std::vector<double> loc{ 10.0, 11.0, 14.0, 16.0 };
     std::vector<double> loc1{ 14.0, 16.0, 11.0, 10.0 };
@@ -42,7 +42,7 @@ TEST(Local_compare, Test_size_four_eq_real_sort_mas) {
 }
 
 TEST(Local_compare, Test_seq_compare_100) {
-    int size = 100;
+    const int size = 100;
     double* vec = generateDouble(size);
     double* vec1 = vec;
     vec1 = BubbleForCompare(vec, size);
@@ -51,7 +51,7 @@ TEST(Local_compare, Test_seq_compare_100) {
 }
 
 TEST(Local_compare, Test_seq_compare_1000) {
-    int size = 1000;
+    const int size = 1000;
     double* vec = generateDouble(size);
     double* vec1 = vec;
     vec1 = BubbleForCompare(vec, size);
@@ -60,7 +60,7 @@ TEST(Local_compare, Test_seq_compare_1000) {
 }
 
 TEST(Local_compare, Test_negativ_size) {
-    int size = -10;
+    const int size = -10;
     ASSERT_ANY_THROW(generateDouble(size));
 }
 

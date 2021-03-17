@@ -5,7 +5,7 @@
 #include <vector>
 #include "../../../modules/task_1/ivanov_y_double_sort/sort_double.h"
 
-double* BubbleForCompare(double* inputNumbers, int size) {
+double* BubbleForCompare(double* inputNumbers, const int size) {
     double* numbers = inputNumbers;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -20,7 +20,7 @@ double* BubbleForCompare(double* inputNumbers, int size) {
     delete[] numbers;
 }
 
-double* generateDouble(int n) {
+double* generateDouble(const int n) {
     std::mt19937 gen;
     gen.seed(static_cast<int>(time(0)));
     double* vec = new double[n];
@@ -34,7 +34,7 @@ double* generateDouble(int n) {
     return vec;
 }
 
-void transit(double* inputNumbers, double* loc, int size, int add) {
+void transit(double* inputNumbers, double* loc, const int size, int add) {
     unsigned char* pmem = (unsigned char*)inputNumbers;
     int counters[256];
     int sum = 0;
@@ -57,7 +57,7 @@ void transit(double* inputNumbers, double* loc, int size, int add) {
     }
 }
 
-void transit1(double* inputNumbers, double* loc, int size, int add) {
+void transit1(double* inputNumbers, double* loc, const int size, int add) {
     unsigned char* pmem = (unsigned char*)inputNumbers;
     int counters[256];
     int sum = 0;
@@ -89,7 +89,7 @@ void transit1(double* inputNumbers, double* loc, int size, int add) {
     }
 }
 
-void loc_sort(double* inputNumbers, int size) {
+void loc_sort(double* inputNumbers, const int size) {
     double* tmp = nullptr;
     double* loc = new double[size];
     for (int i = 0; i < 8; i++) {
