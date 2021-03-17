@@ -32,6 +32,7 @@ double* generateDouble(const int n) {
         vec[i] = numb;
     }
     return vec;
+    delete[] vec;
 }
 
 void transit(double* inputNumbers, double* loc, const int size, int add) {
