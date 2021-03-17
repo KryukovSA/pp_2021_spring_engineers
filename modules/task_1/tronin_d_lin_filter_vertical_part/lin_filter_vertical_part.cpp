@@ -4,7 +4,7 @@
 #include <cmath>
 #include <stdexcept>
 
-const static double kPi = 3.141592653589793;
+static const double kPi = 3.141592653589793;
 
 std::vector<double> CalculateGaussFilter(size_t size, double sigma) {
     if (size % 2 == 0) {
