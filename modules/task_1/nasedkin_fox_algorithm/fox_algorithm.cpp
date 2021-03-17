@@ -5,7 +5,7 @@
 
 std::vector<double> MatrixInit(int size) {
   if (size <= 0) {
-  throw("Incorrect size");
+  throw("Incorrect size!");
   }
 
   std::vector<double> matrix(size*size);
@@ -23,7 +23,7 @@ std::vector<double> MatrixInit(int size) {
 std::vector<double> SeqMatrixCalc(std::vector<double> a,
   std::vector<double> b, int size) {
   if (a.size() != size*size) {
-    throw("Incorrect size");
+    throw("Incorrect size!");
   }
   std::vector<double> c(size * size, 0);
 
@@ -39,11 +39,11 @@ std::vector<double> SeqMatrixCalc(std::vector<double> a,
 std::vector<double> SeqMatrixBlockCalc(std::vector<double> a,
   std::vector<double> b, int matrixSize) {
   if (matrixSize <= 0) {
-    throw("Incorrect size");
+    throw("Incorrect size!");
   }
 
   if (a.size() != matrixSize * matrixSize) {
-    throw("Incorrect size");
+    throw("Incorrect size!");
   }
   int blocksCount = 0;
 
