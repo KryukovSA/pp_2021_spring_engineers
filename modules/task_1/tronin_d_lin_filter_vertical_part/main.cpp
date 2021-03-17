@@ -67,6 +67,7 @@ TEST(LinearFilter, Filter_correct_values) {
     }
 }
 
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
