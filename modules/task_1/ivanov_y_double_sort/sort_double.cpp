@@ -1,4 +1,8 @@
 // Copyright 2021 Ivanov Yaroslav
+#include <random>
+#include <ctime>
+#include <algorithm>
+#include <vector>
 #include "../../../modules/task_1/ivanov_y_double_sort/sort_double.h"
 
 double* BubbleForCompare(double* inputNumbers, int size) {
@@ -77,8 +81,7 @@ void transit1(double* inputNumbers, double* loc, int size, int add) {
         if (pmem[index] < 128) {
             loc[counters[pmem[index]]] = inputNumbers[i];
             counters[pmem[index]]++;
-        }
-        else {
+        } else {
             counters[pmem[index]]--;
             loc[counters[pmem[index]]] = inputNumbers[i];
         }
