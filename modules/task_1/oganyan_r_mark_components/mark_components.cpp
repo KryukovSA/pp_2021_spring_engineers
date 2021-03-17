@@ -3,14 +3,14 @@
 #include "../../modules/task_1/oganyan_r_mark_components/mark_components.h"
 
 static const std::vector<std::pair<int, int>> directions{
-        {-1, -1},
+       // {-1, -1},
         {-1, 0},
-        {-1, 1},
+      //  {-1, 1},
         {0,  -1},
         {0,  1},
-        {1,  -1},
+       // {1,  -1},
         {1,  0},
-        {1,  1},
+       // {1,  1},
 };
 
 void bfs(std::vector<uint16_t>* img, std::pair<uint16_t, uint16_t> start,
