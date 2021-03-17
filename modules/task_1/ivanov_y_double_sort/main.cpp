@@ -22,7 +22,7 @@ TEST(Local_compare, Test_size_one_no_exceptions) {
     ASSERT_NO_THROW(loc_sort(vec, size));
 }
 
-TEST(Local_compare, Test_size_four_eq_real_sort_mass) {
+TEST(Local_compare, Test_size_four_eq_real_sort_mas) {
     int size = 4;
     double* vec = generateDouble(size);
     std::vector<double> loc{ 10.0, 11.0, 14.0, 16.0 };

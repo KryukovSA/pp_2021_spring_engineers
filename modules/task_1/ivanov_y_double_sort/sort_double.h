@@ -2,7 +2,6 @@
 #ifndef MODULES_TASK_1_IVANOV_Y_SORT_DOUBLE_SORT_DOUBLE_H_
 #define MODULES_TASK_1_IVANOV_Y_SORT_DOUBLE_SORT_DOUBLE_H_
 
-#include <string>
 #include <random>
 #include <ctime>
 #include <algorithm>

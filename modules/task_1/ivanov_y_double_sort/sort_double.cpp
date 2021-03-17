@@ -37,17 +37,14 @@ void transit(double* inputNumbers, double* loc, int size, int add) {
     for (int i = 0; i < 256; i++) {
         counters[i] = 0;
     }
-
     for (int i = 0; i < size; i++) {
         counters[pmem[8 * i + add]]++;
     }
-
     for (int i = 0; i < 256; i++) {
         int tmp = counters[i];
         counters[i] = sum;
         sum += tmp;
     }
-
     for (int i = 0; i < size; i++) {
         int index = 8 * i + add;
         loc[counters[pmem[index]]] = inputNumbers[i];
