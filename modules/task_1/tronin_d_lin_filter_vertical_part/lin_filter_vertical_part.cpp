@@ -1,9 +1,10 @@
 // Copyright 2020 Tronin Dmitry
 #include "../../modules/task_1/tronin_d_lin_filter_vertical_part/lin_filter_vertical_part.h"
 
-#define _USE_MATH_DEFINES
 #include <cmath>
 #include <stdexcept>
+
+const static double kPi = 3.141592653589793;
 
 std::vector<double> CalculateGaussFilter(size_t size, double sigma) {
     if (size % 2 == 0) {
@@ -21,7 +22,7 @@ std::vector<double> CalculateGaussFilter(size_t size, double sigma) {
     for (int row = -static_cast<int>(size) / 2; row <= static_cast<int>(size) / 2; ++row) {
         for (int col = -static_cast<int>(size) / 2; col <= static_cast<int>(size) / 2; ++col) {
             filter[(row + static_cast<int>(size) / 2) * size + col + static_cast<int>(size) / 2] =
-                1. / (2 * M_PI * sigma * sigma)
+                1. / (2 * kPi * sigma * sigma)
                     * exp(-static_cast<double>(row * row + col * col) / (2 * sigma * sigma));
             sum += filter[(row + static_cast<int>(size) / 2) * size + col
                 + static_cast<int>(size) / 2];
