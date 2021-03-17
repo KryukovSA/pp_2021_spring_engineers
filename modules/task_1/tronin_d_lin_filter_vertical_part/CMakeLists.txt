@@ -50,7 +50,7 @@ if (USE_SEQ)
             COMMAND "${Python3_EXECUTABLE}"
             ${CMAKE_SOURCE_DIR}/scripts/check_count_tests.py
             ${ProjectId}
-            ${AmessageRGS_FOR_CHECK_COUNT_TESTS}
+            ${ARGS_FOR_CHECK_COUNT_TESTS}
             )
 else (USE_SEQ)
     message(STATUS "-- ${ProjectId} - NOT BUILD!")
