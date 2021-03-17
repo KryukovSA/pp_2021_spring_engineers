@@ -17,11 +17,12 @@ double* BubbleForCompare(double* inputNumbers, int size) {
         }
     }
     return numbers;
+    delete[] numbers;
 }
 
 double* generateDouble(int n) {
     std::mt19937 gen;
-    gen.seed(static_cast<double>(time(0)));
+    gen.seed(static_cast<int>(time(0)));
     double* vec = new double[n];
     for (int i = 0; i < n; i++) {
         double numb = gen() / 1000;
@@ -98,5 +99,5 @@ void loc_sort(double* inputNumbers, int size) {
         loc = tmp;
     }
     transit1(inputNumbers, loc, size, 7);
-    delete[] loc;
+    delete[] tmp;
 }

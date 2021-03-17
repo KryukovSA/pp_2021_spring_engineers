@@ -8,18 +8,21 @@ TEST(Local_compare, Test_works_byte_sort) {
     int size = 100;
     double* vec = generateDouble(size);
     ASSERT_NO_THROW(loc_sort(vec, size));
+    delete[] vec;
 }
 
 TEST(Local_compare, Test_works_bubble_sort) {
     int size = 100;
     double* vec = generateDouble(size);
     ASSERT_NO_THROW(BubbleForCompare(vec, size));
+    delete[] vec;
 }
 
 TEST(Local_compare, Test_size_one_no_exceptions) {
     int size = 1;
     double* vec = generateDouble(size);
     ASSERT_NO_THROW(loc_sort(vec, size));
+    delete[] vec;
 }
 
 TEST(Local_compare, Test_size_four_eq_real_sort_mas) {
@@ -35,6 +38,7 @@ TEST(Local_compare, Test_size_four_eq_real_sort_mas) {
         loc1[i] = vec[i];
     }
     ASSERT_EQ(loc1, loc);
+    delete[] vec;
 }
 
 TEST(Local_compare, Test_seq_compare_100) {
