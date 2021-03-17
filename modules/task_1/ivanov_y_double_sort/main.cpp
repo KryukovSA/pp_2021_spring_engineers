@@ -4,6 +4,8 @@
 #include <algorithm>
 #include "./sort_double.h"
 
+using std::vector;
+
 TEST(Local_compare, Test_works_byte_sort) {
     const int size = 100;
     double* vec = generateDouble(size);
