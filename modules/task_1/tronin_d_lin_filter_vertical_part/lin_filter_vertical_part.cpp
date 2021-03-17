@@ -1,9 +1,9 @@
 // Copyright 2020 Tronin Dmitry
 #include "../../modules/task_1/tronin_d_lin_filter_vertical_part/lin_filter_vertical_part.h"
 
+#define _USE_MATH_DEFINES
 #include <cmath>
 #include <stdexcept>
-
 
 std::vector<double> CalculateGaussFilter(size_t size, double sigma) {
     if (size % 2 == 0) {
