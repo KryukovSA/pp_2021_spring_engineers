@@ -44,19 +44,17 @@ TEST(Local_compare, Test_size_four_eq_real_sort_mas) {
 TEST(Local_compare, Test_seq_compare_100) {
     const int size = 100;
     double* vec = generateDouble(size);
-    double* vec1 = vec;
-    vec1 = BubbleForCompare(vec, size);
     loc_sort(vec, size);
-    ASSERT_EQ(vec, vec1);
+    ASSERT_EQ(vec, BubbleForCompare(vec, size));
+    delete[] vec;
 }
 
 TEST(Local_compare, Test_seq_compare_1000) {
     const int size = 1000;
     double* vec = generateDouble(size);
-    double* vec1 = vec;
-    vec1 = BubbleForCompare(vec, size);
     loc_sort(vec, size);
-    ASSERT_EQ(vec, vec1);
+    ASSERT_EQ(vec, BubbleForCompare(vec, size));
+    delete[] vec;
 }
 
 TEST(Local_compare, Test_negativ_size) {
