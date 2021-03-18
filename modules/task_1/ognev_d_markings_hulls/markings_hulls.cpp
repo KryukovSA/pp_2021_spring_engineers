@@ -214,7 +214,6 @@ std::vector<int> jarvis(std::vector<int> map, int width, int height, int mark,
                         int index) {
   if (width < 1 || height < 1 || index < 0 || mark < 0 || map.empty()) throw "";
   std::vector<int> temp(map);
-  vertecies.push_back(index);
   int first = index;
   int current = index;
 
