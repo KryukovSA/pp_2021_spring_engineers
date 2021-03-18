@@ -112,25 +112,24 @@ std::vector<double> MultNorm(const std::vector<double>& A,
 //=======================================================================
 
 Matrix MultCRS(const Matrix& A, const Matrix& b) {
-  size_t N = A.Lenght;
-  size_t N2 = b.Lenght;
+  const size_t N = A.Lenght;
+  const size_t N2 = b.Lenght;
   Matrix Res, B;
 
-  //
   B.Lenght = b.Lenght;
   B.VCount = b.VCount;
   B.Column = std::vector<size_t>(b.VCount);
   B.RowInd = std::vector<size_t>(b.Lenght + 1);
   B.Values = std::vector<double>(b.VCount);
 
-  for (size_t i = 0; i < B.VCount; i++) {
-    B.RowInd[b.Column[i] + 1]++;
+  for (const auto& iter : b.Column) {
+    B.RowInd[iter + 1]++;
   }
 
   size_t Index_tmp = 0;
-  for (size_t i = 1; i <= b.Lenght; i++) {
-    size_t tmp = B.RowInd[i];
-    B.RowInd[i] = Index_tmp;
+  for (auto& iter : B.RowInd) {
+    const size_t tmp = iter;
+    iter = Index_tmp;
     Index_tmp = Index_tmp + tmp;
   }
 
@@ -147,15 +146,13 @@ Matrix MultCRS(const Matrix& A, const Matrix& b) {
       B.RowInd[Row_index + 1]++;
     }
   }
-  //
 
   Res.Lenght = N;
   Res.RowInd.push_back(0);
   for (size_t i = 0; i < N; i++) {
-    double sum;
     size_t rowNZ = 0;
     for (size_t j = 0; j < N2; j++) {
-      sum = 0.0;
+      double sum = 0.0;
       for (size_t k = A.RowInd[i]; k < A.RowInd[i + 1]; k++) {
         for (size_t l = B.RowInd[j]; l < B.RowInd[j + 1]; l++) {
           if (A.Column[k] == B.Column[l]) {
