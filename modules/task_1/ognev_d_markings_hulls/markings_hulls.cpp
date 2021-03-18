@@ -7,17 +7,20 @@
 #include <list>
 #include <set>
 #include <vector>
+#include <random>
 
 std::vector<int> tree(1, 0);
 int border = 135;
 
 std::vector<bool> GenerateRandomMap(int width, int height) {
   if (width < 1 || height < 1) throw;
-  srand(time(0));
+  std::mt19937 random;
+  std::uniform_real_distribution<> urd(0, 1);
+  random.seed(static_cast<unsigned int>(time(0)));
   std::vector<bool> result(width * height);
   for (int i = 0; i < height; i++) {
     for (int j = 0; j < width; j++) {
-      float r = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
+      float r = urd(random);
       if (r > 0.7f)
         result[i * width + j] = false;
       else
@@ -29,16 +32,18 @@ std::vector<bool> GenerateRandomMap(int width, int height) {
 
 std::vector<bool> GenerateConnectedMap(int width, int height) {
   if (width < 1 || height < 1) throw;
-  srand(time(0));
+  std::mt19937 random;
+  std::uniform_real_distribution<> urd(0, 1);
+  random.seed(static_cast<unsigned int>(time(0)));
   std::vector<bool> result(width * height);
   int index;
-  float r1 = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
+  float r1 = urd(random);
   if (r1 > 0.5f)
     result[0] = true;
   else
     result[0] = false;
   for (int i = 1; i < width * height; i++) {
-    float r = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
+    float r = urd(random);
     if (i > width) {
       if (i % width != 0) {
         index = i - width;
@@ -208,7 +213,6 @@ bool isInside(int x1, int y1, int x2, int y2, int x3, int y3) {
 std::vector<int> jarvis(std::vector<int> map, int width, int height, int mark,
                         int index) {
   if (width < 1 || height < 1 || index < 0 || mark < 0 || map.empty()) throw "";
-  std::list<int> vertecies;
   std::vector<int> temp(map);
   vertecies.push_back(index);
   int first = index;
@@ -237,7 +241,6 @@ std::vector<int> jarvis(std::vector<int> map, int width, int height, int mark,
       }
     }
     if (marked && next != first) {
-      vertecies.push_back(next);
       marked = false;
       map[next] = border;
     }
