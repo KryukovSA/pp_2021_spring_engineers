@@ -14,6 +14,6 @@ int orientTriangle2(int x1, int y1, int x2, int y2, int x3, int y3);
 bool isInside(int x1, int y1, int x2, int y2, int x3, int y3);
 std::vector<int> jarvis(std::vector<int> map, int width, int height, int mark,
                         int index);
-std::vector<int> convexHull(const std::vector<int> map, int width, int height);
+std::vector<int> convexHull(std::vector<int> map, int width, int height);
 
 #endif  // MODULES_TASK_1_OGNEV_D_MARKINGS_HULLS_MARKINGS_HULLS_H_
