@@ -77,7 +77,8 @@ TEST(Seq, mult_random_matr_3x3) {
 
   bool check = true;
   for (int i = 0; i < C.value.size(); i++) {
-    if (fabs(C.value[i] - c.value[i]) >= std::numeric_limits<double>::epsilon()) {
+    if (fabs(C.value[i] - c.value[i]) >=
+      std::numeric_limits<double>::epsilon()) {
       check = false;
       break;
     }
@@ -97,7 +98,8 @@ TEST(Seq, mult_random_matr_7x7) {
 
   bool check = true;
   for (int i = 0; i < C.value.size(); i++) {
-    if (fabs(C.value[i] - c.value[i]) >= std::numeric_limits<double>::epsilon()) {
+    if (fabs(C.value[i] - c.value[i]) >=
+      std::numeric_limits<double>::epsilon()) {
       check = false;
       break;
     }
@@ -117,7 +119,8 @@ TEST(Seq, mult_random_matr_13x13) {
 
   bool check = true;
   for (int i = 0; i < C.value.size(); i++) {
-    if (fabs(C.value[i] - c.value[i]) >= std::numeric_limits<double>::epsilon()) {
+    if (fabs(C.value[i] - c.value[i]) >=
+      std::numeric_limits<double>::epsilon()) {
       check = false;
       break;
     }

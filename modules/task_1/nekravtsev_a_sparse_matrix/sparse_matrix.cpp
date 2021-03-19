@@ -7,33 +7,34 @@
 #include "../../../modules/task_1/nekravtsev_a_sparse_matrix/sparse_matrix.h"
 
 std::vector<double> GenSpareMatrix(int s) {
-    std::random_device dev;
-    std::mt19937 gen(dev());
-    std::vector<double> temp(s * s);
-    double rand = gen() % 20;
+  std::random_device dev;
+  std::mt19937 gen(dev());
+  std::vector<double> temp(s * s);
+  double rand = gen() % 20;
 
-    for (int i = 0; i < s; i++) {
-      for (int j = 0; j < s; j++) {
-        if (rand < 10)
-          temp[i * s + j] = 0;
-        else
-          temp[i * s + j] = gen() % 20;
-        rand = gen() % 20;
-      }
+  for (int i = 0; i < s; i++) {
+    for (int j = 0; j < s; j++) {
+      if (rand < 10)
+        temp[i * s + j] = 0;
+      else
+        temp[i * s + j] = gen() % 20;
+      rand = gen() % 20;
     }
-    
-    /*for (int i = 0; i < s; i++) {     
-      for (int j = 0; j < s; j++) {
-        std::cout << temp[i * s + j] << " ";
-      }
-      std::cout << std::endl;
+  }
+
+  /*for (int i = 0; i < s; i++) {     
+    for (int j = 0; j < s; j++) {
+      std::cout << temp[i * s + j] << " ";
     }
-    std::cout << std::endl;*/
-    
-    return temp;
+    std::cout << std::endl;
+  }
+  std::cout << std::endl;*/
+
+  return temp;
 }
 
-std::vector<double> MultMatrix(int size, std::vector<double> &A, std::vector<double> &B) {
+std::vector<double> MultMatrix(int size, std::vector<double> const &A,
+  std::vector<double> const &B) {
   std::vector<double> res = std::vector<double>(size * size, 0);
 
   for (int i = 0; i < size; i++) {
@@ -42,18 +43,18 @@ std::vector<double> MultMatrix(int size, std::vector<double> &A, std::vector<dou
         res[i * size + j] += A[i * size + k] * B[k * size + j];
     }
   }
-  
+
   /*for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
       std::cout << res[i * size + j] << " ";
     }
     std::cout << std::endl;
   }*/
-  
+
   return res;
 }
 
-CCS createCCS(int s, std::vector<double> &mat) {
+CCS createCCS(int s, std::vector<double> const &mat) {
   CCS res;
   res.size = s;
 
@@ -101,7 +102,7 @@ CCS TranspSpareMatrix(CCS A) {
     res.colInd[A.rows[i] + 1]++;
   }
 
-  double sum = 0; 
+  double sum = 0;
   for (int i = 1; i <= A.size; i++) {
     int tmp = res.colInd[i];
     res.colInd[i] = sum;
@@ -165,7 +166,7 @@ CCS MultCCS(CCS A, CCS B) {
     }
     res.colInd.push_back(NZ + res.colInd[j]);
   }
-  
+
   /*for (int i = 0; i < res.value.size(); i++) {
     std::cout << res.value[i] << " ";
   }
@@ -178,6 +179,6 @@ CCS MultCCS(CCS A, CCS B) {
     std::cout << res.colInd[i] << " ";
   }
   std::cout << std::endl << "-----------" << std::endl;*/
-  
+
   return res;
 }
