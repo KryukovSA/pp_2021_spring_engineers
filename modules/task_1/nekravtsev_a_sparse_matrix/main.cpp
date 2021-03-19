@@ -6,9 +6,9 @@
 
 TEST(Seq, test_ordinary_mult) {
   std::vector<double> A = {
-    1.25, 0, 3.754,
-    0, 0.4, 5.12,
-    9, 0, 0
+    0, 7, 3,
+    10, 0, 5,
+    19, 0, 2
   };
   std::vector<double> B = {
     1, 0, 3,
@@ -17,7 +17,7 @@ TEST(Seq, test_ordinary_mult) {
   };
   std::vector<double> C = MultMatrix(3, A, B);
 
-  std::vector<double> res = { 35.036, 0, 3.75, 46.08, 0, 2, 9, 0, 27 };
+  std::vector<double> res = { 27, 0, 35, 55, 0, 30, 37, 0, 57 };
   bool check = true;
   for (int i = 0; i < res.size(); i++) {
     if (fabs(C[i] - res[i]) >= std::numeric_limits<double>::epsilon()) {
@@ -31,18 +31,18 @@ TEST(Seq, test_ordinary_mult) {
 
 TEST(Seq, check_results_3x3) {
   CCS A = createCCS(3, std::vector<double> {
-    1.25, 0, 3.754,
-    0, 0.4, 5.12,
+    25, 0, 38,
+    0, 4, 43,
     9, 0, 0
   });
   CCS B = createCCS(3, std::vector<double> {
     1, 0, 3,
-    0, 0, 5,
+    0, 2, 5,
     9, 0, 0
   });
   CCS C = MultCCS(TranspSpareMatrix(A), B);
 
-  std::vector<double> res = { 35.036, 46.08, 9, 3.75, 2, 27 };
+  std::vector<double> res = { 367, 387, 9, 8, 75, 20, 27 };
   bool check = true;
   for (int i = 0; i < res.size(); i++) {
     if (fabs(C.value[i] - res[i]) >= std::numeric_limits<double>::epsilon()) {
