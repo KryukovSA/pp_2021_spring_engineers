@@ -98,7 +98,7 @@ CCS TranspSpareMatrix(CCS A) {
   res.rows.resize(A.rows.size());
   res.colInd = std::vector<double>(A.size + 1, 0.0);
 
-  for (int i = 0; i < A.value.size(); i++) {
+  for (size_t i = 0; i < A.value.size(); i++) {
     res.colInd[A.rows[i] + 1]++;
   }
 
@@ -141,8 +141,6 @@ CCS TranspSpareMatrix(CCS A) {
 
 CCS MultCCS(CCS A, CCS B) {
   CCS res;
-  if (A.size != B.size)
-    return res;
   res.size = A.size;
 
   res.colInd.push_back(0);
