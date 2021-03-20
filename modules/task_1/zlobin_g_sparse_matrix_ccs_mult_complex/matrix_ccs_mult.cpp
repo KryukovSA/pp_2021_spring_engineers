@@ -1,8 +1,6 @@
 // Copyright 2021 Zlobin George
-#include <random>
-#include <vector>
-#include <algorithm>
 #include "../../../modules/task_1/zlobin_g_sparse_matrix_ccs_mult_complex/matrix_ccs_mult.h"
+#include <random>
 
 MatrixCCS::MatrixCCS(int nCollumns, int nRows, int nNotZero) {
     if (nCollumns <= 0 || nRows <= 0) {
@@ -21,10 +19,10 @@ MatrixCCS::MatrixCCS(int nCollumns, int nRows, int nNotZero) {
 }
 
 MatrixCCS::MatrixCCS(int nCollumns, int nRows,
-                     std::vector<complex_int> matrix) {
+                     std::vector<std::complex<int>> matrix) {
     if (nCollumns <= 0 || nRows <= 0) {
         throw "Incorrect matrix size";
-    } else if (matrix.size() != nCollumns * nRows) {
+    } else if (static_cast<int>(matrix.size()) != nCollumns * nRows) {
         throw "Size of matrix doesn't match given parameters";
     }
 
@@ -37,12 +35,12 @@ MatrixCCS::MatrixCCS(int nCollumns, int nRows,
     _collumnsIndexes.push_back(0);
     for (int j = 0; j < _nCollumns; j++) {
         for (int i = 0; i < _nRows; i++) {
-            if (matrix[i * _nCollumns + j] != complex_int(0, 0)) {
+            if (matrix[i * _nCollumns + j] != std::complex<int>(0, 0)) {
                 _values.push_back(matrix[i * _nCollumns + j]);
                 _rows.push_back(i);
             }
         }
-        _collumnsIndexes.push_back(_values.size());
+        _collumnsIndexes.push_back(static_cast<int>(_values.size()));
     }
 
     _nNotZero = _collumnsIndexes[_nCollumns];
@@ -51,12 +49,12 @@ MatrixCCS::MatrixCCS(int nCollumns, int nRows,
 MatrixCCS::MatrixCCS(int nCollumns, int nRows,
                      std::vector<int> collumnsIndexes,
                      std::vector<int> rows,
-                     std::vector<complex_int> values) {
+                     std::vector<std::complex<int>> values) {
     if (nCollumns <= 0 || nRows <= 0) {
         throw "Incorrect matrix size";
-    } else if (values.size() > nCollumns * nRows) {
+    } else if (static_cast<int>(values.size()) > nCollumns * nRows) {
         throw "More elements when possible";
-    } else if (collumnsIndexes.size() != nCollumns + 1) {
+    } else if (static_cast<int>(collumnsIndexes.size()) != nCollumns + 1) {
         throw "Incorrect collumns indexes";
     } else if (std::find_if(rows.begin(), rows.end(),
                [&nRows](int i) { return i >= nRows; }) != rows.end()) {
@@ -65,7 +63,7 @@ MatrixCCS::MatrixCCS(int nCollumns, int nRows,
 
     _nCollumns = nCollumns;
     _nRows = nRows;
-    _nNotZero = values.size();
+    _nNotZero = static_cast<int>(values.size());
     _collumnsIndexes = collumnsIndexes;
     _rows = rows;
     _values = values;
@@ -91,7 +89,7 @@ MatrixCCS MatrixCCS::Transpose() {
 
     int j1, j2;
     int row, column, place;
-    complex_int value;
+    std::complex<int> value;
     for (int i = 0; i < _nCollumns; i++) {
         j1 = _collumnsIndexes[i];
         j2 = _collumnsIndexes[i + 1];
@@ -118,7 +116,7 @@ MatrixCCS MatrixCCS::operator*(const MatrixCCS& B) {
     MatrixCCS product{B._nCollumns, _nRows, 0};
 
     int columnNotZero;
-    complex_int value;
+    std::complex<int> value;
 
     product._collumnsIndexes.push_back(0);
     for (int i = 0; i < B._nCollumns; i++) {
@@ -138,7 +136,7 @@ MatrixCCS MatrixCCS::operator*(const MatrixCCS& B) {
                 }
             }
 
-            if (value != complex_int(0, 0)) {
+            if (value != std::complex<int>(0, 0)) {
                 product._values.push_back(value);
                 product._rows.push_back(j);
                 columnNotZero++;
@@ -148,7 +146,7 @@ MatrixCCS MatrixCCS::operator*(const MatrixCCS& B) {
                                            columnNotZero);
     }
 
-    product._nNotZero = product._values.size();
+    product._nNotZero = static_cast<int>(product._values.size());
     return product;
 }
 
@@ -160,7 +158,7 @@ void MatrixCCS::FillRandom(unsigned seed, int min, int max) {
     std::mt19937 random;
     random.seed(seed);
 
-    complex_int value;
+    std::complex<int> value;
     const double probBarrier = 1.0 * _nNotZero / (_nCollumns * _nRows);
 
     std::uniform_real_distribution<> probDistrib(0.0, 1.0);
@@ -169,35 +167,35 @@ void MatrixCCS::FillRandom(unsigned seed, int min, int max) {
     _collumnsIndexes.push_back(0);
     for (int collumn = 0; collumn < _nCollumns; collumn++) {
         for (int row = 0; row < _nRows; row++) {
-            if (_values.size() == _nNotZero) {
+            if (static_cast<int>(_values.size()) == _nNotZero) {
                 break;
-            } else if (_nNotZero - _values.size() + collumn * _nRows + row ==
+            } else if (_nNotZero - static_cast<int>(_values.size()) + collumn * _nRows + row ==
                        _nCollumns * _nRows ||
-                       (_values.size() <_nNotZero &&
+                       (static_cast<int>(_values.size()) < _nNotZero &&
                         probDistrib(random) < probBarrier)) {
                 do {
-                    value = complex_int(valueDistrib(random), valueDistrib(random));
-                } while (value == complex_int(0, 0));
+                    value = std::complex<int>(valueDistrib(random), valueDistrib(random));
+                } while (value == std::complex<int>(0, 0));
                 _values.push_back(value);
                 _rows.push_back(row);
             }
         }
-        _collumnsIndexes.push_back(_values.size());
-        if (_values.size() == _nNotZero) {
+        _collumnsIndexes.push_back(static_cast<int>(_values.size()));
+        if (static_cast<int>(_values.size()) == _nNotZero) {
             break;
         }
     }
 }
 
-void MatrixCCS::Print() {
-    for (int i = 0; i < _nCollumns; i++) {
-        for (int k = _collumnsIndexes[i];
-                k < _collumnsIndexes[i + 1]; k++) {
-            std::cout << "Column " << i << "\tRow " << _rows[k] <<
-                "\tValueR" << _values[k].real() << "\tValueI" << _values[k].imag() << "\n";
-        }
-    }
-}
+// void MatrixCCS::Print() {
+//     for (int i = 0; i < _nCollumns; i++) {
+//         for (int k = _collumnsIndexes[i];
+//                 k < _collumnsIndexes[i + 1]; k++) {
+//             std::cout << "Column " << i << "\tRow " << _rows[k] <<
+//                 "\tValueR" << _values[k].real() << "\tValueI" << _values[k].imag() << "\n";
+//         }
+//     }
+// }
 
 bool operator==(const MatrixCCS& A, const MatrixCCS& B) {
     return A._nCollumns == B._nCollumns &&

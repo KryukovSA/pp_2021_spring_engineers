@@ -4,18 +4,15 @@
 
 #include <vector>
 #include <complex>
-#include <iostream>
-
-using complex_int = std::complex<int>;
 
 class MatrixCCS {
  public:
     MatrixCCS(int nCollumns, int nRows, int nNotZero);
-    MatrixCCS(int nCollumns, int nRows, std::vector<complex_int> matrix);
+    MatrixCCS(int nCollumns, int nRows, std::vector<std::complex<int>> matrix);
     MatrixCCS(int nCollumns, int nRows,
               std::vector<int> collumnsIndexes,
               std::vector<int> rows,
-              std::vector<complex_int> values);
+              std::vector<std::complex<int>> values);
 
     void FillRandom(unsigned seed = 132, int min = -1000, int max = 1000);
     MatrixCCS Transpose();
@@ -27,7 +24,7 @@ class MatrixCCS {
     int GetNumRows() { return _nRows; }
     int GetNumNotZero() { return _nNotZero; }
 
-    void Print();
+    // void Print();
 
  private:
     int _nCollumns;
@@ -36,7 +33,7 @@ class MatrixCCS {
 
     std::vector<int> _collumnsIndexes;
     std::vector<int> _rows;
-    std::vector<complex_int> _values;
+    std::vector<std::complex<int>> _values;
 };
 
 bool operator==(const MatrixCCS& A, const MatrixCCS& B);

@@ -1,118 +1,113 @@
 // Copyright 2021 Zlobin George
 #include <gtest/gtest.h>
-#include <vector>
-#include <algorithm>
 #include "./matrix_ccs_mult.h"
 
 // Tests for Constructor MatrixCCS(int nCollumns, int nRows, int nNotZero);
-TEST(Matrix_CCS_Constructor_From_NCollumns_NRows_NNotZero,
-        Throw_If_Incorrect_NCollumns) {
+TEST(MatrixCCSConstructorFromNCollumnsNRowsNNotZero, ThrowIfIncorrectNCollumns1) {
     ASSERT_ANY_THROW(MatrixCCS(-10, 10, 3));
 }
-TEST(Matrix_CCS_Constructor_From_NCollumns_NRows_NNotZero,
-        Throw_If_Incorrect_NRows) {
+
+TEST(MatrixCCSConstructorFromNCollumnsNRowsNNotZero, ThrowIfIncorrectNRows1) {
     ASSERT_ANY_THROW(MatrixCCS(10, 0, 3));
 }
-TEST(Matrix_CCS_Constructor_From_NCollumns_NRows_NNotZero,
-        Throw_If_Incorrect_NNotZero) {
+
+TEST(MatrixCCSConstructorFromNCollumnsNRowsNNotZero, ThrowIfIncorrectNNotZero) {
     ASSERT_ANY_THROW(MatrixCCS(10, 10, -3));
 }
-TEST(Matrix_CCS_Constructor_From_NCollumns_NRows_NNotZero,
-        Throw_If_NNotZero_More_Than_Available) {
+
+TEST(MatrixCCSConstructorFromNCollumnsNRowsNNotZero, ThrowIfNNotZeroMoreThanAvailable) {
     ASSERT_ANY_THROW(MatrixCCS(10, 10, 101));
 }
-TEST(Matrix_CCS_Constructor_From_NCollumns_NRows_NNotZero,
-        No_Throw_With_Correct_Parameters) {
+
+TEST(MatrixCCSConstructorFromNCollumnsNRowsNNotZero, NoThrowWithCorrectParameters1) {
     ASSERT_NO_THROW(MatrixCCS(10, 10, 3));
 }
-TEST(Matrix_CCS_Constructor_From_NCollumns_NRows_NNotZero,
-        Can_Create_Matrix_With_Zero_Elements) {
+
+TEST(MatrixCCSConstructorFromNCollumnsNRowsNNotZero, CanCreateMatrixWithZeroElements1) {
     ASSERT_NO_THROW(MatrixCCS(10, 10, 0));
 }
 
 // Tests for Constructor MatrixCCS(nCollumns, nRows, matrix);
-TEST(Matrix_CCS_Constructor_From_NCollumns_NRows_Matrix,
-        Throw_If_Incorrect_NCollumns) {
+TEST(MatrixCCSConstructorFromNCollumnsNRowsMatrix, ThrowIfIncorrectNCollumns2) {
     ASSERT_ANY_THROW(MatrixCCS(0, 2,
-        { complex_int(2, 3),     complex_int(0, 0),
-        complex_int(0, -1),    complex_int(-7, 0) }));
+        { {2, 3}, {0, 0},
+        {0, -1}, {-7, 0} }));
 }
-TEST(Matrix_CCS_Constructor_From_NCollumns_NRows_Matrix,
-        Throw_If_Incorrect_NRows) {
+
+TEST(MatrixCCSConstructorFromNCollumnsNRowsMatrix, ThrowIfIncorrectNRows2) {
     ASSERT_ANY_THROW(MatrixCCS(2, -3,
-        { complex_int(0, 0),     complex_int(2, 3),
-        complex_int(0, -1),    complex_int(-7, 0) }));
+        { {0, 0}, {2, 3},
+        {0, -1}, {-7, 0} }));
 }
-TEST(Matrix_CCS_Constructor_From_NCollumns_NRows_Matrix,
-        Throw_If_Matrix_Has_Incorrect_Size) {
+
+TEST(MatrixCCSConstructorFromNCollumnsNRowsMatrix, ThrowIfMatrixHasIncorrectSize) {
     ASSERT_ANY_THROW(MatrixCCS(2, 2,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0),
-        complex_int(0, -1),    complex_int(-7, 0),     complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),      complex_int(-3, 10) }));
+        { {0, 0}, {2, 3}, {7, 0},
+        {0, -1}, {-7, 0}, {0, 0},
+        {0, 0}, {0, 0}, {-3, 10} }));
 }
-TEST(Matrix_CCS_Constructor_From_NCollumns_NRows_Matrix,
-        No_Throw_With_Correct_Parameters) {
+
+TEST(MatrixCCSConstructorFromNCollumnsNRowsMatrix, NoThrowWithCorrectParameters2) {
     ASSERT_NO_THROW(MatrixCCS(3, 3,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0),
-        complex_int(0, -1),    complex_int(-7, 0),     complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),      complex_int(-3, 10) }));
+        { {0, 0}, {2, 3}, {7, 0},
+        {0, -1}, {-7, 0}, {0, 0},
+        {0, 0}, {0, 0}, {-3, 10} }));
 }
-TEST(Matrix_CCS_Constructor_From_NCollumns_NRows_Matrix,
-        Can_Create_Matrix_With_Zero_Elements) {
+
+TEST(MatrixCCSConstructorFromNCollumnsNRowsMatrix, CanCreateMatrixWithZeroElements2) {
     ASSERT_NO_THROW(MatrixCCS(3, 3,
-        { complex_int(0, 0),     complex_int(0, 0),      complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),      complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),      complex_int(0, 0) }));
+        { {0, 0}, {0, 0}, {0, 0},
+        {0, 0}, {0, 0}, {0, 0},
+        {0, 0}, {0, 0}, {0, 0} }));
 }
 
 // Tests for Constructor MatrixCCS(int nCollumns, int nRows,
 //                                 std::vector<int> collumnsIndexes,
 //                                 std::vector<int> rows,
-//                                 std::vector<complex_int> values);
-TEST(Matrix_CCS_Constructor_From_Direct_Given_Fields,
-        Throw_If_Incorrect_NCollumns) {
+//                                 std::vector<std::complex<int>> values);
+TEST(MatrixCCSConstructorFromDirectGivenFields, ThrowIfIncorrectNCollumns3) {
     ASSERT_ANY_THROW(MatrixCCS(-2, 2,
         { 0, 0, 2 },
         { 0, 1 },
-        { complex_int(-7, 0), complex_int(0, -10) }));
+        { {-7, 0}, {0, -10} }));
 }
-TEST(Matrix_CCS_Constructor_From_Direct_Given_Fields,
-        Throw_If_Incorrect_NRows) {
+
+TEST(MatrixCCSConstructorFromDirectGivenFields, ThrowIfIncorrectNRows3) {
     ASSERT_ANY_THROW(MatrixCCS(2, 0,
         { 0, 0, 2 },
         { 0, 1 },
-        { complex_int(-7, 0), complex_int(0, -10) }));
+        { {-7, 0}, {0, -10} }));
 }
-TEST(Matrix_CCS_Constructor_From_Direct_Given_Fields,
-        Throw_If_Given_More_Values_Than_Matrix_Size) {
+
+TEST(MatrixCCSConstructorFromDirectGivenFields, ThrowIfGivenMoreValuesThanMatrixSize) {
     ASSERT_ANY_THROW(MatrixCCS(2, 0,
         { 0, 0, 2 },
         { 0, 1 },
-        { complex_int(-7, 0), complex_int(0, -10) }));
+        { {-7, 0}, {0, -10} }));
 }
-TEST(Matrix_CCS_Constructor_From_Direct_Given_Fields,
-        Throw_If_Incorrect_Collumns_Indexes) {
+
+TEST(MatrixCCSConstructorFromDirectGivenFields, ThrowIfIncorrectCollumnsIndexes) {
     ASSERT_ANY_THROW(MatrixCCS(2, 2,
         { 0, 0, 2, 2 },
         { 0, 1 },
-        { complex_int(-7, 0), complex_int(0, -10) }));
+        { {-7, 0}, {0, -10} }));
 }
-TEST(Matrix_CCS_Constructor_From_Direct_Given_Fields,
-        Throw_If_Rows_Has_Incorrect_Value) {
+
+TEST(MatrixCCSConstructorFromDirectGivenFields, ThrowIfRowsHasIncorrectValue) {
     ASSERT_ANY_THROW(MatrixCCS(2, 2,
         { 0, 0, 2 },
         { 0, 2 },
-        { complex_int(-7, 0), complex_int(0, -10) }));
+        { {-7, 0}, {0, -10} }));
 }
-TEST(Matrix_CCS_Constructor_From_Direct_Given_Fields,
-        No_Throw_With_Correct_Parameters) {
+
+TEST(MatrixCCSConstructorFromDirectGivenFields, NoThrowWithCorrectParameters3) {
     ASSERT_NO_THROW(MatrixCCS(2, 2,
         { 0, 0, 2 },
         { 0, 1 },
-        { complex_int(-7, 0), complex_int(0, -10) }));
+        { {-7, 0}, {0, -10} }));
 }
-TEST(Matrix_CCS_Constructor_From_Direct_Given_Fields,
-        Can_Create_Matrix_With_Zero_Elements) {
+
+TEST(MatrixCCSConstructorFromDirectGivenFields, CanCreateMatrixWithZeroElements3) {
     ASSERT_NO_THROW(MatrixCCS(2, 2,
         { 0, 0, 0},
         {},
@@ -120,84 +115,91 @@ TEST(Matrix_CCS_Constructor_From_Direct_Given_Fields,
 }
 
 // Tests for constructors MatrixCCS are equivalent
-TEST(Matrix_CCS_Constructor_Are_Equivalent, Matrix_With_Zero_Elements) {
+TEST(MatrixCCSConstructorAreEquivalent, MatrixWithZeroElements) {
     EXPECT_EQ(MatrixCCS(3, 3,
-        { complex_int(0, 0),     complex_int(0, 0),      complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),      complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),      complex_int(0, 0) }),
+        { {0, 0}, {0, 0}, {0, 0},
+        {0, 0}, {0, 0}, {0, 0},
+        {0, 0}, {0, 0}, {0, 0} }),
               MatrixCCS(3, 3,
         { 0, 0, 0, 0},
         {},
         {}));
 }
-TEST(Matrix_CCS_Constructor_Are_Equivalent, Square_Matrix) {
+
+TEST(MatrixCCSConstructorAreEquivalent, SquareMatrix1) {
     EXPECT_EQ(MatrixCCS(3, 3,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0),
-        complex_int(0, -1),    complex_int(-7, 0),     complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),      complex_int(-3, 10) }),
+        { {0, 0}, {2, 3}, {7, 0},
+        {0, -1}, {-7, 0}, {0, 0},
+        {0, 0}, {0, 0}, {-3, 10} }),
               MatrixCCS(3, 3,
         { 0, 1, 3, 5 },
         { 1, 0, 1, 0, 2 },
-        { complex_int(0, -1),    complex_int(2, 3),      complex_int(-7, 0),
-        complex_int(7, 0),     complex_int(-3, 10) }));
+        { {0, -1}, {2, 3}, {-7, 0},
+        {7, 0}, {-3, 10} }));
 }
-TEST(Matrix_CCS_Constructor_Are_Equivalent, Row) {
+
+TEST(MatrixCCSConstructorAreEquivalent, Row1) {
     EXPECT_EQ(MatrixCCS(3, 1,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0) }),
+        { {0, 0}, {2, 3}, {7, 0} }),
               MatrixCCS(3, 1,
         { 0, 0, 1, 2 },
         { 0, 0 },
-        { complex_int(2, 3),     complex_int(7, 0) }));
+        { {2, 3}, {7, 0} }));
 }
-TEST(Matrix_CCS_Constructor_Are_Equivalent, Collumn) {
+
+TEST(MatrixCCSConstructorAreEquivalent, Collumn) {
     EXPECT_EQ(MatrixCCS(1, 3,
-        { complex_int(0, 0),
-        complex_int(0, -1),
-        complex_int(0, 0) }),
+        { {0, 0},
+        {0, -1},
+        {0, 0} }),
               MatrixCCS(1, 3,
         { 0, 1 },
         { 1 },
-        { complex_int(0, -1) }));
+        { {0, -1} }));
 }
-TEST(Matrix_CCS_Constructor_Are_Equivalent, Not_Square_Matrix) {
+
+TEST(MatrixCCSConstructorAreEquivalent, NotSquareMatrix1) {
     EXPECT_EQ(MatrixCCS(3, 2,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0),
-        complex_int(0, -1),    complex_int(-7, 0),     complex_int(0, 0) }),
+        { {0, 0}, {2, 3}, {7, 0},
+        {0, -1}, {-7, 0}, {0, 0} }),
               MatrixCCS(3, 2,
         { 0, 1, 3, 4 },
         { 1, 0, 1, 0 },
-        { complex_int(0, -1),    complex_int(2, 3),      complex_int(-7, 0),
-        complex_int(7, 0) }));
+        { {0, -1}, {2, 3}, {-7, 0},
+        {7, 0} }));
 }
-TEST(Matrix_CCS_Constructor_Are_Equivalent, Different_Sizes_Not_Same) {
+
+TEST(MatrixCCSConstructorAreEquivalent, DifferentSizesNotSame) {
     EXPECT_FALSE(MatrixCCS(3, 3,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0),
-        complex_int(0, -1),    complex_int(-7, 0),     complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),      complex_int(-3, 10) }) ==
+        { {0, 0}, {2, 3}, {7, 0},
+        {0, -1}, {-7, 0}, {0, 0},
+        {0, 0}, {0, 0}, {-3, 10} }) ==
               MatrixCCS(3, 2,
         { 0, 1, 3, 4 },
         { 1, 0, 1, 0 },
-        { complex_int(0, -1),    complex_int(2, 3),      complex_int(-7, 0),
-        complex_int(7, 0) }));
+        { {0, -1}, {2, 3}, {-7, 0},
+        {7, 0} }));
 }
-TEST(Matrix_CCS_Constructor_Are_Equivalent, Different_Values_Not_Same) {
+
+TEST(MatrixCCSConstructorAreEquivalent, DifferentValuesNotSame) {
     EXPECT_FALSE(MatrixCCS(3, 3,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0),
-        complex_int(0, -1),    complex_int(7, 0),     complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),      complex_int(-3, 10) }) ==
+        { {0, 0}, {2, 3}, {7, 0},
+        {0, -1}, {7, 0}, {0, 0},
+        {0, 0}, {0, 0}, {-3, 10} }) ==
               MatrixCCS(3, 3,
         { 0, 1, 3, 5 },
         { 1, 0, 1, 0, 2 },
-        { complex_int(0, -1),    complex_int(2, 3),      complex_int(-7, 0),
-        complex_int(7, 0),     complex_int(-3, 10) }));
+        { {0, -1}, {2, 3}, {-7, 0},
+        {7, 0}, {-3, 10} }));
 }
 
 // Tests for FillRandom(unsigned seed = 132, int min = -1000, int max = 1000);
-TEST(Matrix_CCS_Fill_With_Random_Values, Can_Fill_Matrix) {
+TEST(MatrixCCSFillWithRandomValues, CanFillMatrix) {
     MatrixCCS A = MatrixCCS(3, 3, 0);
     ASSERT_NO_THROW(A.FillRandom());
 }
-TEST(Matrix_CCS_Fill_With_Random_Values, Same_Seed_Same_Matrix) {
+
+TEST(MatrixCCSFillWithRandomValues, SameSeedSameMatrix) {
     MatrixCCS A = MatrixCCS(3, 3, 0);
     MatrixCCS B = A;
     A.FillRandom();
@@ -206,143 +208,151 @@ TEST(Matrix_CCS_Fill_With_Random_Values, Same_Seed_Same_Matrix) {
 }
 
 // Tests for Transpose()
-TEST(Matrix_CCS_Transpose, Can_Transpose) {
+TEST(MatrixCCSTranspose, CanTranspose) {
     MatrixCCS A = MatrixCCS(3, 3,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0),
-        complex_int(0, -1),    complex_int(-7, 0),     complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),      complex_int(-3, 10) });
+        { {0, 0}, {2, 3}, {7, 0},
+        {0, -1}, {-7, 0}, {0, 0},
+        {0, 0}, {0, 0}, {-3, 10} });
     ASSERT_NO_THROW(A.Transpose());
 }
-TEST(Matrix_CCS_Transpose, Square_Matrix) {
+
+TEST(MatrixCCSTranspose, SquareMatrix2) {
     MatrixCCS A = MatrixCCS(3, 3,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0),
-        complex_int(0, -1),    complex_int(-7, 0),     complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),      complex_int(-3, 10) });
+        { {0, 0}, {2, 3}, {7, 0},
+        {0, -1}, {-7, 0}, {0, 0},
+        {0, 0}, {0, 0}, {-3, 10} });
     MatrixCCS AT = A.Transpose();
     MatrixCCS ATref = MatrixCCS(3, 3,
-        { complex_int(0, 0),     complex_int(0, -1),      complex_int(0, 0),
-        complex_int(2, 3),     complex_int(-7, 0),      complex_int(0, 0),
-        complex_int(7, 0),     complex_int(0, 0),       complex_int(-3, 10) });
+        { {0, 0}, {0, -1}, {0, 0},
+        {2, 3}, {-7, 0}, {0, 0},
+        {7, 0}, {0, 0}, {-3, 10} });
     EXPECT_EQ(ATref, AT);
     EXPECT_EQ(A, AT.Transpose());
 }
-TEST(Matrix_CCS_Transpose, Row) {
+
+TEST(MatrixCCSTranspose, Row2) {
     MatrixCCS A = MatrixCCS(3, 1,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0) });
+        { {0, 0}, {2, 3}, {7, 0} });
     MatrixCCS AT = A.Transpose();
     MatrixCCS ATref = MatrixCCS(1, 3,
-        { complex_int(0, 0),
-        complex_int(2, 3),
-        complex_int(7, 0) });
+        { {0, 0},
+        {2, 3},
+        {7, 0} });
     EXPECT_EQ(ATref, AT);
     EXPECT_EQ(A, AT.Transpose());
 }
-TEST(Matrix_CCS_Transpose, Not_Square_Matrix) {
+
+TEST(MatrixCCSTranspose, NotSquareMatrix2) {
     MatrixCCS A = MatrixCCS(3, 2,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0),
-        complex_int(0, -1),    complex_int(-7, 0),     complex_int(0, 0) });
+        { {0, 0}, {2, 3}, {7, 0},
+        {0, -1}, {-7, 0}, {0, 0} });
     MatrixCCS AT = A.Transpose();
     MatrixCCS ATref = MatrixCCS(2, 3,
-        { complex_int(0, 0),     complex_int(0, -1),
-        complex_int(2, 3),     complex_int(-7, 0),
-        complex_int(7, 0),     complex_int(0, 0) });
+        { {0, 0}, {0, -1},
+        {2, 3}, {-7, 0},
+        {7, 0}, {0, 0} });
     EXPECT_EQ(ATref, AT);
     EXPECT_EQ(A, AT.Transpose());
 }
 
 // Tests for Multiplication
-TEST(Matrix_CCS_Multiplication, Throw_If_Not_Corresponding_Matrices) {
+TEST(MatrixCCSMultiplication, ThrowIfNotCorrespondingMatrices) {
     MatrixCCS A = MatrixCCS(3, 2,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0),
-        complex_int(0, -1),    complex_int(-7, 0),     complex_int(0, 0) });
+        { {0, 0}, {2, 3}, {7, 0},
+        {0, -1}, {-7, 0}, {0, 0} });
     MatrixCCS B = MatrixCCS(2, 4,
-        { complex_int(0, 0),     complex_int(0, -1),
-        complex_int(2, 3),     complex_int(-7, 0),
-        complex_int(7, 0),     complex_int(0, 0),
-        complex_int(0, -10),   complex_int(20, 0) });
+        { {0, 0}, {0, -1},
+        {2, 3}, {-7, 0},
+        {7, 0}, {0, 0},
+        {0, -10}, {20, 0} });
     ASSERT_ANY_THROW(A * B);
 }
-TEST(Matrix_CCS_Multiplication, Can_Multiply_Corresponding_Matrices) {
+
+TEST(MatrixCCSMultiplication, CanMultiplyCorrespondingMatrices) {
     MatrixCCS A = MatrixCCS(3, 2,
-        { complex_int(0, 0),     complex_int(2, 3),      complex_int(7, 0),
-        complex_int(0, -1),    complex_int(-7, 0),     complex_int(0, 0) });
+        { {0, 0}, {2, 3}, {7, 0},
+        {0, -1}, {-7, 0}, {0, 0} });
     MatrixCCS B = MatrixCCS(2, 3,
-        { complex_int(0, 0),     complex_int(0, -1),
-        complex_int(2, 3),     complex_int(-7, 0),
-        complex_int(7, 0),     complex_int(0, 0) });
+        { {0, 0}, {0, -1},
+        {2, 3}, {-7, 0},
+        {7, 0}, {0, 0} });
     ASSERT_NO_THROW(A * B);
 }
-TEST(Matrix_CCS_Multiplication, Myltiply_Numbers) {
+
+TEST(MatrixCCSMultiplication, MyltiplyNumbers) {
     MatrixCCS A = MatrixCCS(1, 1,
-        { complex_int(20, -30) });
+        { {20, -30} });
     MatrixCCS B = MatrixCCS(1, 1,
-        { complex_int(86, 360) });
+        { {86, 360} });
     MatrixCCS AB = MatrixCCS(1, 1,
-        { complex_int(12520, 4620) });
+        { {12520, 4620} });
     ASSERT_EQ(AB, A * B);
 }
-TEST(Matrix_CCS_Multiplication, Myltiply_On_Zero_Matrix) {
+
+TEST(MatrixCCSMultiplication, MyltiplyOnZeroMatrix) {
     MatrixCCS A = MatrixCCS(3, 2,
-        { complex_int(0, 0),    complex_int(20, 0),     complex_int(7, 0),
-        complex_int(8, 0),    complex_int(-7, 0),     complex_int(0, 0) });
+        { {0, 0}, {20, 0}, {7, 0},
+        {8, 0}, {-7, 0}, {0, 0} });
     MatrixCCS B = MatrixCCS(2, 3,
-        { complex_int(0, 0),     complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0) });
+        { {0, 0}, {0, 0},
+        {0, 0}, {0, 0},
+        {0, 0}, {0, 0} });
     MatrixCCS AB = MatrixCCS(2, 2,
-        { complex_int(0, 0),     complex_int(0, 0),
-        complex_int(0, 0),    complex_int(0, 0) });
+        { {0, 0}, {0, 0},
+        {0, 0}, {0, 0} });
     ASSERT_EQ(AB, A * B);
 }
-TEST(Matrix_CCS_Multiplication, Myltiply_On_Singular_Matrix) {
+
+TEST(MatrixCCSMultiplication, MyltiplyOnSingularMatrix) {
     MatrixCCS A = MatrixCCS(2, 2,
-        { complex_int(1, 0),    complex_int(0, 0),
-        complex_int(0, 0),    complex_int(1, 0) });
+        { {1, 0}, {0, 0},
+        {0, 0}, {1, 0} });
     MatrixCCS B = MatrixCCS(2, 2,
-        { complex_int(3, 20),     complex_int(4, 0),
-        complex_int(0, -3),     complex_int(0, 0) });
+        { {3, 20}, {4, 0},
+        {0, -3}, {0, 0} });
     ASSERT_EQ(B, A * B);
 }
-TEST(Matrix_CCS_Multiplication, Matrix_Multiplication_Example_1) {
+
+TEST(MatrixCCSMultiplication, MatrixMultiplicationExample1) {
     MatrixCCS A = MatrixCCS(3, 2,
-        { complex_int(0, 0),    complex_int(20, 0),     complex_int(7, 0),
-        complex_int(8, 0),    complex_int(-7, 0),     complex_int(0, 0) });
+        { {0, 0}, {20, 0}, {7, 0},
+        {8, 0}, {-7, 0}, {0, 0} });
     MatrixCCS B = MatrixCCS(2, 3,
-        { complex_int(0, 0),     complex_int(0, 0),
-        complex_int(4, 0),     complex_int(-7, 0),
-        complex_int(0, 0),     complex_int(0, 0) });
+        { {0, 0}, {0, 0},
+        {4, 0}, {-7, 0},
+        {0, 0}, {0, 0} });
     MatrixCCS AB = MatrixCCS(2, 2,
-        { complex_int(80, 0),     complex_int(-140, 0),
-        complex_int(-28, 0),    complex_int(49, 0) });
+        { {80, 0}, {-140, 0},
+        {-28, 0}, {49, 0} });
     ASSERT_EQ(AB, A * B);
 }
-TEST(Matrix_CCS_Multiplication, Matrix_Multiplication_Example_2) {
+
+TEST(MatrixCCSMultiplication, MatrixMultiplicationExample2) {
     MatrixCCS A = MatrixCCS(3, 4,
-        { complex_int(0, 0),     complex_int(0, 0),     complex_int(0, 0),
-        complex_int(0, 0),     complex_int(-7, 0),    complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),     complex_int(4, 7),
-        complex_int(4, -3),    complex_int(0, 0),     complex_int(0, 0)});
+        { {0, 0}, {0, 0}, {0, 0},
+        {0, 0}, {-7, 0}, {0, 0},
+        {0, 0}, {0, 0}, {4, 7},
+        {4, -3}, {0, 0}, {0, 0} });
     MatrixCCS B = MatrixCCS(2, 3,
-        { complex_int(0, -3),    complex_int(0, 0),
-        complex_int(0, 0),     complex_int(0, 0),
-        complex_int(0, 0),     complex_int(7, -10) });
+        { {0, -3}, {0, 0},
+        {0, 0}, {0, 0},
+        {0, 0}, {7, -10} });
     MatrixCCS AB = MatrixCCS(2, 4,
-        { complex_int(0, 0),    complex_int(0, 0),
-        complex_int(0, 0),    complex_int(0, 0),
-        complex_int(0, 0),    complex_int(4, 7) * complex_int(7, -10),
-        complex_int(4, -3) * complex_int(0, -3),    complex_int(0, 0) });
+        { {0, 0}, {0, 0},
+        {0, 0}, {0, 0},
+        {0, 0}, {98, 9},
+        {-9, -12}, {0, 0} });
     ASSERT_EQ(AB, A * B);
 }
 
 // Test for performance measure
-// TEST(Matrix_CCS_Performance, Sequential) {
+// TEST(MatrixCCSPerformance, Sequential) {
 //     MatrixCCS A = MatrixCCS(1000, 1000, 50000);
 //     MatrixCCS B = MatrixCCS(1000, 1000, 50000);
 //     A.FillRandom();
 //     B.FillRandom();
 //     ASSERT_NO_THROW(A * B);
 // }
-
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
