@@ -1,6 +1,7 @@
 // Copyright 2021 Zlobin George
 #include "../../../modules/task_1/zlobin_g_sparse_matrix_ccs_mult_complex/matrix_ccs_mult.h"
 #include <random>
+#include <algorithm>
 
 MatrixCCS::MatrixCCS(int nCollumns, int nRows, int nNotZero) {
     if (nCollumns <= 0 || nRows <= 0) {
