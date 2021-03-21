@@ -27,7 +27,6 @@ TEST(checkMinorFunction, countRadix) {
     ASSERT_EQ(countRadix(1909), 4);
 }
 
-
 TEST(checkMinorFunction, getRemander) {
     ASSERT_EQ(getRemainder(6.0), 0);
     ASSERT_EQ(getRemainder(6.2), 2);
