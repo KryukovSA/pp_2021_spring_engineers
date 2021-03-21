@@ -21,7 +21,7 @@ std::vector<int> gaussianFilter(const std::vector<int> & img, int width,
     while (l < height) {
         k = 0;
         while (k < width) {
-			std::vector<int> tup = { l, k };
+            std::vector<int> tup = { l, k };
             array.push_back(tup);
             k += block_width;
         }
