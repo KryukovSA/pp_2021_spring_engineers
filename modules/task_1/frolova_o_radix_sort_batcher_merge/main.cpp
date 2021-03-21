@@ -82,15 +82,6 @@ TEST(radix_sort, bigRadix) {
     ASSERT_EQ(sorted, checked);
 }
 
-TEST(radix_sort, works_random_size_20) {
-    std::vector<double> vect = getRandomVector(20);
-    std::vector<double> res = radixSort(vect);
-    std::vector<double> check = checkVector(vect);
-    ASSERT_EQ(res, check);
-}
-
-
-
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
