@@ -14,14 +14,14 @@ std::vector<int> gaussianFilter(const std::vector<int> & img, int width,
     int l = 0;
     int k = 0;
     kernel = createGaussianKernel(radius, sigma);
-    std::vector<std::tuple<int, int>> array;
+    std::vector<std::vector<int>> array;
     int grid_size = ceil(static_cast<double>(sqrt(count_thread)));
     int block_height = height / grid_size;
     int block_width = width / grid_size;
     while (l < height) {
         k = 0;
         while (k < width) {
-            std::tuple<int, int> tup(l, k);
+			std::vector<int> tup = { l, k };
             array.push_back(tup);
             k += block_width;
         }
@@ -31,10 +31,10 @@ std::vector<int> gaussianFilter(const std::vector<int> & img, int width,
     {
         for (int t = 0; t < static_cast<int>(array.size()); t++) {
             if (t % count_thread == omp_get_thread_num()) {
-                int j_start = std::get<0>(array[t]);
-                int j_finish = std::get<0>(array[t]) + block_height;
-                int i_start = std::get<1>(array[t]);
-                int i_finish = std::get<1>(array[t]) + block_width;
+                int j_start = array[t][0];
+                int j_finish = array[t][0] + block_height;
+                int i_start = array[t][1];
+                int i_finish = array[t][1] + block_width;
                 for (int i = i_start; i < i_finish && i < width; i++) {
                     for (int j = j_start; j < j_finish && j < height; j++) {
                         int color = calculateNewPixelColor(img, width, height, i, j, radius, kernel);

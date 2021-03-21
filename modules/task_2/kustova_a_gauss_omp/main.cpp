@@ -30,7 +30,7 @@ TEST(Gaussian_Method, Test_can_gaussian_filter) {
     image1_decimal[56] = 6;    image1_decimal[57] = 50; image1_decimal[58] = 2; image1_decimal[59] = 4;
     image1_decimal[60] = 3;    image1_decimal[61] = 9; image1_decimal[62] = 1; image1_decimal[63] = 4;
     ASSERT_NO_THROW(gaussianFilter(image1_decimal, width, height, radius, sigma, count_thread));
-}/*
+}
 TEST(Gaussian_Method, Test_check_work_with_rectangle_matrix) {
     int radius = 1;
     float sigma = 5.0;
@@ -159,4 +159,3 @@ TEST(Gaussian_Method, Can_creating_Gaussian_Kernel) {
     float sigma = 5.0;
     ASSERT_NO_THROW(createGaussianKernel(radius, sigma));
 }
-*/
