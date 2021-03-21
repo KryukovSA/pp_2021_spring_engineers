@@ -1,4 +1,4 @@
-// Copyright 2021 Kochankov Ilya
+// Copyright 2021 Frolova Olga
 #include <gtest/gtest.h>
 #include <vector>
 #include <algorithm>
