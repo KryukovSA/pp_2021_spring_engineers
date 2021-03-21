@@ -11,7 +11,7 @@ TEST(Gaussian_Method, Test_can_gaussian_filter) {
     float sigma = 5.0;
     int height = 8;
     int count_thread = 3;
-    int width = 9;
+    int width = 8;
     std::vector<int> image1_decimal(height * width);
     image1_decimal[0] = 61; image1_decimal[1] = 2; image1_decimal[2] = 3; image1_decimal[3] = 4;
     image1_decimal[4] = 6; image1_decimal[5] = 8; image1_decimal[6] = 240; image1_decimal[7] = 2;
@@ -34,7 +34,7 @@ TEST(Gaussian_Method, Test_can_gaussian_filter) {
 TEST(Gaussian_Method, Test_check_work_with_rectangle_matrix) {
     int radius = 1;
     float sigma = 5.0;
-    int count_thread = 10;
+    int count_thread = 8;
     int height = 8;
     int width = 9;
     std::vector<int> image1_decimal(height * width);
