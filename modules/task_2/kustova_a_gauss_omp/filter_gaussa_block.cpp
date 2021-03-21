@@ -15,7 +15,7 @@ std::vector<int> gaussianFilter(const std::vector<int> & img, int width,
     int k = 0;
     kernel = createGaussianKernel(radius, sigma);
     std::vector<std::vector<int>> array;
-    int grid_size = ceil(static_cast<double>(sqrt(count_thread)));
+    int grid_size = 1;
     int block_height = height / grid_size;
     int block_width = width / grid_size;
     while (l < height) {
@@ -29,7 +29,7 @@ std::vector<int> gaussianFilter(const std::vector<int> & img, int width,
     }
 #pragma omp parallel num_threads(count_thread) shared(img, width, height, radius, kernel)
     {
-        for (int t = 0; t < static_cast<int>(array.size()); t++) {
+        for (int t = 0; t < 1; t++) {
             if (t % count_thread == omp_get_thread_num()) {
                 int j_start = array[t][0];
                 int j_finish = array[t][0] + block_height;
