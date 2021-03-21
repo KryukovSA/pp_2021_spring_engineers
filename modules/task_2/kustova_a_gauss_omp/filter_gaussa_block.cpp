@@ -6,13 +6,13 @@
 #include <tuple>
 #include "../../../modules/task_2/kustova_a_gauss_omp/filter_gaussa_block.h"
 
-std::vector<int> gaussianFilter(const std::vector<int> & img, int width, int height, int radius, float sigma, int count_thread) {
+std::vector<int> gaussianFilter(const std::vector<int> & img, int width,
+    int height, int radius, float sigma, int count_thread) {
     std::vector<int> resultImage(height * width);
     int size = 2 * radius + 1;
     std::vector<float> kernel(size * size);
     int l = 0;
     int k = 0;
-    int color = 0;
     kernel = createGaussianKernel(radius, sigma);
     std::vector<std::tuple<int, int>> array;
     int grid_size = ceil(static_cast<double>(sqrt(count_thread)));
@@ -21,8 +21,6 @@ std::vector<int> gaussianFilter(const std::vector<int> & img, int width, int hei
     while (l < height) {
         k = 0;
         while (k < width) {
-            int l1 = l / block_height;
-            int k1 = k / block_width;
             std::tuple<int, int> tup(l, k);
             array.push_back(tup);
             k += block_width;
@@ -31,7 +29,7 @@ std::vector<int> gaussianFilter(const std::vector<int> & img, int width, int hei
     }
 #pragma omp parallel num_threads(count_thread) shared(img, width, height, radius, kernel)
     {
-        for (int t = 0; t < array.size(); t++) {
+        for (int t = 0; t < static_cast<int>(array.size()); t++) {
             if (t % count_thread == omp_get_thread_num()) {
                 int j_start = std::get<0>(array[t]);
                 int j_finish = std::get<0>(array[t]) + block_height;
