@@ -1,8 +1,8 @@
-// Copyright 2021 Kochankov Ilya
+// Copyright 2021 Frolova Olga
 #include <gtest/gtest.h>
 #include <vector>
 #include <algorithm>
-#include "./radix_sort_batcher_merge.h"
+#include "../../../modules/task_1/frolova_o_radix_sort_batcher_merge/radix_sort_batcher_merge.h"
 
 TEST(getRandomVector, check_size) {
     std::vector<double> vect = getRandomVector(100);
@@ -26,7 +26,6 @@ TEST(checkMinorFunction, countRadix) {
     ASSERT_EQ(countRadix(136), 3);
     ASSERT_EQ(countRadix(1909), 4);
 }
-
 
 TEST(checkMinorFunction, getRemander) {
     ASSERT_EQ(getRemainder(6.0), 0);
@@ -81,15 +80,6 @@ TEST(radix_sort, bigRadix) {
     std::vector<double> checked = checkVector(vect);
     ASSERT_EQ(sorted, checked);
 }
-
-TEST(radix_sort, works_random_size_20) {
-    std::vector<double> vect = getRandomVector(20);
-    std::vector<double> res = radixSort(vect);
-    std::vector<double> check = checkVector(vect);
-    ASSERT_EQ(res, check);
-}
-
-
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
