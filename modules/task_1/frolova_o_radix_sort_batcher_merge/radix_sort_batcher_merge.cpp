@@ -74,8 +74,10 @@ std::vector<double> radixSortNeg(std::vector<double> vec, int radix) {
     std::vector<int> counts1(10, 0);
     std::vector<double> res(vec.size());
     int size = static_cast<int>(vec.size());
-    for (int i = 0; i < size; i++)
-        counts[static_cast<int>((((getRemainder(vec[i])) % static_cast<unsigned int>(pow(10, (radix)))) / pow(10, (radix - 1))))]++;
+    for (int i = 0; i < size; i++) {
+        int r = getRemainder(vec[i]);
+        counts[static_cast<int>((((r) % static_cast<unsigned int>(pow(10, (radix)))) / pow(10, (radix - 1))))]++;
+    }
     for (int i = 1; i < 10; i++)
          for (int j = i - 1; j >= 0; j--)
              counts1[i] += counts[j];

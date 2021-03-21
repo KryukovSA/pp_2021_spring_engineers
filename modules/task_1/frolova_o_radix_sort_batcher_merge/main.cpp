@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 #include <vector>
 #include <algorithm>
-#include "./radix_sort_batcher_merge.h"
+#include "../../../modules/task_1/frolova_o_radix_sort_batcher_merge/radix_sort_batcher_merge.h"
 
 TEST(getRandomVector, check_size) {
     std::vector<double> vect = getRandomVector(100);
