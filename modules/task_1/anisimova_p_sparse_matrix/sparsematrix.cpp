@@ -6,6 +6,7 @@
 
 #include "../../task_1/anisimova_p_sparse_matrix/sparsematrix.h"
 
+
 SparseMatrix::SparseMatrix(const std::vector<double>& _values, const std::vector<int>& _col_indexes,
     const std::vector<int>& _rows, int _num_nzero, int _size) {
     num_nzero = static_cast<int>(_values.size());

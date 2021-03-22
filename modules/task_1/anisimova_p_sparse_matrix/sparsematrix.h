@@ -4,6 +4,7 @@
 
 #include <vector>
 
+
 class SparseMatrix {
 private:
     std::vector<double> values;

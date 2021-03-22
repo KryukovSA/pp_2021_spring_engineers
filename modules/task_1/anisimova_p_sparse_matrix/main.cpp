@@ -9,6 +9,7 @@ TEST(SparseMatrixTest, MatrixIsEqualToItself1) {
     ASSERT_TRUE(A == A);
 }
 
+
 TEST(SparseMatrixTest, MatrixIsEqualToItself2) {
     SparseMatrix A = SparseMatrix({ 5,8,1,2,6 }, { 0,2,3,5,5 }, { 0,3,2,1,3 }, 5, 4);
     ASSERT_TRUE(A == A);
