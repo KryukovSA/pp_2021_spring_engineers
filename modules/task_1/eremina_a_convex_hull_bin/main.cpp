@@ -52,7 +52,7 @@ TEST(Convex_Hull_Bin, Test_Convex_Bin_Small_Image) {
                                  0, 0, 1, 1, 1, 1, 0, 0,
                                  0, 0, 0, 0, 0, 0, 0, 0 };
     std::vector<int> img_dst(height * width, 0);
-    img_dst = Convex_Hull(img_src, height, for (int i = 0; i < height; i++) {);
+    img_dst = Convex_Hull(img_src, height, width);
     bool flag = true;
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
