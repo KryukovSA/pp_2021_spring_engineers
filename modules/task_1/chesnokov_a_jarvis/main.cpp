@@ -5,12 +5,11 @@
 #include <list>
 #include <random>
 
-#include "jarvis.h"
+#include "../../../modules/task_1/chesnokov_a_jarvis/jarvis.h"
 
 enum { LEFT, RIGHT, BEYOND, BEHIND, BETWEEN, ORIGIN, DESTINATION };
 
-int classify(Point& p0, Point& p1, Point& p2)
-{
+int classify(const Point& p0, const Point& p1, const Point& p2) {
   Point a = p1 - p0;
   Point b = p2 - p0;
   double sa = a.x * b.y - b.x * a.y;
@@ -31,8 +30,7 @@ int classify(Point& p0, Point& p1, Point& p2)
 
 // checks simple predefined CH
 TEST(JarvisTest, Simple_Check_No_Degenerates) {
-  std::list<Point> pts =
-  { 
+  std::list<Point> pts = { 
     { 0,  3},
     {-2,  2},
     {-1,  2},
@@ -46,9 +44,8 @@ TEST(JarvisTest, Simple_Check_No_Degenerates) {
     { 3, -1},
     { 1, -2}
   };
-  
-  std::vector<Point> res =
-  {
+
+  std::vector<Point> res = {
     {-2,  2},
     { 0,  3},
     { 2,  2},
@@ -57,11 +54,11 @@ TEST(JarvisTest, Simple_Check_No_Degenerates) {
     { 1, -2},
     {-1, -1}
   };
-  
+
   std::vector<Point> res2 = Jarvis::makeHull(pts);
-  
+
   ASSERT_EQ(res.size(), res2.size()) << "Resulting CHs' sizes are even not equal!";
-  
+
   for (size_t i = 0; i < res.size(); i++) {
     EXPECT_EQ(res2[i], res[i]) << "mismatch at i = " << i;
   }
@@ -70,8 +67,7 @@ TEST(JarvisTest, Simple_Check_No_Degenerates) {
 // checks floating point precision problems with point closed to CH's edge
 // and also degenerate case with 3 colinear points
 TEST(JarvisTest, Degenerate_Case_Only_Extreme_Points) {
-  std::list<Point> pts =
-  {
+  std::list<Point> pts = {
     { 0,  3},
     { -0.001, 2.999},
     {-2,  2},
@@ -93,8 +89,7 @@ TEST(JarvisTest, Degenerate_Case_Only_Extreme_Points) {
     { 1, -2}
   };
 
-  std::vector<Point> res =
-  {
+  std::vector<Point> res = {
     {-2,  2},
     { 0,  3},
     { 2,  2},
@@ -132,8 +127,7 @@ TEST(JarvisTest, Degenerate_Case_For_2_Point_CH_Is_This_Two_Point) {
 }
 
 TEST(JarvisTest, Degenerate_Case_From_Identical_Vertcies_Only_One_Is_Taken) {
-  std::list<Point> pts =
-  {
+  std::list<Point> pts = {
     { 0,  3}, { 0.0001,  2.9999},
     {-2,  2}, {-2,  2},
     {-1,  2}, {-1,  2},
@@ -148,8 +142,7 @@ TEST(JarvisTest, Degenerate_Case_From_Identical_Vertcies_Only_One_Is_Taken) {
     { 1, -2}, { 0.9999, -1.999}
   };
 
-  std::vector<Point> res =
-  {
+  std::vector<Point> res = {
     {-2,  2},
     { 0,  3},
     { 2,  2},
@@ -172,14 +165,14 @@ TEST(JarvisTest, Big_Check_1000_Random_Points_By_Def) {
   std::mt19937 generator;
   generator.seed(322);
 
-  std::uniform_real<> distribution(0.0, 50.0);
+  std::uniform_real_distribution<> distribution(0.0, 50.0);
 
   std::list<Point> pts;
 
   const int count = 1000;
   for (int i = 0; i < count; ++i)
     pts.emplace_back(distribution(generator), distribution(generator));
-  
+
   std::vector<Point> res = Jarvis::makeHull(pts);
   for (size_t i = 1; i < res.size(); i++) {
     for (auto it = pts.begin(); it != pts.end(); it++) {
