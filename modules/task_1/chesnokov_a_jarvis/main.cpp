@@ -30,7 +30,7 @@ int classify(const Point& p0, const Point& p1, const Point& p2) {
 
 // checks simple predefined CH
 TEST(JarvisTest, Simple_Check_No_Degenerates) {
-  std::list<Point> pts = { 
+  std::list<Point> pts = {
     { 0,  3},
     {-2,  2},
     {-1,  2},

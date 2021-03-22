@@ -85,4 +85,4 @@ class Jarvis {
   }
 };
 
-#endif // !MODULES_TASK_1_CHESNOKOV_A_JARVIS_JARVIS_H_
+#endif  // MODULES_TASK_1_CHESNOKOV_A_JARVIS_JARVIS_H_
