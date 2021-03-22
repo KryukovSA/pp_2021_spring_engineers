@@ -52,12 +52,14 @@ TEST(Convex_Hull_Bin, Test_Convex_Bin_Small_Image) {
                                  0, 0, 1, 1, 1, 1, 0, 0,
                                  0, 0, 0, 0, 0, 0, 0, 0 };
     std::vector<int> img_dst(height * width, 0);
-    img_dst = Convex_Hull(img_src, height, width);
+    img_dst = Convex_Hull(img_src, height, for (int i = 0; i < height; i++) {);
     bool flag = true;
-    for (int i = 0; i < height * width; i++) {
-        if (img_res[i] != img_dst[i]) {
-            flag = false;
-            break;
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (img_res[i * width + j] != img_dst[i * width + j]) {
+                flag = false;
+                break;
+            }
         }
     }
     ASSERT_TRUE(flag);
@@ -91,10 +93,12 @@ TEST(Convex_Hull_Bin, Test_Convex_Bin_Medium_Image) {
     std::vector<int> img_dst(height * width, 0);
     img_dst = Convex_Hull(img_src, height, width);
     bool flag = true;
-    for (int i = 0; i < height * width; i++) {
-        if (img_res[i] != img_dst[i]) {
-            flag = false;
-            break;
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (img_res[i * width + j] != img_dst[i * width + j]) {
+                flag = false;
+                break;
+            }
         }
     }
     ASSERT_TRUE(flag);
@@ -173,10 +177,12 @@ TEST(Convex_Hull_Bin, Test_Convex_Bin_Large_Image) {
     std::vector<int> img_dst(height * width, 0);
     img_dst = Convex_Hull(img_src, height, width);
     bool flag = true;
-    for (int i = 0; i < height * width; i++) {
-        if (img_res[i] != img_dst[i]) {
-            flag = false;
-            break;
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (img_res[i * width + j] != img_dst[i * width + j]) {
+                flag = false;
+                break;
+            }
         }
     }
     ASSERT_TRUE(flag);

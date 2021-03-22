@@ -2,7 +2,6 @@
 #ifndef MODULES_TASK_1_EREMINA_A_CONVEX_HULL_BIN_CONVEX_HULL_BIN_H_
 #define MODULES_TASK_1_EREMINA_A_CONVEX_HULL_BIN_CONVEX_HULL_BIN_H_
 
-#include <fstream>
 #include <vector>
 #include <map>
 #include <stack>

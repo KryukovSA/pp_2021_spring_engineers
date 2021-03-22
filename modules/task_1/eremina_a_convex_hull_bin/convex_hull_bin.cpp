@@ -253,7 +253,7 @@ std::vector<int> Convex_Hull(std::vector<int> img_src,
                                 {begin.x, begin.y + step_y, 0, 0},
                                 {begin.x + step_x, begin.y, 0, 0}};
                 double min_dist = height + width;
-                int min_tmp;
+                int min_tmp = 0;
                 for (int i = 0; i < 3; i++) {
                     if (rightTurn(begin, tmp[i], elem, 1)) {
                         tmp[i].distanse_p0 =
@@ -274,7 +274,7 @@ std::vector<int> Convex_Hull(std::vector<int> img_src,
             begin = elem;
         }
 
-        delete points;
+        delete [] points;
     }
     return img_dst;
 }
