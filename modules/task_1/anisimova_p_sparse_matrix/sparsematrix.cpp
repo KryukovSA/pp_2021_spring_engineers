@@ -1,10 +1,9 @@
 // Copyright 2021 Anisimova Polina
 
-#include "../../task_1/anisimova_p_sparse_matrix/sparsematrix.h"
-
 #include <cmath>
 #include <limits>
 #include <random>
+#include "../../../modules/task_1/anisimova_p_sparse_matrix/sparsematrix.h"
 
 SparseMatrix::SparseMatrix(const std::vector<double>& _values,
                            const std::vector<int>& _col_indexes,

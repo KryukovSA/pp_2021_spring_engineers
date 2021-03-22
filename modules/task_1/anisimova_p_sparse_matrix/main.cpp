@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 #include <math.h>
 
-#include "../../task_1/anisimova_p_sparse_matrix/sparsematrix.h"
+#include "../../../modules/task_1/anisimova_p_sparse_matrix/sparsematrix.h"
 
 TEST(SparseMatrixTest, MatrixIsEqualToItself1) {
   SparseMatrix A = SparseMatrix({1, 1, 1}, {0, 1, 2, 3}, {0, 1, 2}, 3, 3);
