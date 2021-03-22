@@ -21,7 +21,8 @@ TEST(Convex_Hull_Bin, Test_Split_Image_Into_Components) {
                              0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
                              0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1 };
     std::map<int, int> marks = splitImageIntoComponents(&img, width, height);
-    ASSERT_EQ(marks.size(), 7);
+    int count = static_cast<int>(marks.size());
+    ASSERT_EQ(count, 7);
 }
 TEST(Convex_Hull_Bin, Test_Convex_Bin_Random_Image) {
     int height = 20;
