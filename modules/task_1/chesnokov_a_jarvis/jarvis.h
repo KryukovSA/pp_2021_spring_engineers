@@ -5,8 +5,10 @@
 #include <math.h>
 #include <list>
 
+bool almost_equal(double x, double y, int ulp);
+
 class Point {
-public:
+ public:
   
   double x, y;
   
@@ -16,8 +18,9 @@ public:
   
   Point(const Point& other) = default;
   
+ public:
   bool operator==(const Point& other) const {
-    return (x == other.x && y == other.y);
+    return (almost_equal(x, other.x, 2) && almost_equal(y, other.y, 2));
   }
   
   bool operator!=(const Point& other) const {
@@ -44,9 +47,13 @@ public:
     return dot / (len1 * len2);
   }
   
+  double length() {
+    return sqrt(x * x + y * y);
+  }
+
   double distance(const Point& other) const {
     Point v = other - *this;
-    return sqrt(v.x * v.x + v.y * v.y);
+    return v.length();
   }
 };
 

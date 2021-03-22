@@ -2,6 +2,15 @@
 
 #include "jarvis.h"
 
+bool almost_equal(double x, double y, int ulp)
+{
+  // the machine epsilon has to be scaled to the magnitude of the values used
+  // and multiplied by the desired precision in ULPs (units in the last place)
+  return std::fabs(x - y) <= std::numeric_limits<double>::epsilon() * std::fabs(x + y) * ulp
+    // unless the result is subnormal
+    || std::fabs(x - y) < std::numeric_limits<double>::min();
+}
+
 std::vector<Point> Jarvis::makeHull(std::list<Point> in)
 {
   if (in.empty()) {
@@ -44,9 +53,9 @@ Point Jarvis::findLeftmost(const std::list<Point>& in)
   auto lm = in.begin();
   
   for (auto it = in.begin(); it != in.end(); it++) {
-    if (it->x < lm->x) {
+    if (almost_equal(it->x, lm->x, 2) && it->y < lm->y) {
       lm = it;
-    } else if (it->x == lm->x && it->y < lm->y) {
+    } else if (it->x < lm->x) {
       lm = it;
     }
   }
@@ -68,10 +77,10 @@ Point Jarvis::findWithMinAngle(const Point& prev, const Point& cur, std::list<Po
 
     if (*it == cur) continue;
 
-    if (cur_cos > max_cos) {
+    if (almost_equal(cur_cos, max_cos, 2) && cur.distance(*min_point_it) < cur.distance(*it)) {
       max_cos = cur_cos;
       min_point_it = it;
-    } else if (cur_cos == max_cos && cur.distance(*min_point_it) < cur.distance(*it)) {
+    } else if (cur_cos > max_cos) {
       max_cos = cur_cos;
       min_point_it = it;
     }
