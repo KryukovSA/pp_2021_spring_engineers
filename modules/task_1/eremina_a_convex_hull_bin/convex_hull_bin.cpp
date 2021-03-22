@@ -97,10 +97,10 @@ std::map<int, int> splitImageIntoComponents(std::vector<int>* img_src_dst,
 // measured counterclockwise from point p0;
 // If the polar angles of several points coincide,
 // then the distance to the point p0
-void sortPolar(point* points, const point p0, const int count) {
+void sortPolar(point* points, const point* p0, const int count) {
     for (int i = 0; i < count; i++) {
-        int y = points[i].y - p0.y;
-        int x = points[i].x - p0.x;
+        int y = points[i].y - p0->y;
+        int x = points[i].x - p0->x;
         double polar_angle = atan2(y, x);
         if (polar_angle < 0) polar_angle += 2*PI;
         points[i].polar_angle = polar_angle;
@@ -128,9 +128,9 @@ void sortPolar(point* points, const point p0, const int count) {
 }
 
 // Do the three points a, b and c make a right turn (with or without =)?
-bool rightTurn(const point a, const point b, const point c, bool flag) {
-    point u = {b.x - a.x, b.y - a.y, 0, 0};
-    point v = {c.x - b.x, c.y - b.y, 0, 0};
+bool rightTurn(const point* a, const point* b, const point* c, bool flag) {
+    point u = {b->x - a->x, b->y - a->y, 0, 0};
+    point v = {c->x - b->x, c->y - b->y, 0, 0};
     if (flag) {
         return u.x * v.y - u.y * v.x <= 0;
     }
@@ -197,7 +197,7 @@ std::vector<int> Convex_Hull(std::vector<int> img_src,
         }
 
         // Sort points
-        sortPolar(points, p0, count);
+        sortPolar(points, &p0, count);
 
         std::stack<point> S;
         S.push(p0);
@@ -207,7 +207,7 @@ std::vector<int> Convex_Hull(std::vector<int> img_src,
             S.pop();
             point next_to_top = S.top();
             S.push(top);
-            while (rightTurn(next_to_top, top, points[i], 0)) {
+            while (rightTurn(&next_to_top, &top, &(points[i]), 0)) {
                 S.pop();
                 top = S.top();
                 S.pop();
@@ -255,7 +255,7 @@ std::vector<int> Convex_Hull(std::vector<int> img_src,
                 double min_dist = height + width;
                 int min_tmp = 0;
                 for (int i = 0; i < 3; i++) {
-                    if (rightTurn(begin, tmp[i], elem, 1)) {
+                    if (rightTurn(&begin, &(tmp[i]), &elem, 1)) {
                         tmp[i].distanse_p0 =
                             sqrt((begin.x - tmp[i].x) * (begin.x - tmp[i].x) +
                                  (begin.y - tmp[i].y) * (begin.y - tmp[i].y)) +

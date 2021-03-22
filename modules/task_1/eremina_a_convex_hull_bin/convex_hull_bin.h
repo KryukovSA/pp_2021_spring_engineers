@@ -24,10 +24,10 @@ std::map<int, int> splitImageIntoComponents(
 // measured counterclockwise from point p0;
 // If the polar angles of several points coincide,
 // then the distance to the point p0
-void sortPolar(point* points, const point p0, const int count);
+void sortPolar(point* points, const point* p0, const int count);
 
 // Do the three points a, b and c make a right turn (with or without =)?
-bool rightTurn(const point a, const point b, const point c, bool flag);
+bool rightTurn(const point* a, const point* b, const point* c, bool flag);
 
 // Graham's algorithm - an algorithm for constructing
 // a convex hull in two-dimensional space
