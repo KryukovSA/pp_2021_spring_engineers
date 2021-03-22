@@ -1,22 +1,57 @@
 // Copyright 2018 Chesnokov Artyom
 #include <gtest/gtest.h>
+#include "jarvis.h"
 
-TEST(Jarvis, OK1) {
+TEST(JarvisTest, Simple_Check_No_Degenerates) {
+    std::list<Point> pts =
+    { 
+        { 0,  3},
+        {-2,  2},
+        {-1,  2},
+        { 1,  2},
+        { 2,  2},
+        { 2,  1},
+        { 3,  1},
+        { 0,  0},
+        {-1, -1},
+        { 1, -1},
+        { 3, -1},
+        { 1, -2}
+    };
+
+    std::vector<Point> res =
+    {
+        {-2,  2},
+        { 0,  3},
+        { 2,  2},
+        { 3,  1},
+        { 3, -1},
+        { 1, -2},
+        {-1, -1}
+    };
+
+    std::vector<Point> res2 = Jarvis::makeHull(pts);
+
+    ASSERT_EQ(res.size(), res2.size()) << "Resulting CHs' sizes are even not equal!";
+
+    for (size_t i = 0; i < res.size(); i++) {
+        EXPECT_EQ(res2[i], res[i]) << "mismatch at i = " << i;
+    }
+    
+}
+
+TEST(JarvisTest, OK2) {
     SUCCEED();
 }
 
-TEST(Jarvis, OK2) {
+TEST(JarvisTest, OK3) {
     SUCCEED();
 }
 
-TEST(Jarvis, OK3) {
+TEST(JarvisTest, OK4) {
     SUCCEED();
 }
 
-TEST(Jarvis, OK4) {
-    SUCCEED();
-}
-
-TEST(Jarvis, OK5) {
+TEST(JarvisTest, OK5) {
     SUCCEED();
 }
