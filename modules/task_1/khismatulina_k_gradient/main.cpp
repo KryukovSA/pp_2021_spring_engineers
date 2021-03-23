@@ -83,7 +83,6 @@ TEST(gradient, gradient_test) {
     matrix[6] = 2;
     matrix[7] = 0;
     matrix[8] = 3;
-    
     std::vector<double> rightRes(size);
     rightRes[0] = 0.25;
     rightRes[1] = 0.21;

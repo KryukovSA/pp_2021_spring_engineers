@@ -61,7 +61,6 @@ std::vector<double> gradientSeq(const std::vector<double>& matrix, const std::ve
         discrepancyCurrent[i] = vector[i] - Ah[i];
     }
     std::vector<double> h(discrepancyCurrent);
-    
     do {
         iters++;
         Ah = multMV(matrix, h);
