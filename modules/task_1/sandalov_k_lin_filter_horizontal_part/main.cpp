@@ -54,7 +54,7 @@ TEST(Parallel_Operations_OpenMP, Image_processing_with_incorrect_img_size) {
 TEST(Parallel_Operations_OpenMP, Image_processing_with_incorrect_kernel_size) {
     std::vector<float> image (250, 0);
     std::vector<float> filter (9, 0);
-    ASSERT_ANY_THROW(my::linearFilterSeq(image, filter, 50, 5, 4));
+    ASSERT_ANY_THROW(my::linearFilterSeq(image, filter, 50, 5, 5));
 }
 
 TEST(Parallel_Operations_OpenMP, Filter_doesnt_change_blank_image) {
