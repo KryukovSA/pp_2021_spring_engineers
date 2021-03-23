@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 #include <vector>
 #include <algorithm>
-#include "../../../modules/task_1/solomakhin_s_hoar_sort_simple_merge/hoar_sort_simple_merge.h"
+#include "./hoar_sort_simple_merge.h"
 
 TEST(random_gen, run) {
     ASSERT_NO_THROW(random_gen(100));
