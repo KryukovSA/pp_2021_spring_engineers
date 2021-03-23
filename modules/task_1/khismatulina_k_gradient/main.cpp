@@ -37,7 +37,7 @@ TEST(gradient, check_multMV_1) {
     rightRes[0] = 22;
     std::vector<double> myRes = multMV(matrix, vec);
     int check = 1;
-    for (int i = 0; i < myRes.size(); ++i) {
+    for (size_t i = 0; i < myRes.size(); ++i) {
         if (myRes[i] != rightRes[i]) check = 0;
     }
     ASSERT_EQ(check, 1);
@@ -60,7 +60,7 @@ TEST(gradient, check_multMV_2) {
 
     std::vector<double> myRes = multMV(matrix, vec);
     int check = 1;
-    for (int i = 0; i < myRes.size(); ++i) {
+    for (size_t i = 0; i < myRes.size(); ++i) {
         if (myRes[i] != rightRes[i]) check = 0;
     }
     ASSERT_EQ(check, 1);
@@ -88,7 +88,7 @@ TEST(gradient, gradient_test) {
     rightRes[1] = 0.21;
     rightRes[2] = 0.68;
     std::vector<double> myRes = gradientSeq(matrix, vec, size);
-    for (int i = 0; i < myRes.size(); ++i) {
+    for (size_t i = 0; i < myRes.size(); ++i) {
         ASSERT_NEAR(myRes[i], rightRes[i], 0.5);
     }
 }
