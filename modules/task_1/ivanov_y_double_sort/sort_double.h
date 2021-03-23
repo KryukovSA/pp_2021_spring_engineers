@@ -2,6 +2,8 @@
 #ifndef MODULES_TASK_1_IVANOV_Y_DOUBLE_SORT_SORT_DOUBLE_H_
 #define MODULES_TASK_1_IVANOV_Y_DOUBLE_SORT_SORT_DOUBLE_H_
 
+#include <vector>
+
 std::vector<double> BubbleForCompare(std::vector<double> inputNumbers, const int size);
 std::vector<double> generateDouble(const int n);
 std::vector<double> loc_sort(std::vector<double> inputNumers, const int size);

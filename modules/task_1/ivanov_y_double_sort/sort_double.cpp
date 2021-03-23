@@ -7,17 +7,16 @@
 #include "../../../modules/task_1/ivanov_y_double_sort/sort_double.h"
 
 std::vector<double> BubbleForCompare(std::vector<double> inputNumbers, const int size) {
-    std::vector<double> numbers = inputNumbers;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            if (numbers[i] < numbers[j]) {
-                double tmp = numbers[i];
-                numbers[i] = numbers[j];
-                numbers[j] = tmp;
+            if (inputNumbers[i] < inputNumbers[j]) {
+                double tmp = inputNumbers[i];
+                inputNumbers[i] = inputNumbers[j];
+                inputNumbers[j] = tmp;
             }
         }
     }
-    return numbers;
+    return inputNumbers;
 }
 
 std::vector<double> generateDouble(const int n) {
