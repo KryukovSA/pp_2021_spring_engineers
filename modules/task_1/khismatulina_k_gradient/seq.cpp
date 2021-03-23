@@ -79,6 +79,5 @@ std::vector<double> gradientSeq(const std::vector<double>& matrix, const std::ve
 		discrepancyNext = discrepancyCurrent;
 		discrepancyCurrent = swap;
 	} while ((check > eps) && (iters <= size));
-
 	return res;
 }

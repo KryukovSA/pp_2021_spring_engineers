@@ -1,7 +1,6 @@
 // Copyright 2021 Khismatulina Karina
 #ifndef MODULES_TASK_1_KHISMATULINA_K_SEQ_SEQ_H_
 #define MODULES_TASK_1_KHISMATULINA_K_SEQ_SEQ_H_
-
 #include <vector>
 
 std::vector<double> getRandomVector(int size);

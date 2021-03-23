@@ -5,7 +5,7 @@
 #include "../../../modules/task_1/khismatulina_k_gradient/seq.h"
 
 TEST(gradient, create_vec_with_negative_size) {
-    ASSERT_ANY_THROW(getRandomVector(-1));
+    ASSERT_ANY_THROW(getRandomVector(-2));
 }
 
 TEST(gradient, check_multVV) {
