@@ -1,33 +1,29 @@
+// Copyright 2021 Solomakhin Sergey
 #include "../../../modules/task_1/solomakhin_s_hoar_sort_simple_merge/hoar_sort_simple_merge.h"
 #include <random>
 #include <algorithm>
 #include <vector>
 
-std::vector<int> random_gen(int size)
-{
+std::vector<int> random_gen(int size) {
     std::random_device dev;
     std::mt19937 gen(dev());
     std::vector<int> vec(size);
-    for (int i = 0; i < size; i++)
-    {
+    for (int i = 0; i < size; i++) {
         vec[i] = gen() % 100;
     }
     return vec;
 }
 
-std::vector<int> hoar_sort(std::vector<int>& arr, int first, int last)
-{
+std::vector<int> hoar_sort(const std::vector<int>& arr, int first, int last) {
     int mid, count;
     int f = first, l = last;
     mid = static_cast<int>(arr[(f + l) / 2]);
-    do
-    {
+    do {
         while (arr[f] < mid)
             f++;
         while (arr[l] > mid)
             l--;
-        if (f <= l)
-        {
+        if (f <= l) {
             count = arr[f];
             arr[f] = arr[l];
             arr[l] = count;
@@ -41,7 +37,7 @@ std::vector<int> hoar_sort(std::vector<int>& arr, int first, int last)
     return arr;
 }
 
-std::vector<int> merge(std::vector<int>& a, std::vector<int>& b) {
+std::vector<int> merge(const std::vector<int>& a, const std::vector<int>& b) {
     std::vector<int> result((a.size() + b.size()));
 
     int i = 0, j = 0, k = 0;
