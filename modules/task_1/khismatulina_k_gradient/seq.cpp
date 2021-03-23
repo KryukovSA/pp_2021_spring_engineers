@@ -32,7 +32,7 @@ std::vector<double> getRandomMatrix(int size) {
 double multVV(std::vector<double> A, std::vector<double> B) {
     assert(A.size() == B.size());
     double result = 0;
-    for (int i = 0; i < A.size(); ++i) {
+    for (size_t i = 0; i < A.size(); ++i) {
         result += A[i] * B[i];
     }
     return result;
@@ -42,8 +42,8 @@ std::vector<double> multMV(std::vector<double> m, std::vector<double> v) {
     assert(m.size() > 0 && v.size() > 0);
     assert(m.size() % v.size() == 0);
     std::vector<double> result(m.size() / v.size());
-    for (int i = 0; i < result.size(); ++i) {
-        for (int j = 0; j < v.size(); ++j) {
+    for (size_t i = 0; i < result.size(); ++i) {
+        for (size_t j = 0; j < v.size(); ++j) {
             result[i] += m[i * v.size() + j] * v[j];
         }
     }
