@@ -6,11 +6,11 @@
 #include <iostream>
 #include "../../../modules/task_1/ivanov_y_double_sort/sort_double.h"
 
-double* BubbleForCompare(double* inputNumbers, const int size) {
-    double* numbers = inputNumbers;
+std::vector<double> BubbleForCompare(std::vector<double> inputNumbers, const int size) {
+    std::vector<double> numbers = inputNumbers;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            if (numbers[i] > numbers[j]) {
+            if (numbers[i] < numbers[j]) {
                 double tmp = numbers[i];
                 numbers[i] = numbers[j];
                 numbers[j] = tmp;
@@ -18,13 +18,12 @@ double* BubbleForCompare(double* inputNumbers, const int size) {
         }
     }
     return numbers;
-    delete[] numbers;
 }
 
-double* generateDouble(const int n) {
+std::vector<double> generateDouble(const int n) {
     std::mt19937 gen;
     gen.seed(static_cast<int>(time(0)));
-    double* vec = new double[n];
+    std::vector<double> vec(n);
     for (int i = 0; i < n; i++) {
         double numb = gen() / 1000;
         while (numb >= 1001 || numb <= -1001) {
@@ -33,11 +32,14 @@ double* generateDouble(const int n) {
         vec[i] = numb;
     }
     return vec;
-    delete[] vec;
 }
 
-void transit(double* inputNumbers, double* loc, const int size, int add) {
-    unsigned char* pmem = (unsigned char*)inputNumbers;
+std::vector<double> transit(std::vector<double> inputNumbers, std::vector<double> loc, const int size, int add) {
+    double* nimbs = new double[size];
+    for (int i = 0; i < size; i++) {
+        nimbs[i] = inputNumbers[i];
+    }
+    unsigned char* pmem = (unsigned char*)nimbs;
     int counters[256];
     int sum = 0;
 
@@ -58,54 +60,20 @@ void transit(double* inputNumbers, double* loc, const int size, int add) {
         counters[pmem[index]]++;
     }
     pmem = nullptr;
+    nimbs = nullptr;
+    delete[] nimbs;
     delete[] pmem;
+    return loc;
 }
 
-void transit1(double* inputNumbers, double* loc, const int size, int add) {
-    unsigned char* pmem = (unsigned char*)inputNumbers;
-    int counters[256];
-    int sum = 0;
-
-    for (int i = 0; i < 256; i++) {
-        counters[i] = 0;
-    }
-
-    for (int i = 255; i > 127; i--) {
-        counters[i] += sum;
-        sum = counters[i];
-    }
-
-    for (int i = 0; i < 128; i++) {
-        int tmp = counters[i];
-        counters[i] = sum;
-        sum += tmp;
-    }
-
-    for (int i = 0; i < size; i++) {
-        int index = 8 * i + add;
-        if (pmem[index] < 128) {
-            loc[counters[pmem[index]]] = inputNumbers[i];
-            counters[pmem[index]]++;
-        } else {
-            counters[pmem[index]]--;
-            loc[counters[pmem[index]]] = inputNumbers[i];
-        }
-    }
-    pmem = nullptr;
-    delete[] pmem;
-}
-
-void loc_sort(double* inputNumbers, const int size) {
-    double* tmp = nullptr;
-    double* loc = new double[size];
+std::vector<double> loc_sort(std::vector<double> inputNumbers, const int size) {
+    std::vector<double> loc(size);
+    std::vector<double> tmp(size);
     for (int i = 0; i < 8; i++) {
-        transit(inputNumbers, loc, size, i);
+        loc = transit(inputNumbers, loc, size, i);
         tmp = inputNumbers;
         inputNumbers = loc;
         loc = tmp;
     }
-    transit1(inputNumbers, loc, size, 7);
-    delete[] tmp;
-    loc = nullptr;
-    delete[] loc;
+    return inputNumbers;
 }
