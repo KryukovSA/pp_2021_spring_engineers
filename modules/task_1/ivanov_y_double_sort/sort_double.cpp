@@ -3,6 +3,7 @@
 #include <ctime>
 #include <algorithm>
 #include <vector>
+#include <iostream>
 #include "../../../modules/task_1/ivanov_y_double_sort/sort_double.h"
 
 double* BubbleForCompare(double* inputNumbers, const int size) {
@@ -56,6 +57,8 @@ void transit(double* inputNumbers, double* loc, const int size, int add) {
         loc[counters[pmem[index]]] = inputNumbers[i];
         counters[pmem[index]]++;
     }
+    pmem = nullptr;
+    delete[] pmem;
 }
 
 void transit1(double* inputNumbers, double* loc, const int size, int add) {
@@ -88,6 +91,8 @@ void transit1(double* inputNumbers, double* loc, const int size, int add) {
             loc[counters[pmem[index]]] = inputNumbers[i];
         }
     }
+    pmem = nullptr;
+    delete[] pmem;
 }
 
 void loc_sort(double* inputNumbers, const int size) {
@@ -101,4 +106,6 @@ void loc_sort(double* inputNumbers, const int size) {
     }
     transit1(inputNumbers, loc, size, 7);
     delete[] tmp;
+    loc = nullptr;
+    delete[] loc;
 }
