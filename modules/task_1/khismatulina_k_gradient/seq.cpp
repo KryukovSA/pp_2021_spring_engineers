@@ -44,25 +44,25 @@ std::vector<double> multMV(std::vector<double> m, std::vector<double> v) {
     std::vector<double> result(m.size() / v.size());
     for (int i = 0; i < result.size(); ++i) {
         for (int j = 0; j < v.size(); ++j) {
-    	    result[i] += m[i * v.size() + j] * v[j];
+            result[i] += m[i * v.size() + j] * v[j];
         }
     }
     return result;
 }
 
 std::vector<double> gradientSeq(const std::vector<double>& matrix, const std::vector<double>& vector, int size) {
-	assert(size > 0);
-	int iters = 0;
-	double eps = 0.1, beta = 0.0, alpha = 0.0, check = 0.0;
-	std::vector<double> res(size, 1);
-	std::vector<double> Ah = multMV(matrix, res);
-	std::vector<double> discrepancyCurrent(size), discrepancyNext(size);
-	for (int i = 0; i < size; ++i) {
-		discrepancyCurrent[i] = vector[i] - Ah[i];
-	}
-	std::vector<double> h(discrepancyCurrent);
-
-	do {
+    assert(size > 0);
+    int iters = 0;
+    double eps = 0.1, beta = 0.0, alpha = 0.0, check = 0.0;
+    std::vector<double> res(size, 1);
+    std::vector<double> Ah = multMV(matrix, res);
+    std::vector<double> discrepancyCurrent(size), discrepancyNext(size);
+    for (int i = 0; i < size; ++i) {
+        discrepancyCurrent[i] = vector[i] - Ah[i];
+    }
+    std::vector<double> h(discrepancyCurrent);
+    
+    do {
         iters++;
         Ah = multMV(matrix, h);
         alpha = multVV(discrepancyCurrent, discrepancyNext) / multVV(h, Ah);
@@ -78,6 +78,6 @@ std::vector<double> gradientSeq(const std::vector<double>& matrix, const std::ve
         std::vector<double> swap = discrepancyNext;
         discrepancyNext = discrepancyCurrent;
         discrepancyCurrent = swap;
-    } while ((check > eps) && (iters <= size)); 
+    } while ((check > eps) && (iters <= size));
     return res;
 }
