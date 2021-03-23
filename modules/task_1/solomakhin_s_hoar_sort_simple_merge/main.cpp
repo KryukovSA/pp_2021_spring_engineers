@@ -1,10 +1,8 @@
 // Copyright 2021 Solomakhin Sergey
-#include <iostream>
 #include "gtest/gtest.h"
-#include <random>
 #include <vector>
 #include <algorithm>
-#include "hoar_sort_simple_merge.h"
+#include "../../../modules/task_1/solomakhin_s_hoar_sort_simple_merge/hoar_sort_simple_merge.h"
 
 TEST(random_gen, run) {
     ASSERT_NO_THROW(random_gen(100));

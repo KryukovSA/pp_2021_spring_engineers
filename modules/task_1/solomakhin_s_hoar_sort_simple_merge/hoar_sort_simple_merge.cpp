@@ -1,8 +1,6 @@
-#include "hoar_sort_simple_merge.h"
+#include "../../../modules/task_1/solomakhin_s_hoar_sort_simple_merge/hoar_sort_simple_merge.h"
 #include <random>
 #include <vector>
-#include <algorithm>
-#include <iostream>
 
 std::vector<int> random_gen(int size)
 {
@@ -20,12 +18,12 @@ std::vector<int> hoar_sort(std::vector<int>& arr, int first, int last)
 {
     int mid, count;
     int f = first, l = last;
-    mid = arr[(f + l) / 2]; //вычисление опорного элемента
+    mid = static_cast<int>(arr[(f + l) / 2]); //вычисление опорного элемента
     do
     {
-        while (arr[f] < mid) 
+        while (arr[f] < mid)
             f++;
-        while (arr[l] > mid) 
+        while (arr[l] > mid)
             l--;
         if (f <= l) //перестановка элементов
         {
