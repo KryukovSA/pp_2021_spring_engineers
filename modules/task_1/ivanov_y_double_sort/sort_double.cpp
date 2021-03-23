@@ -68,6 +68,10 @@ std::vector<double> transit(std::vector<double> inputNumbers, std::vector<double
 std::vector<double> loc_sort(std::vector<double> inputNumbers, const int size) {
     std::vector<double> loc(size);
     std::vector<double> tmp(size);
+    for (int i = 0; i < size; i++) {
+        loc[i] = 0;
+        tmp[i] = 0;
+    }
     for (int i = 0; i < 8; i++) {
         loc = transit(inputNumbers, loc, size, i);
         tmp = inputNumbers;
