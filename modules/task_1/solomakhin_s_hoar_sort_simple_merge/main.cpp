@@ -4,51 +4,51 @@
 #include <algorithm>
 #include "./hoar_sort_simple_merge.h"
 
-TEST(random_gen, run) {
+TEST(randomgen, run) {
     ASSERT_NO_THROW(random_gen(100));
 }
 
-TEST(random_gen, wrong_size) {
+TEST(randomgen, wrongsize) {
     ASSERT_ANY_THROW(random_gen(-100));
 }
 
-TEST(hoar_sort, run_without_exceptions_with_size_10) {
+TEST(hoarsort, runwithoutexceptionswithsize10) {
     auto vect = random_gen(10);
     ASSERT_NO_THROW(hoar_sort(vect, 0, 9));
 }
 
-TEST(hoar_sort, run_without_exceptions_with_size_100) {
+TEST(hoarsort, runwithoutexceptionswithsize_100) {
     auto vect = random_gen(100);
     ASSERT_NO_THROW(hoar_sort(vect, 0, 99));
 }
 
-TEST(hoar_sort, run_without_exceptions_with_size_1000) {
+TEST(hoarsort, run_withoutexceptionswithsize1000) {
     auto vect = random_gen(1000);
     ASSERT_NO_THROW(hoar_sort(vect, 0, 999));
 }
 
-TEST(hoar_sort, run_with_size_10) {
+TEST(hoarsort, runwithsize10) {
     auto vect = random_gen(10);
     auto sorted = hoar_sort(vect, 0, 9);
     std::sort(vect.begin(), vect.end());
     ASSERT_EQ(vect, sorted);
 }
 
-TEST(hoar_sort, run_with_size_100) {
+TEST(hoarsort, runwithsize100) {
     auto vect = random_gen(100);
     auto sorted = hoar_sort(vect, 0, 99);
     std::sort(vect.begin(), vect.end());
     ASSERT_EQ(vect, sorted);
 }
 
-TEST(hoar_sort, run_random_size_1000) {
+TEST(hoarsort, runrandomsize1000) {
     auto vect = random_gen(1000);
     auto sorted = hoar_sort(vect, 0, 999);
     std::sort(vect.begin(), vect.end());
     ASSERT_EQ(vect, sorted);
 }
 
-TEST(merge, run_with_size_10_to_size_20) {
+TEST(merging, runwithsize10tosize20) {
     auto vect_a = random_gen(10);
     auto vect_b = random_gen(10);
     vect_a = hoar_sort(vect_a, 0, 9);
@@ -59,7 +59,7 @@ TEST(merge, run_with_size_10_to_size_20) {
     }
 }
 
-TEST(merge, run_with_size_100_to_size_200) {
+TEST(merging, runwithsize100tosize200) {
     auto vect_a = random_gen(100);
     auto vect_b = random_gen(100);
     vect_a = hoar_sort(vect_a, 0, 99);
@@ -70,7 +70,7 @@ TEST(merge, run_with_size_100_to_size_200) {
     }
 }
 
-TEST(merge, run_with_size_1000_to_size_2000) {
+TEST(merging, runwithsize1000tosize2000) {
     auto vect_a = random_gen(1000);
     auto vect_b = random_gen(1000);
     vect_a = hoar_sort(vect_a, 0, 999);
