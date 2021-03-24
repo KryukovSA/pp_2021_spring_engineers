@@ -1,44 +1,50 @@
 // Copyright 2021 Solomakhin Sergey
 #include "../../../modules/task_1/solomakhin_s_hoar_sort_simple_merge/hoar_sort_simple_merge.h"
 #include <random>
-#include <algorithm>
 #include <vector>
 
-std::vector<int> random_gen(int size) {
+std::vector<double> random_gen(int size) {
     std::random_device dev;
     std::mt19937 gen(dev());
-    std::vector<int> vec(size);
+    std::vector<double> vec(size);
     for (int i = 0; i < size; i++) {
         vec[i] = gen() % 100;
     }
     return vec;
 }
 
-std::vector<int> hoar_sort(const std::vector<int>& arr, int first, int last) {
-    int mid, count;
-    int f = first, l = last;
-    mid = static_cast<int>(arr[(f + l) / 2]);
-    do {
-        while (arr[f] < mid)
-            f++;
-        while (arr[l] > mid)
-            l--;
-        if (f <= l) {
-            count = arr[f];
-            arr[f] = arr[l];
-            arr[l] = count;
-            f++;
-            l--;
+std::vector<double> hoar_sort(int left, int right, std::vector <double>& arr) {
+    while (right > left) {
+        int it_l = left;
+        int it_r = right;
+        double pivot = arr.at((left + right) / 2);
+        while (it_l <= it_r) {
+            while (arr.at(it_l) < pivot) {
+                it_l++;
+            }
+            while (arr.at(it_r) > pivot) {
+                it_r--;
+            }
+            if (it_l <= it_r) {
+                std::swap(arr.at(it_l), arr.at(it_r));
+                it_l++;
+                it_r--;
+            }
         }
-    } while (f < l);
-    if (first < l) hoar_sort(arr, first, l);
-    if (f < last) hoar_sort(arr, f, last);
-
+        if (2 * it_l > left + right) {
+            hoar_sort(it_l, right, arr);
+            right = it_l - 1;
+        }
+        else {
+            hoar_sort(left, it_l - 1, arr);
+            left = it_l;
+        }
+    }
     return arr;
 }
 
-std::vector<int> merge(const std::vector<int>& a, const std::vector<int>& b) {
-    std::vector<int> result((a.size() + b.size()));
+std::vector<double> merge(const std::vector<double>& a, const std::vector<double>& b) {
+    std::vector<double> result((a.size() + b.size()));
 
     int i = 0, j = 0, k = 0;
     while (i < static_cast<int>(a.size()) && j < static_cast<int>(b.size())) {
@@ -48,10 +54,10 @@ std::vector<int> merge(const std::vector<int>& a, const std::vector<int>& b) {
             result[k] = b[j++];
         k++;
     }
-    while (i < static_cast<int>(a.size())) {
+    while (i < (a.size())) {
         result[k++] = a[i++];
     }
-    while (j < static_cast<int>(b.size())) {
+    while (j < (b.size())) {
         result[k++] = b[j++];
     }
 
