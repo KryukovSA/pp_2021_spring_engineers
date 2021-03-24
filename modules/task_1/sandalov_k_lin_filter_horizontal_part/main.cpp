@@ -26,8 +26,6 @@ static const std::vector<float> correct_kernel {
     0.0751136, 0.123841, 0.0751136
 };
 
-static const float delta = 0.000001;
-
 TEST(Linear_Filter, Create_Filter_With_Even_Size) {
     ASSERT_ANY_THROW(my::createGaussianFilter(6, 1));
 }
