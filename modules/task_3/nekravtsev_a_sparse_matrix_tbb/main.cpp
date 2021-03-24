@@ -179,7 +179,7 @@ TEST(Par, par_mult_random_matr_80x80) {
 
   // clock_t t1 = clock();
   CCS C = MultCCS(TranspSpareMatrix(A), B);
-  clock_t t2 = clock();
+  // clock_t t2 = clock();
   // std::cout << (t2 - t1) / (double)CLOCKS_PER_SEC << std::endl;
   // t1 = clock();
   C = MultCCSParallel(TranspSpareMatrix(A), B, 4);
