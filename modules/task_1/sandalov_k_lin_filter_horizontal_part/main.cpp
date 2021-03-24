@@ -28,38 +28,38 @@ static const std::vector<float> correct_kernel {
 
 static const float delta = 0.000001;
 
-TEST(Parallel_Operations_OpenMP, Create_filter_with_even_size) {
+TEST(Linear_Filter, Create_Filter_With_Even_Size) {
     ASSERT_ANY_THROW(my::createGaussianFilter(6, 1));
 }
 
-TEST(Parallel_Operations_OpenMP, Create_filter_with_negative_sigma) {
-    ASSERT_ANY_THROW(my::createGaussianFilter(3, -1));    
+TEST(Linear_Filter, Create_Filter_With_Negative_Sigma) {
+    ASSERT_ANY_THROW(my::createGaussianFilter(3, -1));
 }
 
-TEST(Parallel_Operations_OpenMP, Create_filter_with_correct_params) {
+TEST(Linear_Filter, Create_Filter_With_Correct_Params) {
     std::vector<float> computedKernel;
     ASSERT_NO_THROW(computedKernel = my::createGaussianFilter(3, 1));
     ASSERT_EQ(computedKernel.size(), correct_kernel.size());
     for (size_t i = 0; i < computedKernel.size(); ++i) {
         ASSERT_NEAR(computedKernel[i], correct_kernel[i], 0.000001);
-    }    
+    }
 }
 
-TEST(Parallel_Operations_OpenMP, Image_processing_with_incorrect_img_size) {
-    std::vector<float> image (250, 0);
-    std::vector<float> filter (9, 0);
+TEST(Linear_Filter, Image_Processing_With_Incorrect_Img_Size) {
+    std::vector<float> image(250, 0);
+    std::vector<float> filter(9, 0);
     ASSERT_ANY_THROW(my::linearFilterSeq(image, filter, 10, 10, 3));
 }
 
-TEST(Parallel_Operations_OpenMP, Image_processing_with_incorrect_kernel_size) {
-    std::vector<float> image (250, 0);
-    std::vector<float> filter (9, 0);
+TEST(Linear_Filter, Image_Processing_With_Incorrect_Kernel_Size) {
+    std::vector<float> image(250, 0);
+    std::vector<float> filter(9, 0);
     ASSERT_ANY_THROW(my::linearFilterSeq(image, filter, 50, 5, 5));
 }
 
-TEST(Parallel_Operations_OpenMP, Filter_doesnt_change_blank_image) {
+TEST(Linear_Filter, Filter_Doesnt_Change_Blank_Image) {
     int64_t size{15};
-    std::vector<float> blankImage (size * size, 255);
+    std::vector<float> blankImage(size * size, 255);
     auto kernel = my::createGaussianFilter(3, 1);
     auto res = my::linearFilterSeq(blankImage, kernel, size, size, 3);
     for (size_t i = 0; i < blankImage.size(); ++i) {
@@ -67,7 +67,7 @@ TEST(Parallel_Operations_OpenMP, Filter_doesnt_change_blank_image) {
     }
 }
 
-TEST(Parallel_Operations_OpenMP, Filetr_work_correct) {
+TEST(Linear_Filter, Filetr_Work_Correct) {
     auto kernel = my::createGaussianFilter(3, 1);
     auto res = my::linearFilterSeq(init_arr, kernel, 5, 5, 3);
     for (size_t i = 0; i < init_arr.size(); ++i) {

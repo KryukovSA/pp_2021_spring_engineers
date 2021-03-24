@@ -1,16 +1,16 @@
 get_filename_component(ProjectId ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
-if ( USE_OMP )
-    set(ProjectId "${ProjectId}_omp")
-    project( ${ProjectId} )
-    message( STATUS "-- " ${ProjectId} )
+if (USE_SEQ)
+    set(ProjectId "${ProjectId}_seq")
+    project(${ProjectId})
+    message(STATUS "-- " ${ProjectId})
 
     file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h)
 
     set(PACK_LIB "${ProjectId}_lib")
-    add_library(${PACK_LIB} STATIC ${ALL_SOURCE_FILES} )
+    add_library(${PACK_LIB} STATIC ${ALL_SOURCE_FILES})
 
-    add_executable( ${ProjectId} ${ALL_SOURCE_FILES} )
+    add_executable(${ProjectId} ${ALL_SOURCE_FILES})
 
     target_link_libraries(${ProjectId} ${PACK_LIB})
     target_link_libraries(${ProjectId} gtest gtest_main)
@@ -18,7 +18,7 @@ if ( USE_OMP )
     enable_testing()
     add_test(NAME ${ProjectId} COMMAND ${ProjectId})
 
-    if( UNIX )
+    if (UNIX)
         foreach (SOURCE_FILE ${ALL_SOURCE_FILES})
             string(FIND ${SOURCE_FILE} ${PROJECT_BINARY_DIR} PROJECT_TRDPARTY_DIR_FOUND)
             if (NOT ${PROJECT_TRDPARTY_DIR_FOUND} EQUAL -1)
@@ -39,7 +39,7 @@ if ( USE_OMP )
                 --quiet
                 ${ALL_SOURCE_FILES}
         )
-    endif( UNIX )
+    endif (UNIX)
 
     SET(ARGS_FOR_CHECK_COUNT_TESTS "")
     foreach (FILE_ELEM ${ALL_SOURCE_FILES})
@@ -51,7 +51,7 @@ if ( USE_OMP )
             ${CMAKE_SOURCE_DIR}/scripts/check_count_tests.py
             ${ProjectId}
             ${ARGS_FOR_CHECK_COUNT_TESTS}
-    )
-else( USE_OMP )
-    message( STATUS "-- ${ProjectId} - NOT BUILD!"  )
-endif( USE_OMP )
+            )
+else (USE_SEQ)
+    message(STATUS "-- ${ProjectId} - NOT BUILD!")
+endif (USE_SEQ)
