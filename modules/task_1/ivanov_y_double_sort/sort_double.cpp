@@ -58,10 +58,10 @@ std::vector<double> transit(std::vector<double> inputNumbers, std::vector<double
         loc[counters[pmem[index]]] = inputNumbers[i];
         counters[pmem[index]]++;
     }
-    pmem = nullptr;
+    /*pmem = nullptr;
     nimbs = nullptr;
     delete[] nimbs;
-    delete[] pmem;
+    delete[] pmem;*/
     return loc;
 }
 
