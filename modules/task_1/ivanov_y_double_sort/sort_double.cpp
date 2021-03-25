@@ -34,17 +34,17 @@ std::vector<double> generateDouble(const int n) {
 }
 
 std::vector<double> transit(std::vector<double> inputNumbers, std::vector<double> loc, const int size, int add) {
-    double* nimbs = new double[size];
+    /*double* nimbs = new double[size];
     for (int i = 0; i < size; i++) {
         nimbs[i] = inputNumbers[i];
-    }
-    unsigned char* pmem = (unsigned char*)nimbs;
-    int counters[256];
+    }*/
+    unsigned char* pmem = reinterpret_cast<unsigned char*>(inputNumbers.data());
+    int counters[256] = { 0 };
     int sum = 0;
 
-    for (int i = 0; i < 256; i++) {
+    /*for (int i = 0; i < 256; i++) {
         counters[i] = 0;
-    }
+    }*/
     for (int i = 0; i < size; i++) {
         counters[pmem[8 * i + add]]++;
     }
