@@ -154,12 +154,12 @@ TEST(Simpson_Method_Test, Simpson_TBB_TimeTest) {
     std::make_pair(0, 2) };
 
   // double start = omp_get_wtime();
-  double seqRes = simpsonMethod(scope, f3, 50000000);
+  double seqRes = simpsonMethod(scope, f3, 50);
   // double end = omp_get_wtime();
   // std::cout << "Sequential time: " << end - start << std::endl;
 
   // start = omp_get_wtime();
-  double parRes = simpsonMethodTBB(scope, f3, 50000000);
+  double parRes = simpsonMethodTBB(scope, f3, 50);
   // end = omp_get_wtime();
   // std::cout << "Parallel time: " << end - start << std::endl;
 
