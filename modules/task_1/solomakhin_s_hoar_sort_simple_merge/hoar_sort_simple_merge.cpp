@@ -53,6 +53,7 @@ bool checker(std::vector <int>* vec) {
 
 std::vector<int>merge(const std::vector<int>& a, const std::vector<int>& b) {
     std::vector<int> result((a.size() + b.size()));
+
     int i = 0, j = 0, k = 0;
     while (i < static_cast<int>(a.size()) && j < static_cast<int>(b.size())) {
         if (a[i] < b[j])
@@ -61,11 +62,12 @@ std::vector<int>merge(const std::vector<int>& a, const std::vector<int>& b) {
             result[k] = b[j++];
         k++;
     }
-    while (i < (a.size())) {
+    while (i < static_cast<int>(a.size())) {
         result[k++] = a[i++];
     }
-    while (j < (b.size())) {
+    while (j < static_cast<int>(b.size())) {
         result[k++] = b[j++];
     }
+
     return result;
 }
