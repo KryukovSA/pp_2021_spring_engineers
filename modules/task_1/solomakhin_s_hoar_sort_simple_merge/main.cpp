@@ -1,6 +1,6 @@
 // Copyright 2021 Solomakhin Sergey
-#include "gtest/gtest.h"
 #include <iostream>
+#include "gtest/gtest.h"
 #include "./hoar_sort_simple_merge.h"
 
 TEST(randomgen, run) {
