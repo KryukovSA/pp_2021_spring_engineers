@@ -62,9 +62,10 @@ void calcPoints(std::function<double(std::vector<double>)> func,
   std::vector<double> a, std::vector<double> h,
   int startPoint, int endPoint) {
   double evenSum = 0, oddSum = 0;
+  int dimention = a.size();
   std::vector<double> point(a);
   for (int i = startPoint; i < endPoint; i++) {
-    for (int j = 0; j < a.size(); j++) {
+    for (int j = 0; j < dimention; j++) {
       point[j] = a[j] + h[j] * (i + 1);
     }
     if (i % 2 == 0) {
