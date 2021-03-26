@@ -1,6 +1,9 @@
 // Copyright 2021 Solomakhin Sergey
 #include "../../../modules/task_1/solomakhin_s_hoar_sort_simple_merge/hoar_sort_simple_merge.h"
 #include <random>
+#include <algorithm>
+#include <ctime>
+#include <utility>
 #include <vector>
 
 std::vector<int> random_gen(int size) {
