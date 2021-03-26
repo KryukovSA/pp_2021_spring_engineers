@@ -1,10 +1,12 @@
+// Copyright 2021 Baulin Mikhail
+
 #include "../../../modules/task_1/baulin_m_radix_sort_simple_merge/radix_sort.h"
 
 #include <algorithm>
 #include <random>
 #include <vector>
 
-std::vector<double> getRandomVector(int sz) {
+std::vector<double> GetRandomVector(int sz) {
   std::random_device dev;
   std::mt19937 gen(dev());
   std::vector<double> vec(sz);
@@ -14,7 +16,7 @@ std::vector<double> getRandomVector(int sz) {
   return vec;
 }
 
-std::vector<double> sort(std::vector<double> source, std::vector<double> tmp,
+std::vector<double> CountingSort(std::vector<double> source, std::vector<double> tmp,
                          const int offset) {
   auto const size = static_cast<int>(source.size());
   auto byteArr = (unsigned char*)source.data();
@@ -42,7 +44,7 @@ std::vector<double> sort(std::vector<double> source, std::vector<double> tmp,
   return tmp;
 }
 
-std::vector<double> sign_sort(std::vector<double> source) {
+std::vector<double> SignSort(std::vector<double> source) {
   auto const offset = 7;
   auto const size = static_cast<int>(source.size());
   auto byteArr = (unsigned char*)source.data();
@@ -81,31 +83,30 @@ std::vector<double> sign_sort(std::vector<double> source) {
   return result;
 }
 
-std::vector<double> radix_sort(const std::vector<double>& source) {
+std::vector<double> RadixSort(const std::vector<double>& source) {
   auto tmp = std::vector<double>(source.size());
   auto tmpForSwap = std::vector<double>(source.size());
   auto copy = std::vector<double>(source);
 
   for (int i = 0; i < 8; i++) {
-    tmp = sort(copy, tmp, i);
+    tmp = CountingSort(copy, tmp, i);
     tmpForSwap = copy;
     copy = tmp;
     tmp = tmpForSwap;
   }
 
-  return sign_sort(copy);
+  return SignSort(copy);
 }
 
-std::vector<double> merge(const std::vector<double>& left,
+std::vector<double> Merge(const std::vector<double>& left,
                           const std::vector<double>& right) {
   std::vector<double> result((left.size() + right.size()));
 
   auto const leftSize = static_cast<int>(left.size());
   auto const rightSize = static_cast<int>(right.size());
 
-  auto i = 0, j = 0, k =0;
-  for (k = 0; k < leftSize + rightSize - 1; k++)
-  {
+  auto i = 0, j = 0, k = 0;
+  for (k = 0; k < leftSize + rightSize - 1; k++) {
     if (left[i] < right[j])
       result[k] = left[i++];
     else
