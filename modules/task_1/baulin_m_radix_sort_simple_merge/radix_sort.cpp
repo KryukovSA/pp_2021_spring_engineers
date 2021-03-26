@@ -16,7 +16,7 @@ std::vector<double> getRandomVector(int sz) {
 
 std::vector<double> sort(std::vector<double> source, std::vector<double> tmp,
                          const int offset) {
-  const auto const size = source.size();
+  auto const size = static_cast<int>(source.size());
   auto byteArr = (unsigned char*)source.data();
   auto acc = 0;
   int counters[256] = {0};
@@ -43,8 +43,8 @@ std::vector<double> sort(std::vector<double> source, std::vector<double> tmp,
 }
 
 std::vector<double> sign_sort(std::vector<double> source) {
-  const auto const offset = 7;
-  const auto const size = source.size();
+  auto const offset = 7;
+  auto const size = static_cast<int>(source.size());
   auto byteArr = (unsigned char*)source.data();
   auto acc = 0;
 
@@ -100,8 +100,11 @@ std::vector<double> merge(const std::vector<double>& left,
                           const std::vector<double>& right) {
   std::vector<double> result((left.size() + right.size()));
 
+  auto const leftSize = static_cast<int>(left.size());
+  auto const rightSize = static_cast<int>(right.size());
+
   auto i = 0, j = 0, k =0;
-  for (k = 0; k < left.size() + right.size() - 1; k++)
+  for (k = 0; k < leftSize + rightSize - 1; k++)
   {
     if (left[i] < right[j])
       result[k] = left[i++];
@@ -109,10 +112,10 @@ std::vector<double> merge(const std::vector<double>& left,
       result[k] = right[j++];
   }
 
-  while (i < left.size()) {
+  while (i < leftSize) {
     result[k++] = left[i++];
   }
-  while (j < right.size()) {
+  while (j < rightSize) {
     result[k++] = right[j++];
   }
 
