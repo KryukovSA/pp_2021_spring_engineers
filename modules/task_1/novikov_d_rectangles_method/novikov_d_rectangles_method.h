@@ -10,7 +10,6 @@
 template <typename Function>
 double rectangles_base(Function function, std::vector <double> begin_point,
     std::vector <double> end_point, const int number_of_partitions) {
-    
     if (number_of_partitions <= 0) {
         throw 1;
     }
