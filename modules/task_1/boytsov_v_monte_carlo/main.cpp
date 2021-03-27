@@ -2,7 +2,6 @@
 #include <gtest/gtest.h>
 #include <vector>
 #include <cmath>
-#include <gtest-mpi-listener.hpp>
 #include "./monte_carlo.h"
 
 double integral(std::vector<double> x) {
