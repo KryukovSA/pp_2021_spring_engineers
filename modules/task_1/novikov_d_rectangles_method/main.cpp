@@ -1,7 +1,7 @@
 // Copyright 2021 Novikov Danil
 
 #include <gtest/gtest.h>
-#include "../../task_1/novikov_d_rectangles_method/novikov_d_rectangles_method.h"
+#include "../../modules/task_1/novikov_d_rectangles_method/novikov_d_rectangles_method.h"
 
 TEST(Novikov, TestException1) {
     std::vector <double> begin_point = { 0 };
