@@ -7,6 +7,7 @@ TEST(hoar_sort_batcher, simple_check_5000) {
     double* mas = randomFunc(size);
     sortFunc(0, size - 1, mas);
     ASSERT_EQ(true, check(mas, size));
+    delete[] mas;
 }
 TEST(hoar_sort_batcher, check_otr) {
     int size = 10000;
@@ -14,12 +15,14 @@ TEST(hoar_sort_batcher, check_otr) {
     mas[7] = -100;
     sortFunc(0, size - 1, mas);
     ASSERT_EQ(true, check(mas, size));
+    delete[] mas;
 }
 TEST(hoar_sort_batcher, simple_check_10000) {
     int size = 10000;
     double* mas = randomFunc(size);
     sortFunc(0, size - 1, mas);
     ASSERT_EQ(true, check(mas, size));
+    delete[] mas;
 }
 TEST(hoar_sort_batcher, check_all_otr) {
     int size = 5000;
@@ -29,6 +32,7 @@ TEST(hoar_sort_batcher, check_all_otr) {
     }
     sortFunc(0, size - 1, mas);
     ASSERT_EQ(true, check(mas, size));
+    delete[] mas;
 }
 TEST(hoar_sort_batcher, simple_check_all_zero) {
     int size = 5000;
@@ -39,6 +43,7 @@ TEST(hoar_sort_batcher, simple_check_all_zero) {
     mas[9] = 1;
     sortFunc(0, size - 1, mas);
     ASSERT_EQ(true, check(mas, size));
+    delete[] mas;
 }
 
 int main(int argc, char** argv) {
