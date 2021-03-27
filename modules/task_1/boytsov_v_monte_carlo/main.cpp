@@ -52,7 +52,6 @@ TEST(Monte_carlol_test, test_result_of_integral_3) {
     ASSERT_NEAR(res, -10.181, 0.5);
 }
 
-
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

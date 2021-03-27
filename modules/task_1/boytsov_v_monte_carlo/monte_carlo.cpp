@@ -3,6 +3,7 @@
 #include <string>
 #include <random>
 #include <algorithm>
+#include <ctime>
 #include "../../modules/task_1/boytsov_v_monte_carlo/monte_carlo.h"
 
 double getSequentialOperations(double(*f)(std::vector<double>), const std::vector<double>&a,
