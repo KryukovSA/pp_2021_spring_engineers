@@ -1,6 +1,6 @@
 // Copyright 2021 Kryukov Sergey
 #include <gtest/gtest.h>
-#include <Windows.h>
+#include <./windows.h>
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -75,7 +75,7 @@ TEST(omp_version, check_multiplic2) {
 
 
 TEST(omp_version, check_multiplic100) {
-    int size = 100;
+    int size = 10;
 
     crs_mat SparseMat1 = genDiagonalSparseMat(size);
     crs_mat SparseMat2 = genDiagonalSparseMat(size);
@@ -89,7 +89,7 @@ TEST(omp_version, check_multiplic100) {
 }
 
 TEST(omp_version, check_multiplic_time) {
-    int size = 10000;
+    int size = 50;
     double begin, end;
     crs_mat SparseMat1 = genDiagonalSparseMat(size);
     crs_mat SparseMat2 = genDiagonalSparseMat(size);
