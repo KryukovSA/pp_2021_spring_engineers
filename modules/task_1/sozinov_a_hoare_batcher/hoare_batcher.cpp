@@ -11,7 +11,7 @@ std::vector<double> GetRandomVector(int size) {
   std::mt19937 ger(dev());
   std::uniform_real_distribution<> realDist(-100, 100);
 
-  for (size_t index = 0; index < size; ++index) {
+  for (int index = 0; index < size; ++index) {
     genVec.push_back(realDist(ger));
   }
   return genVec;
