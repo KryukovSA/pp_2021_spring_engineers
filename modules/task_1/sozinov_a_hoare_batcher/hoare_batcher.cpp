@@ -11,7 +11,7 @@ std::vector<double> GetRandomVector(int size) {
   std::mt19937 ger(dev());
   std::uniform_real_distribution<> realDist(-100, 100);
 
-  for (int index = 0; index < size; ++index) {
+  for (size_t index = 0; index < size; ++index) {
     genVec.push_back(realDist(ger));
   }
   return genVec;
@@ -43,7 +43,7 @@ void Sort(std::vector<double>* vector, int begin, int end) {
 
 void EvenOddSplit(std::vector<double>* res, const std::vector<double>& left,
                   const std::vector<double>& right, EvenOdd type) {
-  int leftIndex, rightIndex;
+  size_t leftIndex, rightIndex;
   if (type == EvenOdd::Even) {
     leftIndex = 0;
     rightIndex = 0;
@@ -63,11 +63,11 @@ void EvenOddSplit(std::vector<double>* res, const std::vector<double>& left,
   }
 
   if (leftIndex >= left.size()) {
-    for (int i = rightIndex; i < right.size(); i += 2) {
+    for (size_t i = rightIndex; i < right.size(); i += 2) {
       (*res).push_back(right[i]);
     }
   } else {
-    for (int i = leftIndex; i < left.size(); i += 2) {
+    for (size_t i = leftIndex; i < left.size(); i += 2) {
       (*res).push_back(left[i]);
     }
   }
@@ -78,18 +78,18 @@ void BatcherMerge(std::vector<double>* res, const std::vector<double>& left, con
   EvenOddSplit(&even, left, right, EvenOdd::Even);
   EvenOddSplit(&odd, left, right, EvenOdd::Odd);
 
-  int index = 0;
+  size_t index = 0;
   for (; index < even.size() && index < odd.size(); ++index) {
     (*res).push_back(even[index]);
     (*res).push_back(odd[index]);
   }
 
   if (index < odd.size())
-    (*res).insert((*res).begin(), odd.begin() + index, odd.end());
+    (*res).insert((*res).end(), odd.begin() + index, odd.end());
   else if (index < even.size())
-    (*res).insert((*res).begin(), even.begin() + index, even.end());
+    (*res).insert((*res).end(), even.begin() + index, even.end());
 
-  for (int i = 0; i < (*res).size() - 1; ++i) {
+  for (size_t i = 0; i < (*res).size() - 1; ++i) {
     if ((*res)[i] > (*res)[i + 1]) {
       std::swap((*res)[i], (*res)[i + 1]);
     }
