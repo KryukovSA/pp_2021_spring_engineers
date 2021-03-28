@@ -37,7 +37,7 @@ int process_unprocessed_point(const std::vector<int>& graph, std::vector<int>& d
 std::vector<int> dijkstra(const std::vector<int>& graph, int start) {
     
     if (graph.size() == 0)
-        throw "Ошибка: пустой граф ";
+        throw "Ошибка: пустой граф";
     
     int points_count = static_cast<int>(sqrt(graph.size()));
     if (points_count * points_count != graph.size())
