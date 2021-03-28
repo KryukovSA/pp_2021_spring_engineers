@@ -35,7 +35,7 @@ std::vector<int> histogramStretching(const std::vector<int>& mx, int rows, int c
             minIntensity = mx[i];
         }
     }
-    for (int i = 0; i < sizeM; i++) {  // Formula of linear histogram stretching
+    for (int i = 0; i < sizeM; i++) {  // Formul of linear histogram stretching
         stretchedMatrix[i] = (mx[i] - minIntensity) * (255 / (maxIntensity - minIntensity));
     }
     return stretchedMatrix;
