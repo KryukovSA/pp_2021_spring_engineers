@@ -74,7 +74,7 @@ TEST(omp_version, check_multiplic2) {
 
 
 TEST(omp_version, check_multiplic100) {
-    int size = 10;
+    int size = 100;
 
     crs_mat SparseMat1 = genDiagonalSparseMat(size);
     crs_mat SparseMat2 = genDiagonalSparseMat(size);
@@ -87,7 +87,7 @@ TEST(omp_version, check_multiplic100) {
 }
 
 TEST(omp_version, check_multiplic_time) {
-    int size = 50;
+    int size = 1000;
     double begin, end;
     crs_mat SparseMat1 = genDiagonalSparseMat(size);
     crs_mat SparseMat2 = genDiagonalSparseMat(size);
@@ -103,6 +103,8 @@ TEST(omp_version, check_multiplic_time) {
     std::cout << "OMP time = " << end - begin << "\n";
 
     EXPECT_EQ(SparseMatResult.val, SparseMatResult_omp.val);
+    EXPECT_EQ(SparseMatResult.rowNum, SparseMatResult_omp.rowNum);
+    EXPECT_EQ(SparseMatResult.colNum, SparseMatResult_omp.colNum);
 }
 
 int main(int argc, char **argv) {

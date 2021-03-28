@@ -55,7 +55,7 @@ std::vector<std::complex<double>> MultipluValues(
     const int size_) {
 
     std::vector<std::complex<double>> resultVec;
-    std::complex<double> sum = 0;
+    std::complex<double> sum = { 0.0, 0.0 };
     for (int i = 0; i < size_; i++) {
         sum = first[i] * second[i];
         resultVec.push_back(sum);
@@ -100,7 +100,7 @@ crs_mat multiplicateMatrix(crs_mat A, crs_mat B) {
     matC_rowNum.push_back(0);
     for (int rowA = 0; rowA < A.size; rowA++) {
         for (int rowB = 0; rowB < A.size; rowB++) {
-            std::complex<double> scalsum = 0;
+            std::complex<double> scalsum = { 0.0, 0.0 };
             for (int k = A.rowNum[rowA]; k < A.rowNum[rowA + 1]; k++) {
                 for (int n = B.rowNum[rowB]; n < B.rowNum[rowB + 1]; n++) {
                     if (A.colNum[k] == B.colNum[n]) {
@@ -114,7 +114,7 @@ crs_mat multiplicateMatrix(crs_mat A, crs_mat B) {
                 matC_colNum.push_back(rowB);
             }
         }
-        matC_rowNum.push_back(matC_val.size() + matC_rowNum[rowA]);
+        matC_rowNum.push_back(matC_val.size());
     }
     for (int j = 0; j < static_cast<int>(matC_colNum.size()); j++) {
         C.colNum.push_back(matC_colNum[j]);
@@ -153,7 +153,7 @@ crs_mat omp_multiplicateMatrix(crs_mat A, crs_mat B) {
             }
 
             for (j = 0; j < A.size; j++) {
-                std::complex<double> scalsum = 0;
+                std::complex<double> scalsum = { 0.0, 0.0 };
                 for (n = B.rowNum[j]; n < B.rowNum[j + 1]; n++) {
                     if (tmp[B.colNum[n]] != -1) {
                         scalsum += A.val[tmp[B.colNum[n]]] * B.val[n];
@@ -175,7 +175,6 @@ crs_mat omp_multiplicateMatrix(crs_mat A, crs_mat B) {
         }
         matC_rowNum.push_back(C.val.size());
     }
-    C.rowNum.push_back(0);
     for (int i = 0; i <= A.size; i++) {
         C.rowNum.push_back(matC_rowNum[i]);
     }
