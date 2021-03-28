@@ -1,6 +1,6 @@
 // Copyright 2021 Kryukov Sergey
 #include <gtest/gtest.h>
-#include <windows.h>
+#include <Windows.h>
 #include <vector>
 #include <algorithm>
 #include <iostream>
