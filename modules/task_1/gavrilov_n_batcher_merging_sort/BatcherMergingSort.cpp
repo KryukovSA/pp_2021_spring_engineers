@@ -133,6 +133,9 @@ std::vector<std::pair<int, int>> Batcher(int procCount) {
 }
 
 void Sort(std::vector<int>* data, int splitCount) {
+    if (data->size() == 0)
+        return;
+
     if (splitCount < 1)
         throw "splitCount must be more than 0";
 
