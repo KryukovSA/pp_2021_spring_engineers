@@ -1,6 +1,5 @@
 // Copyright 2021 Kryukov Sergey
 #include <gtest/gtest.h>
-#include "windows.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -84,7 +83,6 @@ TEST(omp_version, check_multiplic100) {
     rightRes = MultipluValues(SparseMat1.val, SparseMat2.val, size);
 
     crs_mat SparseMatResult = multiplicateMatrix(SparseMat1, SparseMat2);
-    Sleep(2000);
     EXPECT_EQ(SparseMatResult.val, rightRes);
 }
 
@@ -104,7 +102,6 @@ TEST(omp_version, check_multiplic_time) {
     end = omp_get_wtime();
     std::cout << "OMP time = " << end - begin << "\n";
 
-    Sleep(2000);
     EXPECT_EQ(SparseMatResult.val, SparseMatResult_omp.val);
 }
 
