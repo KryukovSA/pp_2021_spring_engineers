@@ -74,8 +74,9 @@ void EvenOddSplit(std::vector<double>* res, const std::vector<double>& left,
 }
 
 void BatcherMerge(std::vector<double>* res, const std::vector<double>& left, const std::vector<double>& right) {
-  std::vector<double> even.reserve((left.size() + 1) / 2 + (right.size() + 1) / 2);
-  std::vector<double> odd.reserve(left.size() / 2 + right.size() / 2);
+  std::vector<double> even, odd;
+  even.reserve((left.size() + 1) / 2 + (right.size() + 1) / 2);
+  odd.reserve(left.size() / 2 + right.size() / 2);
   EvenOddSplit(&even, left, right, EvenOdd::Even);
   EvenOddSplit(&odd, left, right, EvenOdd::Odd);
 
