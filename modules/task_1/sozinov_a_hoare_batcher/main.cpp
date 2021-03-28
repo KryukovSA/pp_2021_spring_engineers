@@ -16,14 +16,14 @@ TEST(GetRandomVector, vector_have_correct_size) {
 
 TEST(Sort, can_sort) {
   std::vector<double> vect = GetRandomVector(100);
-  ASSERT_NO_THROW(Sort(vect));
+  ASSERT_NO_THROW(Sort(&vect, 0, vect.size() - 1));
 }
 
 TEST(Sort, correct_sort_100) {
   std::vector<double> vect = GetRandomVector(100);
   std::vector<double> copy = vect;
   std::sort(copy.begin(), copy.end());
-  Sort(vect, 0, vect.size() - 1);
+  Sort(&vect, 0, vect.size() - 1);
   ASSERT_EQ(copy, vect);
 }
 
@@ -31,7 +31,7 @@ TEST(Sort, correct_sort_41) {
   std::vector<double> vect = GetRandomVector(41);
   std::vector<double> copy = vect;
   std::sort(copy.begin(), copy.end());
-  Sort(vect, 0, vect.size() - 1);
+  Sort(&vect, 0, vect.size() - 1);
   ASSERT_EQ(copy, vect);
 }
 
@@ -41,7 +41,7 @@ TEST(BatcherMerge, corerct_batcher) {
   std::vector<double> vectR = GetRandomVector(13);
   std::vector<double> copy = vectL;
 
-  copy.insert(copy.end(), vectR.begin(), vetR.end());
+  copy.insert(copy.end(), vectR.begin(), vectR.end());
   std::sort(copy.begin(), copy.end());
 
   Sort(&vectL, 0, vectL.size() - 1);
@@ -56,7 +56,7 @@ TEST(BatcherMerge, corerct_batcher_dif_size) {
   std::vector<double> vectR = GetRandomVector(13);
   std::vector<double> copy = vectL;
 
-  copy.insert(copy.end(), vectR.begin(), vetR.end());
+  copy.insert(copy.end(), vectR.begin(), vectR.end());
   std::sort(copy.begin(), copy.end());
 
   Sort(&vectL, 0, vectL.size() - 1);
