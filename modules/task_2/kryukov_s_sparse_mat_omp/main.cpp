@@ -1,9 +1,9 @@
 // Copyright 2021 Kryukov Sergey
 #include <gtest/gtest.h>
+#include <windows.h>
 #include <vector>
 #include <algorithm>
-#include <windows.h> 
-#include<iostream>
+#include <iostream>
 #include "./sparsemat_omp.h"
 
 TEST(omp_version, correct_transpose_mat) {
@@ -74,8 +74,8 @@ TEST(omp_version, check_multiplic2) {
 }
 
 
-TEST(omp_version, check_multiplic1000) {
-    int size = 1000;
+TEST(omp_version, check_multiplic100) {
+    int size = 100;
 
     crs_mat SparseMat1 = genDiagonalSparseMat(size);
     crs_mat SparseMat2 = genDiagonalSparseMat(size);
@@ -86,6 +86,26 @@ TEST(omp_version, check_multiplic1000) {
     crs_mat SparseMatResult = multiplicateMatrix(SparseMat1, SparseMat2);
     Sleep(2000);
     EXPECT_EQ(SparseMatResult.val, rightRes);
+}
+
+TEST(omp_version, check_multiplic_time) {
+    int size = 10000;
+    double begin, end;
+    crs_mat SparseMat1 = genDiagonalSparseMat(size);
+    crs_mat SparseMat2 = genDiagonalSparseMat(size);
+    begin = omp_get_wtime();
+    crs_mat SparseMatResult = multiplicateMatrix(SparseMat1, SparseMat2);
+    end = omp_get_wtime();
+    std::cout << "Seq time = " << end - begin << "\n";
+
+    begin = omp_get_wtime();
+    crs_mat SparseMatResult_omp = omp_multiplicateMatrix(SparseMat1,
+        SparseMat2);
+    end = omp_get_wtime();
+    std::cout << "OMP time = " << end - begin << "\n";
+
+    Sleep(2000);
+    EXPECT_EQ(SparseMatResult.val, SparseMatResult_omp.val);
 }
 
 int main(int argc, char **argv) {

@@ -1,8 +1,10 @@
 // Copyright 2021 Kryukov Sergey
 #include<float.h>
+#include <omp.h>
 #include <random>
 #include <ctime>
 #include <vector>
+#include <string>
 #include "../../../modules/task_2/kryukov_s_sparse_mat_omp/sparsemat_omp.h"
 
 crs_mat createSparseMat(int size_,
@@ -47,8 +49,10 @@ crs_mat genDiagonalSparseMat(int size_) {
     return resultMat;
 }
 
-std::vector<std::complex<double>> MultipluValues(const std::vector<std::complex<double>> & first,
-    const std::vector<std::complex<double>> & second, const int size_) {
+std::vector<std::complex<double>> MultipluValues(
+    const std::vector<std::complex<double>>& first,
+    const std::vector<std::complex<double>> & second,
+    const int size_) {
 
     std::vector<std::complex<double>> resultVec;
     std::complex<double> sum = 0;
@@ -116,6 +120,62 @@ crs_mat multiplicateMatrix(crs_mat A, crs_mat B) {
         C.colNum.push_back(matC_colNum[j]);
         C.val.push_back(matC_val[j]);
     }
+    for (int i = 0; i <= A.size; i++) {
+        C.rowNum.push_back(matC_rowNum[i]);
+    }
+    return C;
+}
+
+crs_mat omp_multiplicateMatrix(crs_mat A, crs_mat B) {
+    crs_mat C;
+    if (A.size != B.size)
+        throw(std::string)"incorrect size";
+    C.size = A.size;
+    std::vector<std::vector<std::complex<double>>> matC_val(A.size);
+    std::vector<std::vector<int>> matC_colNum(A.size);
+    std::vector<int> matC_rowNum;
+    B = transposeMatrixGustavson(B);
+    matC_rowNum.push_back(0);
+    int n, j;
+
+    #pragma omp parallel
+    {
+        std::vector<int> tmp(C.size, -1);
+        #pragma omp for private(j, n) schedule(static)
+        for (int rowA = 0; rowA < A.size; rowA++) {
+            tmp.assign(A.size, -1);
+            int indexfirst = A.rowNum[rowA];
+            int indexSecond = A.rowNum[rowA + 1];
+
+            for (j = indexfirst; j < indexSecond; j++) {
+                int column = A.colNum[j];
+                tmp[column] = j;
+            }
+
+            for (j = 0; j < A.size; j++) {
+                std::complex<double> scalsum = 0;
+                for (n = B.rowNum[j]; n < B.rowNum[j + 1]; n++) {
+                    if (tmp[B.colNum[n]] != -1) {
+                        scalsum += A.val[tmp[B.colNum[n]]] * B.val[n];
+                    }
+                }
+
+                if (std::abs(scalsum) >= DBL_MIN) {
+                    matC_val[rowA].push_back(scalsum);
+                    matC_colNum[rowA].push_back(j);
+                }
+            }
+        }
+    }
+
+    for (int j = 0; j < static_cast<int>(A.size); j++) {
+        for (int i = 0; i < static_cast<int>(matC_colNum[j].size()); i++) {
+            C.colNum.push_back(matC_colNum[j][i]);
+            C.val.push_back(matC_val[j][i]);
+        }
+        matC_rowNum.push_back(C.val.size());
+    }
+    C.rowNum.push_back(0);
     for (int i = 0; i <= A.size; i++) {
         C.rowNum.push_back(matC_rowNum[i]);
     }
