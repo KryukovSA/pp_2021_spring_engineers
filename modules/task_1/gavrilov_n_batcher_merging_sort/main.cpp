@@ -31,14 +31,14 @@ std::vector<int> GetRandomVector(size_t size) {
 }
 
 TEST(Parallel_Operations_MPI, No_Throw_SplitCount1to10) {
-    for (size_t i = 1; i <= 10; i++) {
+    for (int i = 1; i <= 10; i++) {
         std::vector<int> data = GetRandomVector(10000);
         ASSERT_NO_THROW(Sort(&data, i));
     }
 }
 
 TEST(Parallel_Operations_MPI, Sorting_Right_SplitCount1to10) {
-    for (size_t i = 1; i <= 10; i++) {
+    for (int i = 1; i <= 10; i++) {
         std::vector<int> data = GetRandomVector(10000);
         Sort(&data, i);
         ASSERT_TRUE(IsSorted(data));
@@ -46,8 +46,8 @@ TEST(Parallel_Operations_MPI, Sorting_Right_SplitCount1to10) {
 }
 
 TEST(Parallel_Operations_MPI, Sorting_Time_SplitCount1to10) {
-    int count = 1000000;
-    for (size_t i = 1; i <= 10; i++) {
+    int count = 10000;
+    for (int i = 1; i <= 10; i++) {
         std::vector<int> data = GetRandomVector(count);
 
         // auto begin = std::chrono::high_resolution_clock::now();
@@ -73,7 +73,7 @@ TEST(Parallel_Operations_MPI, Sort_By_Num_Place_Rang2) {
 }
 
 TEST(Parallel_Operations_MPI, Sorting_Right_Even_If_Bad_Size_SplitCount1to10) {
-    for (size_t j = 1; j <= 10; j++) {
+    for (int j = 1; j <= 10; j++) {
         for (int i = 1; i < j; i++) {
             std::vector<int> data = GetRandomVector(j * 1000 + j - i);
             ASSERT_NO_THROW(Sort(&data, j));
@@ -83,7 +83,7 @@ TEST(Parallel_Operations_MPI, Sorting_Right_Even_If_Bad_Size_SplitCount1to10) {
 }
 
 TEST(Parallel_Operations_MPI, Sorting_Right_Even_If_Bad_Size2_SplitCount1to10) {
-    for (size_t j = 1; j <= 10; j++) {
+    for (int j = 1; j <= 10; j++) {
         for (int i = 1; i <= j; i++) {
             std::vector<int> data = GetRandomVector(j - 1);
             ASSERT_NO_THROW(Sort(&data, j));
