@@ -51,7 +51,7 @@ TEST(Parallel_Operations_MPI, Sorting_Time_SplitCount1to10) {
         std::vector<int> data = GetRandomVector(count);
 
         // auto begin = std::chrono::high_resolution_clock::now();
-        Sort(&data);
+        Sort(&data, i);
         // auto end = std::chrono::high_resolution_clock::now();
 
         // auto t = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
