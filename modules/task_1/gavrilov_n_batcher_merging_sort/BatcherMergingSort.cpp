@@ -191,6 +191,6 @@ void Sort(std::vector<int>* data, int splitCount) {
         }
     }
     std::copy(localData[0].begin(), localData[0].end(), data->begin());
-	delete[] localData;
+    delete[] localData;
     data->erase(data->begin() + realSize, data->end());
 }
