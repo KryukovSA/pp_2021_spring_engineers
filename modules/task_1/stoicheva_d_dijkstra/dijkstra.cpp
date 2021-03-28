@@ -15,24 +15,25 @@ int find_unprocessed_point_with_min_distance(const std::vector<int>& graph,
 }
 
 int process_unprocessed_point(const std::vector<int>& graph,
-    std::vector<int> distances,
-    std::vector<bool> processed, int current_point) {
+    std::vector<int>* distances,
+    std::vector<bool>* processed, int current_point) {
 
     int min_distance = std::numeric_limits<int>::max();
     int min_distance_point = -1;
-    for (size_t point = 0; point < processed.size(); point++) {
-        int start_row_index = current_point * processed.size();
+    for (size_t point = 0; point < processed->size(); point++) {
+        int start_row_index = current_point * processed->size();
         int distance = graph[start_row_index + point];
-        if (!processed[point] && distance > 0) {
-            distances[point] = std::min(distances[point],
-                                        distances[current_point] + distance);
-            if (min_distance > distances[point]) {
-                min_distance = distances[point];
+        if (!(*processed)[current_point] && distance > 0) {
+            int *dp = distances->data() + point;
+            int *dcp = distances->data() + current_point;
+            *dp = std::min(*dp, *dcp + distance);
+            if (min_distance > *dp) {
+                min_distance = *dp;
                 min_distance_point = point;
             }
         }
     }
-    processed[current_point] = true;
+    (*processed)[current_point] = true;
     return min_distance_point;
 }
 
@@ -57,7 +58,7 @@ std::vector<int> dijkstra(const std::vector<int>& graph, int start) {
     int next_unprocessed_point = start;
     while (next_unprocessed_point >= 0) {
         next_unprocessed_point = process_unprocessed_point(graph,
-                   distances, processed, next_unprocessed_point);
+                   &distances, &processed, next_unprocessed_point);
         if (next_unprocessed_point < 0) {
             next_unprocessed_point =
                 find_unprocessed_point_with_min_distance(graph, distances,
