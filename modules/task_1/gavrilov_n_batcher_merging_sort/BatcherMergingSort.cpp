@@ -156,7 +156,7 @@ void Sort(std::vector<int>* data, int splitCount) {
 
     for (int i = 0; i < maxSize; i++) {
         localData[i] = std::vector<int>(countPerProc);
-        for (size_t e = 0; e < countPerProc; e++) {
+        for (int e = 0; e < countPerProc; e++) {
             localData[i][e] = (*data)[i * countPerProc + e];
         }
     }
