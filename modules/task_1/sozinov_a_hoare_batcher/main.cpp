@@ -45,7 +45,7 @@ TEST(BatcherMerge, corerct_batcher) {
   std::sort(copy.begin(), copy.end());
 
   Sort(&vectL, 0, vectL.size() - 1);
-  Sort(&vectR, 0, vectR.size() - 1);  
+  Sort(&vectR, 0, vectR.size() - 1);
   BatcherMerge(&res, vectL, vectR);
   ASSERT_EQ(copy, res);
 }

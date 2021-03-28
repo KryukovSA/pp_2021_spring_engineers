@@ -3,8 +3,7 @@
 #include <random>
 #include <vector>
 #include <algorithm>
-#include <algorithm>
-#include "../../../modules/task_1/sozinov_a_hoare_sort/hoare_batcher.h"
+#include "../../../modules/task_1/sozinov_a_hoare_batcher/hoare_batcher.h"
 
 std::vector<double> GetRandomVector(int size) {
   std::vector<double> genVec;
@@ -42,14 +41,13 @@ void Sort(std::vector<double>* vector, int begin, int end) {
     Sort(vector, begin, last);
 }
 
-void EvenOddSplit(std::vector<double>* res, const std::vector<double>& left, 
+void EvenOddSplit(std::vector<double>* res, const std::vector<double>& left,
                   const std::vector<double>& right, EvenOdd type) {
   int leftIndex, rightIndex;
   if (type == EvenOdd::Even) {
     leftIndex = 0;
     rightIndex = 0;
-  }
-  else {
+  } else {
     leftIndex = 1;
     rightIndex = 1;
   }
@@ -58,8 +56,7 @@ void EvenOddSplit(std::vector<double>* res, const std::vector<double>& left,
     if (left[leftIndex] <= right[rightIndex]) {
       (*res).push_back(left[leftIndex]);
       leftIndex += 2;
-    }
-    else {
+    } else {
       (*res).push_back(right[rightIndex]);
       rightIndex += 2;
     }
@@ -69,8 +66,7 @@ void EvenOddSplit(std::vector<double>* res, const std::vector<double>& left,
     for (int i = rightIndex; i < right.size(); i += 2) {
       (*res).push_back(right[i]);
     }
-  }
-  else {
+  } else {
     for (int i = leftIndex; i < left.size(); i += 2) {
       (*res).push_back(left[i]);
     }
@@ -87,12 +83,12 @@ void BatcherMerge(std::vector<double>* res, const std::vector<double>& left, con
     (*res).push_back(even[index]);
     (*res).push_back(odd[index]);
   }
-  
+
   if (index < odd.size())
     (*res).insert((*res).begin(), odd.begin() + index, odd.end());
   else if (index < even.size())
     (*res).insert((*res).begin(), even.begin() + index, even.end());
-  
+
   for (int i = 0; i < (*res).size() - 1; ++i) {
     if ((*res)[i] > (*res)[i + 1]) {
       std::swap((*res)[i], (*res)[i + 1]);
