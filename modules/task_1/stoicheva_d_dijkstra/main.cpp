@@ -1,53 +1,8 @@
-// Copyright 2018 Nesterov Alexander
+// Copyright 2021 Stoicheva Darya
 #include <gtest/gtest.h>
 #include <vector>
 #include <iostream>
 #include "../../../modules/task_1/stoicheva_d_dijkstra/dijkstra.h"
-
-TEST(DISABLED_Sequential, Test_Sum_10) {
-    const int count = 10;
-    int sum = 0;
-    for (size_t i = 0; i < count; i++) {
-        sum++;
-    }
-    ASSERT_EQ(count, sum);
-}
-
-TEST(DISABLED_Sequential, Test_Sum_20) {
-    const int count = 20;
-    int sum = 0;
-    for (size_t i = 0; i < count; i++) {
-        sum++;
-    }
-    ASSERT_EQ(count, sum);
-}
-
-TEST(DISABLED_Sequential, Test_Sum_50) {
-    const int count = 20;
-    int sum = 0;
-    for (size_t i = 0; i < count; i++) {
-        sum++;
-    }
-    ASSERT_EQ(count, sum);
-}
-
-TEST(DISABLED_Sequential, Test_Sum_70) {
-    const int count = 20;
-    int sum = 0;
-    for (size_t i = 0; i < count; i++) {
-        sum++;
-    }
-    ASSERT_EQ(count, sum);
-}
-
-TEST(DISABLED_Sequential, Test_Sum_100) {
-    const int count = 100;
-    int sum = 0;
-    for (size_t i = 0; i < count; i++) {
-        sum++;
-    }
-    ASSERT_EQ(count, sum);
-}
 
 TEST(Sequential, Test_EmptyGraph) {
     std::vector<int> graph = {};
@@ -78,11 +33,11 @@ TEST(Sequential, Test_Graph6) {
                               -1, -1, -1, 6, 0, 9,
                                14, -1, 2, -1, 9, 0 };
     std::vector<int> result = { 0, 7, 9, 20, 20, 11 };
-    
+
     ASSERT_EQ(result, dijkstra(graph, 0));
 }
 
-TEST(Sequential, Test_Graph5) {
+TEST(Sequential, Test_Graph6a) {
     std::vector<int> graph = { 0, 1, 4, -1, 2, -1,
                               1, 0, -1, 9, -1, -1,
                               4, -1, 0, 7, -1, -1,
