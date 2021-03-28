@@ -10,7 +10,6 @@
 
 using Matrix = std::vector<std::vector<double>>;
 Matrix RandMatrix(int hight, int widht);
-template <class T>
 int clamp(int value, int max, int min);
 Matrix GaussKernel(int R, double sigma);
 Matrix SeqGauss(Matrix mat, int rows, int cols, int R,
