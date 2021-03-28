@@ -84,12 +84,13 @@ void BatcherMerge(std::vector<double>* res, const std::vector<double>& left, con
     (*res).push_back(odd[index]);
   }
 
-  if (index < odd.size())
+  if (index < odd.size()) {
     for (; index < odd.size(); ++index)
       (*res).push_back(odd[index]);
-  else if (index < even.size())
+  } else if (index < even.size()) {
     for (; index < even.size(); ++index)
       (*res).push_back(even[index]);
+  }
 
   for (size_t i = 0; i < (*res).size() - 1; ++i) {
     if ((*res)[i] > (*res)[i + 1]) {
