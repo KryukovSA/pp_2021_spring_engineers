@@ -96,28 +96,3 @@ std::vector<int> RadixSort(std::vector<int> vect, int size) {
   }
   return vect1;
 }
-std::vector<int> Merge(const std::vector<int>& vect_left,
-                          const std::vector<int>& vect_right) {
-
-  std::vector<int> result((vect_left.size() + vect_right.size()));
-
-  int const vect_leftSize = static_cast<int>(vect_left.size());
-  int const vect_rightSize = static_cast<int>(vect_right.size());
-
-  int i = 0, j = 0, k = 0;
-  for (k = 0; k < vect_leftSize + vect_rightSize - 1; k++) {
-    if (vect_left[i] < vect_right[j])
-      result[k] = vect_left[i++];
-    else
-      result[k] = vect_right[j++];
-  }
-
-  while (i < vect_leftSize) {
-    result[k++] = vect_left[i++];
-  }
-  while (j < vect_rightSize) {
-    result[k++] = vect_right[j++];
-  }
-
-  return result;
-}
