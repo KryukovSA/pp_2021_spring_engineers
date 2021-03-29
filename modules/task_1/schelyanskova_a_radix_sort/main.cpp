@@ -35,6 +35,17 @@ TEST(radix_sort, works_bubble) {
   std::vector<int> radix = RadixSort(vect, 6);
   ASSERT_EQ(bubble, radix);
 }
+//
+//TEST(merge, works_with_sort) {
+//  std::vector<int> vect2 = {103, 37, 9};
+//  std::vector<int> vect1 = {3, 7, 1};
+//  std::vector<int> sorted1 = RadixSort(vect1,3 );
+//  std::vector<int> sorted2 = RadixSort(vect2,3 );
+//  std::vector<int> sorted = Merge(sorted1, sorted2);
+//  std::vector<int> correctAnswer = {1, 3, 7, 9, 37, 103};
+//  ASSERT_EQ(sorted, correctAnswer);
+//}
+
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
