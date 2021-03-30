@@ -68,6 +68,18 @@ TEST(Parallel_Operations_OpenMP, Test_TwoDimSum) {
     ASSERT_NEAR(68.67, par_int, 0.6);
 }
 
+TEST(Parallel_Operations_OpenMP, Test_ThreeDimSum) {
+    std::vector<std::pair<int, std::pair<int, int>>> vec;
+    vec.push_back(std::make_pair(1, std::make_pair(1, 4)));
+    vec.push_back(std::make_pair(2, std::make_pair(1, 2)));
+    vec.push_back(std::make_pair(3, std::make_pair(1, 3)));
+    // std::function<double(double)> func= pow(x, 2);
+    double(*ptr5)(double, double, double) = integral5;
+    double par_int = SolveParallelSum(vec, ptr5);
+    // int parallel_sum = getParallelOperations(vec, "+");
+    ASSERT_NEAR(36.00, par_int, 0.6);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
