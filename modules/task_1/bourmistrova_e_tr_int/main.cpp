@@ -1,6 +1,7 @@
 // Copyright 2021 Ekaterina Burmistrova
 #include <gtest/gtest.h>
 #include <vector>
+#include <cmath>
 #include <functional>
 #include "./trapezoid_integral.h"
 
