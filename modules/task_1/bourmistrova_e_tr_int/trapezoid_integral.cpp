@@ -8,7 +8,7 @@
 #include <functional>
 #include "./../../modules/task_1/bourmistrova_e_tr_int/trapezoid_integral.h"
 
-double SolveParallel(std::vector<std::pair<int, std::pair<int, int>>>
+double SolveParallel(const std::vector<std::pair<int, std::pair<int, int>>>&
     ord_and_bord,
     std::function<double(double, double, double)> f) {
     double tr_sum = 0;

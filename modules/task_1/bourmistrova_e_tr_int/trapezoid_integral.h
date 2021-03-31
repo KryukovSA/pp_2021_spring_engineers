@@ -8,7 +8,7 @@
 #include <utility>
 
 // std::vector<int> getRandomVector(int  sz);
-double SolveParallel(std::vector<std::pair<int, std::pair<int, int>>>
+double SolveParallel(const std::vector<std::pair<int, std::pair<int, int>>>&
     ord_and_bord, std::function<double(double, double, double)> f);
 // int getSequentialOperations(std::vector<int> vec, const std::string& ops);
 
