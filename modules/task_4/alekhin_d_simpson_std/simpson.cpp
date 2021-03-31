@@ -6,6 +6,8 @@
 #include "../../../3rdparty/unapproved/unapproved.h"
 #include "../../modules/task_4/alekhin_d_simpson_std/simpson.h"
 
+std::mutex mutex;
+
 double simpsonMethod(std::vector<std::pair<double, double>> scope,
   std::function<double(std::vector<double>)> func,
   int precision) {
@@ -74,7 +76,6 @@ void calcPoints(std::function<double(std::vector<double>)> func,
       evenSum += func(point);
     }
   }
-  std::mutex mutex;
   mutex.lock();
   globEvenSum += evenSum;
   globOddSum += oddSum;
