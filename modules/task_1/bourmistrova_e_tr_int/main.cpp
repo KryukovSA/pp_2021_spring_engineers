@@ -26,8 +26,8 @@ double integral5(double x, double y, double z) {
 }
 
 TEST(Parallel_Operations_OpenMP, Test_OneDim) {
-    std::vector<std::pair<int, std::pair<int, int>>> vec;
-    vec.push_back(std::make_pair(1, std::make_pair(2, 5)));
+    std::vector<std::pair<int, std::pair<int, int>>> vec(1);
+    vec[0] = std::make_pair(1, std::make_pair(2, 5));
     // std::function<double(double)> func= pow(x, 2);
     double(*ptr1)(double, double, double) = integral;
     double par_int = SolveParallel(vec, ptr1);
@@ -36,9 +36,9 @@ TEST(Parallel_Operations_OpenMP, Test_OneDim) {
 }
 
 TEST(Parallel_Operations_OpenMP, Test_TwoDim) {
-    std::vector<std::pair<int, std::pair<int, int>>> vec;
-    vec.push_back(std::make_pair(1, std::make_pair(1, 2)));
-    vec.push_back(std::make_pair(2, std::make_pair(2, 3)));
+    std::vector<std::pair<int, std::pair<int, int>>> vec(2);
+    vec[0] = std::make_pair(1, std::make_pair(1, 2));
+    vec[1] = std::make_pair(2, std::make_pair(2, 3));
     // std::function<double(double)> func= pow(x, 2);
     double(*ptr2)(double, double, double) = integral2;
     double par_int = SolveParallel(vec, ptr2);
@@ -47,10 +47,10 @@ TEST(Parallel_Operations_OpenMP, Test_TwoDim) {
 }
 
 TEST(Parallel_Operations_OpenMP, Test_ThreeDim) {
-    std::vector<std::pair<int, std::pair<int, int>>> vec;
-    vec.push_back(std::make_pair(1, std::make_pair(1, 2)));
-    vec.push_back(std::make_pair(2, std::make_pair(2, 3)));
-    vec.push_back(std::make_pair(3, std::make_pair(4, 5)));
+    std::vector<std::pair<int, std::pair<int, int>>> vec(3);
+    vec[0] = std::make_pair(1, std::make_pair(1, 2));
+    vec[1] = std::make_pair(2, std::make_pair(2, 3));
+    vec[2] = std::make_pair(3, std::make_pair(4, 5));
     // std::function<double(double)> func= pow(x, 2);
     double(*ptr3)(double, double, double) = integral3;
     double par_int = SolveParallel(vec, ptr3);
@@ -59,9 +59,9 @@ TEST(Parallel_Operations_OpenMP, Test_ThreeDim) {
 }
 
 TEST(Parallel_Operations_OpenMP, Test_TwoDimSum) {
-    std::vector<std::pair<int, std::pair<int, int>>> vec;
-    vec.push_back(std::make_pair(1, std::make_pair(1, 3)));
-    vec.push_back(std::make_pair(2, std::make_pair(2, 4)));
+    std::vector<std::pair<int, std::pair<int, int>>> vec(2);
+    vec[0] = std::make_pair(1, std::make_pair(1, 3));
+    vec[1] = std::make_pair(2, std::make_pair(2, 4));
     // std::function<double(double)> func= pow(x, 2);
     double(*ptr4)(double, double, double) = integral4;
     double par_int = SolveParallel(vec, ptr4);
@@ -70,10 +70,10 @@ TEST(Parallel_Operations_OpenMP, Test_TwoDimSum) {
 }
 
 TEST(Parallel_Operations_OpenMP, Test_ThreeDimSum) {
-    std::vector<std::pair<int, std::pair<int, int>>> vec;
-    vec.push_back(std::make_pair(1, std::make_pair(1, 4)));
-    vec.push_back(std::make_pair(2, std::make_pair(1, 2)));
-    vec.push_back(std::make_pair(3, std::make_pair(1, 3)));
+    std::vector<std::pair<int, std::pair<int, int>>> vec(3);
+    vec[0] = std::make_pair(1, std::make_pair(1, 4));
+    vec[1] = std::make_pair(2, std::make_pair(1, 2));
+    vec[2] = std::make_pair(3, std::make_pair(1, 3));
     // std::function<double(double)> func= pow(x, 2);
     double(*ptr5)(double, double, double) = integral5;
     double par_int = SolveParallel(vec, ptr5);
