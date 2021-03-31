@@ -10,7 +10,7 @@
 
 double SolveParallel(std::vector<std::pair<int, std::pair<int, int>>>
     ord_and_bord,
-    double(*f)(double, double, double)) {
+    std::function<double(double, double, double)> f) {
     int num_threads = omp_get_num_threads();
     double tr_sum = 0;
     int i = 0, j = 0, k = 0;
