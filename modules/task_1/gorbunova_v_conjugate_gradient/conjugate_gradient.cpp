@@ -46,15 +46,15 @@ double conj_grad(double** A, double* B, int S) {
         for (i = 0; i < S; i++)
             d[i] = r[i] + beta * d[i];
     } while (R / sumB > 0.01 * 0.01 && Iteration < MaxIteration);
+    delete[] Ax;
+    delete[] A;
+    delete[] B;
+    delete[] d;
+    delete[] r;
     double res = 0;
     for (i = 0; i < S; i++) {
         res += x[i];
     }
     delete[] x;
-    delete[] d;
-    delete[] r;
-    delete[] Ax;
-    delete[] A;
-    delete[] B;
     return res;
 }
