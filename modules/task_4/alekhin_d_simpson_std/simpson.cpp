@@ -76,10 +76,9 @@ void calcPoints(std::function<double(std::vector<double>)> func,
       evenSum += func(point);
     }
   }
-  mutex.lock();
+  std::lock_guard<std::mutex> lock(mutex);
   globEvenSum += evenSum;
   globOddSum += oddSum;
-  mutex.unlock();
 }
 
 double simpsonMethodSTD(
