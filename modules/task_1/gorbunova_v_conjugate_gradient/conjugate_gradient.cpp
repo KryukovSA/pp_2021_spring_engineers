@@ -50,5 +50,11 @@ double conj_grad(double** A, double* B, int S) {
     for (i = 0; i < S; i++) {
         res += x[i];
     }
+    delete[] x;
+    delete[] d;
+    delete[] r;
+    delete[] Ax;
+    delete[] A;
+    delete[] B;
     return res;
 }
