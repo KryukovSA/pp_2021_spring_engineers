@@ -64,9 +64,9 @@ TEST(Parallel_Operations_OpenMP, Test_TwoDimSum) {
     vec.push_back(std::make_pair(2, std::make_pair(2, 4)));
     // std::function<double(double)> func= pow(x, 2);
     double(*ptr4)(double, double, double) = integral4;
-    double par_int = SolveParallelSum(vec, ptr4);
+    double par_int = SolveParallel(vec, ptr4);
     // int parallel_sum = getParallelOperations(vec, "+");
-    ASSERT_NEAR(68.67, par_int, 0.6);
+    ASSERT_NEAR(137.33, par_int, 7.00);
 }
 
 TEST(Parallel_Operations_OpenMP, Test_ThreeDimSum) {
@@ -76,9 +76,9 @@ TEST(Parallel_Operations_OpenMP, Test_ThreeDimSum) {
     vec.push_back(std::make_pair(3, std::make_pair(1, 3)));
     // std::function<double(double)> func= pow(x, 2);
     double(*ptr5)(double, double, double) = integral5;
-    double par_int = SolveParallelSum(vec, ptr5);
+    double par_int = SolveParallel(vec, ptr5);
     // int parallel_sum = getParallelOperations(vec, "+");
-    ASSERT_NEAR(36.00, par_int, 0.6);
+    ASSERT_NEAR(36.00, par_int, 7.00);
 }
 
 int main(int argc, char **argv) {

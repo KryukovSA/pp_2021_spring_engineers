@@ -7,33 +7,6 @@
 #include <functional>
 #include "./../../modules/task_1/bourmistrova_e_tr_int/trapezoid_integral.h"
 
-double SolveParallelSum(std::vector<std::pair<int, std::pair<int,
-    int>>> ord_and_bord,
-    double(*f)(double, double, double)) {
-    double sum = 0;
-    if (ord_and_bord.size() == 2) {
-        std::vector< std::pair<int, std::pair<int, int>>>
-            tmp1(ord_and_bord.begin(), ord_and_bord.begin() + 0);
-        std::vector< std::pair<int, std::pair<int, int>>>
-            tmp2(ord_and_bord.begin() + 1, ord_and_bord.begin() + 1);
-        sum = SolveParallel(tmp1, *f);
-        sum += SolveParallel(tmp2, *f);
-    }
-    if (ord_and_bord.size() == 3) {
-        std::vector< std::pair<int, std::pair<int, int>>>
-            tmp1(ord_and_bord.begin(), ord_and_bord.begin() + 0);
-        std::vector< std::pair<int, std::pair<int, int>>>
-            tmp2(ord_and_bord.begin() + 1, ord_and_bord.begin() + 1);
-        std::vector< std::pair<int, std::pair<int, int>>>
-            tmp3(ord_and_bord.begin() + 2, ord_and_bord.begin() + 2);
-        sum += SolveParallel(tmp1, *f);
-        sum += SolveParallel(tmp2, *f);
-        sum += SolveParallel(tmp3, *f);
-    }
-    return sum;
-}
-
-
 double SolveParallel(std::vector<std::pair<int, std::pair<int, int>>>
     ord_and_bord,
     double(*f)(double, double, double)) {
