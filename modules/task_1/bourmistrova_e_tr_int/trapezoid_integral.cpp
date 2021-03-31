@@ -1,4 +1,5 @@
 // Copyright 2021 Ekaterina Burmistrova
+
 #include <omp.h>
 #include <vector>
 #include <string>
@@ -147,5 +148,6 @@ double SolveParallel(std::vector<std::pair<int, std::pair<int, int>>>
         }
         tr_sum = h1 * h2 * h3 * tr_sum;
     }
+
     return tr_sum;
 }
