@@ -11,11 +11,9 @@
 double SolveParallel(std::vector<std::pair<int, std::pair<int, int>>>
     ord_and_bord,
     std::function<double(double, double, double)> f) {
-    int num_threads = omp_get_num_threads();
     double tr_sum = 0;
     int i = 0, j = 0, k = 0;
     if (ord_and_bord.size() == 1) {  // ONE DIMENSION
-        std::cout << num_threads << "\n";
         // int h = (ord_and_bord[0].second.second
         // - ord_and_bord[0].second.first) / num_threads;
         int h = 1;
@@ -36,8 +34,6 @@ double SolveParallel(std::vector<std::pair<int, std::pair<int, int>>>
         int delta2 = h2;
         int delta1 = h1;
         // int delta1 = h1, delta2 = h2;
-        int num_threads = omp_get_num_threads();
-        std::cout << num_threads << "\n";
         #pragma omp parallel for private(i, j, q) reduction(+ : tr_sum)
         for (i = ord_and_bord[0].second.first;
             i < ord_and_bord[0].second.second+1; i++) {
