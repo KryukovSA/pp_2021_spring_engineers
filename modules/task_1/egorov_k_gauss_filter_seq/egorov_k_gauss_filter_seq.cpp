@@ -37,7 +37,7 @@ std::vector<float> calculateKernel3x3(float sigma) {
     return kernel;
 }
 
-int pColourCalculation(std::vector<int> img, int w, int h,
+int pColourCalculation(const std::vector<int> &img, int w, int h,
                        int x, int y, std::vector<float> kernel) {
     int nColour = 0;
     float sColour = 0;
@@ -53,7 +53,7 @@ int pColourCalculation(std::vector<int> img, int w, int h,
     return clamp(static_cast<int>(sColour), 0, 255);
 }
 
-std::vector<int> filterApply(const std::vector<int> img, int w, int h, float sigma) {
+std::vector<int> filterApply(const std::vector<int> &img, int w, int h, float sigma) {
     std::vector<int> res(w * h);
     std::vector<float> kernel(9);
 
