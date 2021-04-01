@@ -104,7 +104,7 @@ namespace my {
             omp_set_num_threads(4);
             #pragma omp parallel for schedule(dynamic)\
                 shared(resImg, srcImg, kernel)\
-                firstprivate(N, M, K) 
+                firstprivate(N, M, K)
                 for (int64_t j = i; j < N; j += K) {
                     for (int64_t f = 0; f < M; ++f) {
                         resImg[j * M + f] = applyKernel(srcImg,
