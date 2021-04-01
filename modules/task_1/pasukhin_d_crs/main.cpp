@@ -2,9 +2,10 @@
 
 #include <gtest/gtest.h>
 
-#include <vector>
-#include <limits>
 #include <cmath>
+#include <complex>
+#include <limits>
+#include <vector>
 
 #include "./crs.h"
 
@@ -40,8 +41,8 @@ TEST(Sequential, Test_Own_Matrix) {
     is_OK = D.RowInd[i] == C.RowInd[i];
   }
   for (int i = 0; i < 5 && is_OK; ++i) {
-    is_OK = fabs(D.Values[i] - C.Values[i]) <
-            std::numeric_limits<double>::epsilon();
+    is_OK =
+        abs(D.Values[i] - C.Values[i]) < std::numeric_limits<double>::epsilon();
   }
 
   ASSERT_EQ(true, is_OK);
@@ -57,7 +58,7 @@ TEST(Sequential, Test_Own_Ones_Matrix) {
   Matrix C = MultCRS(A, B);
 
   bool is_OK = true;
-  if (fabs(C.Values[0] - A.Values[0] * B.Values[0]) >=
+  if (abs(C.Values[0] - A.Values[0] * B.Values[0]) >=
       std::numeric_limits<double>::epsilon())
     is_OK = false;
 
@@ -69,16 +70,17 @@ TEST(Sequential, Test_Random_Small_Matrix) {
   Matrix A = GenerateCRS(my_lenght);
   Matrix B = GenerateCRS(my_lenght);
   Matrix C = MultCRS(A, B);
-  std::vector<double> A_norm = TransformToNorm(A);
-  std::vector<double> B_norm = TransformToNorm(B);
-  std::vector<double> C_norm = TransformToNorm(C);
+  std::vector<std::complex<double>> A_norm = TransformToNorm(A);
+  std::vector<std::complex<double>> B_norm = TransformToNorm(B);
+  std::vector<std::complex<double>> C_norm = TransformToNorm(C);
 
-  std::vector<double> C_res_norm = MultNorm(A_norm, B_norm, my_lenght);
+  std::vector<std::complex<double>> C_res_norm =
+      MultNorm(A_norm, B_norm, my_lenght);
 
   bool is_OK = true;
 
   for (int i = 0; i < 100 && is_OK; ++i) {
-    if (fabs(C_res_norm[i] - C_norm[i]) >=
+    if (abs(C_res_norm[i] - C_norm[i]) >=
         std::numeric_limits<double>::epsilon())
       is_OK = false;
   }
@@ -91,16 +93,17 @@ TEST(Sequential, Test_Rand_Middle_Matrix) {
   Matrix A = GenerateCRS(my_lenght);
   Matrix B = GenerateCRS(my_lenght);
   Matrix C = MultCRS(A, B);
-  std::vector<double> A_norm = TransformToNorm(A);
-  std::vector<double> B_norm = TransformToNorm(B);
-  std::vector<double> C_norm = TransformToNorm(C);
+  std::vector<std::complex<double>> A_norm = TransformToNorm(A);
+  std::vector<std::complex<double>> B_norm = TransformToNorm(B);
+  std::vector<std::complex<double>> C_norm = TransformToNorm(C);
 
-  std::vector<double> C_res_norm = MultNorm(A_norm, B_norm, my_lenght);
+  std::vector<std::complex<double>> C_res_norm =
+      MultNorm(A_norm, B_norm, my_lenght);
 
   bool is_OK = true;
 
   for (int i = 0; i < 10000 && is_OK; ++i) {
-    if (fabs(C_res_norm[i] - C_norm[i]) >=
+    if (abs(C_res_norm[i] - C_norm[i]) >=
         std::numeric_limits<double>::epsilon())
       is_OK = false;
   }
@@ -115,8 +118,8 @@ TEST(Sequential, Test_Transform_To_Norm) {
   B.Column = {3, 1, 1, 4, 2};
   B.RowInd = {0, 1, 2, 3, 4, 5};
   B.Values = {8., 22., 20., 17., 7.};
-  std::vector<double> B_norm = TransformToNorm(B);
-  std::vector<double> B_comp{
+  std::vector<std::complex<double>> B_norm = TransformToNorm(B);
+  std::vector<std::complex<double>> B_comp{
       0.00, 0.00, 0.00, 8.00, 0.00, 0.00, 22.0, 0.00, 0.00,
       0.00, 0.00, 20.0, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
       0.00, 17.0, 0.00, 0.00, 7.00, 0.00, 0.00,
@@ -124,7 +127,7 @@ TEST(Sequential, Test_Transform_To_Norm) {
   bool is_OK = true;
 
   for (int i = 0; i < 25 && is_OK; ++i) {
-    if (fabs(B_norm[i] - B_comp[i]) >= std::numeric_limits<double>::epsilon())
+    if (abs(B_norm[i] - B_comp[i]) >= std::numeric_limits<double>::epsilon())
       is_OK = false;
   }
 
