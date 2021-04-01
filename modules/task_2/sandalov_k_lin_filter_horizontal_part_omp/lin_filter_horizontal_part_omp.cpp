@@ -102,17 +102,15 @@ namespace my {
         std::vector<float> resImg(N * M);
         for (int64_t i = 0; i < K; ++i) {
             omp_set_num_threads(4);
-            #pragma omp parallel shared(resImg, srcImg, kernel)\
-                firstprivate(N, M, K)
-            {
-                #pragma omp for schedule(dynamic)
+            #pragma omp parallel for schedule(dynamic)\
+                shared(resImg, srcImg, kernel)\
+                firstprivate(N, M, K) 
                 for (int64_t j = i; j < N; j += K) {
                     for (int64_t f = 0; f < M; ++f) {
                         resImg[j * M + f] = applyKernel(srcImg,
                             kernel, j, f, N, M, K);
                     }
                 }
-            }
         }
         return resImg;
     }
