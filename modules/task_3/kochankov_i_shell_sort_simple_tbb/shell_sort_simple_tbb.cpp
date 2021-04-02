@@ -1,10 +1,10 @@
 // Copyright 2021 Kochankov Ilya
+#include <tbb/tbb.h>
 #include <omp.h>
 #include <random>
 #include <vector>
 #include <algorithm>
 #include <iostream>
-#include <tbb/tbb.h>
 #include "../../../modules/task_3/kochankov_i_shell_sort_simple_tbb/shell_sort_simple_tbb.h"
 
 
