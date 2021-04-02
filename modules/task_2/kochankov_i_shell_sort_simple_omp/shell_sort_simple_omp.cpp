@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
-#include "../../../modules/task_1/kochankov_i_shell_sort_simple/shell_sort_simple.h"
+#include "../../../modules/task_2/kochankov_i_shell_sort_simple_omp/shell_sort_simple_omp.h"
 
 
 std::vector<double> getRandomVector(int sz) {

@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <iostream>
 #include <tbb/tbb.h>
-#include "../../../modules/task_1/kochankov_i_shell_sort_simple/shell_sort_simple.h"
+#include "../../../modules/task_3/kochankov_i_shell_sort_simple_tbb/shell_sort_simple_tbb.h"
 
 
 std::vector<double> getRandomVector(int sz) {
@@ -70,15 +70,13 @@ std::vector<double> shell_sort_omp(const std::vector<double>& vec, int num_threa
         int thread_num = omp_get_thread_num();
         if (thread_num == num_threads - 1) {
             local_vec = std::vector<double>(copy.size() - delta * (num_threads - 1));
-        }
-        else {
+        } else {
             local_vec = std::vector<double>(delta);
         }
 
         if (thread_num == num_threads - 1) {
             std::copy(copy.begin() + delta * (num_threads - 1), copy.end(), local_vec.begin());
-        }
-        else {
+        } else {
             std::copy(copy.begin() + delta * thread_num,
                 copy.begin() + delta * (thread_num + 1), local_vec.begin());
         }
