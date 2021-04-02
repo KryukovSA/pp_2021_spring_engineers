@@ -5,7 +5,7 @@
 #include <iostream>
 #include "./sparsemat_tbb.h"
 
-TEST(omp_version, correct_transpose_mat) {
+TEST(tbb_version, correct_transpose_mat) {
     int size = 3;
     std::vector<std::complex<double>> standartMat = {
         {0, 0}, {0, 2}, {0, 0},
@@ -19,7 +19,7 @@ TEST(omp_version, correct_transpose_mat) {
     ASSERT_EQ(TransponationMat.rowNum, rightRowNum);
 }
 
-TEST(omp_version, correct_transpose_mat2) {
+TEST(tbb_version, correct_transpose_mat2) {
     int size = 4;
     std::vector<std::complex<double>> standartMat = {
         {0, 0}, {0, 2}, {0, 0}, {0, 0},
@@ -34,7 +34,7 @@ TEST(omp_version, correct_transpose_mat2) {
     ASSERT_EQ(TransponationMat.rowNum, rightRowNum);
 }
 
-TEST(omp_version, check_multiplic) {
+TEST(tbb_version, check_multiplic) {
     int size = 2;
     std::vector<std::complex<double>> standartMat1 = {
         {0, 0}, {2, 0},
@@ -53,7 +53,7 @@ TEST(omp_version, check_multiplic) {
     ASSERT_EQ(SparseMatResult.val, rightVal);
 }
 
-TEST(omp_version, check_multiplic2) {
+TEST(tbb_version, check_multiplic2) {
     int size = 2;
     std::vector<std::complex<double>> standartMat1 = {
         {0, 0}, {0, 0},
