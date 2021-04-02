@@ -35,8 +35,8 @@ crs_mat genDiagonalSparseMat(int size_) {
     gen.seed(static_cast<unsigned int>(time(0)));
     for (int i = 0; i < size_; i++) {
         values.push_back(std::complex<double>(
-            static_cast<double>(gen() % 100),
-            static_cast<double>(gen() % 100)));
+            static_cast<double>(gen() % 100000),
+            static_cast<double>(gen() % 100000)));
         colNum.push_back(i);
         int a = i + 1;
         rowNum.push_back(a);

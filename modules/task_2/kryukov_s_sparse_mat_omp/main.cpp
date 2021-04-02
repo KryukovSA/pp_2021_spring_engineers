@@ -72,22 +72,8 @@ TEST(omp_version, check_multiplic2) {
     ASSERT_EQ(SparseMatResult.val, rightVal);
 }
 
-
-TEST(omp_version, check_multiplic100) {
-    int size = 100;
-
-    crs_mat SparseMat1 = genDiagonalSparseMat(size);
-    crs_mat SparseMat2 = genDiagonalSparseMat(size);
-    std::vector<std::complex<double>> rightRes;
-
-    rightRes = MultipluValues(SparseMat1.val, SparseMat2.val, size);
-
-    crs_mat SparseMatResult = multiplicateMatrix(SparseMat1, SparseMat2);
-    EXPECT_EQ(SparseMatResult.val, rightRes);
-}
-
 TEST(omp_version, check_multiplic_time) {
-    int size = 1000;
+    int size = 500;
     double begin, end;
     crs_mat SparseMat1 = genDiagonalSparseMat(size);
     crs_mat SparseMat2 = genDiagonalSparseMat(size);
