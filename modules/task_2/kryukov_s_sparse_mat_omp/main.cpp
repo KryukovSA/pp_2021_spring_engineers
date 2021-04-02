@@ -93,19 +93,6 @@ TEST(omp_version, check_multiplic_time) {
     EXPECT_EQ(SparseMatResult.colNum, SparseMatResult_omp.colNum);
 }
 
-TEST(omp_version, check_multiplic100) {
-    int size = 2000;
-
-    crs_mat SparseMat1 = genDiagonalSparseMat(size);
-    crs_mat SparseMat2 = genDiagonalSparseMat(size);
-    std::vector<std::complex<double>> rightRes;
-
-    rightRes = MultipluValues(SparseMat1.val, SparseMat2.val, size);
-
-    crs_mat SparseMatResult = multiplicateMatrix(SparseMat1, SparseMat2);
-    EXPECT_EQ(SparseMatResult.val, rightRes);
-}
-
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
