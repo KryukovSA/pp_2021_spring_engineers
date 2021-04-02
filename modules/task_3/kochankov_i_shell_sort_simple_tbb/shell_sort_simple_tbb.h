@@ -1,6 +1,6 @@
 // Copyright 2021 Kochankov Ilya
-#ifndef MODULES_TASK_2_KOCHANKOV_I_SHELL_SORT_SIMPLE_OMP_SHELL_SORT_SIMPLE_OMP_H_
-#define MODULES_TASK_2_KOCHANKOV_I_SHELL_SORT_SIMPLE_OMP_SHELL_SORT_SIMPLE_OMP_H_
+#ifndef MODULES_TASK_3_KOCHANKOV_I_SHELL_SORT_SIMPLE_TBB_SHELL_SORT_SIMPLE_TBB_H_
+#define MODULES_TASK_3_KOCHANKOV_I_SHELL_SORT_SIMPLE_TBB_SHELL_SORT_SIMPLE_TBB_H_
 
 #include <vector>
 
@@ -12,4 +12,4 @@ std::vector<double> shell_sort_tbb(const std::vector<double>& vec, int num_threa
 std::vector<double> merge(const std::vector<double>& a, const std::vector<double>& b);
 
 
-#endif  // MODULES_TASK_2_KOCHANKOV_I_SHELL_SORT_SIMPLE_OMP_SHELL_SORT_SIMPLE_OMP_H_
+#endif  // MODULES_TASK_3_KOCHANKOV_I_SHELL_SORT_SIMPLE_TBB_SHELL_SORT_SIMPLE_TBB_H_
