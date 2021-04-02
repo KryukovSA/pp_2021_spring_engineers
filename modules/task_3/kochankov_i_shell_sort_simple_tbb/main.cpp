@@ -1,5 +1,6 @@
 // Copyright 2021 Kochankov Ilya
 #include <tbb/tbb.h>
+#include <omp.h>
 #include <gtest/gtest.h>
 #include <vector>
 #include <algorithm>
