@@ -2,6 +2,7 @@
 
 #include "../../../modules/task_1/pasukhin_d_crs/crs.h"
 
+#include <complex>
 #include <ctime>
 #include <iostream>
 #include <limits>
@@ -13,14 +14,14 @@
 // purpose  :
 //=======================================================================
 
-std::vector<double> TransformToNorm(const Matrix& A) {
-  std::vector<double> Res(A.Lenght * A.Lenght, 0.);
+std::vector<std::complex<double>> TransformToNorm(const Matrix& A) {
+  std::vector<std::complex<double>> Res(A.Lenght * A.Lenght, 0.);
 
   for (size_t i = 0; i < A.Lenght; ++i) {
-    const size_t i1 = A.RowInd[i];
-    const size_t i2 = A.RowInd[i + 1] - 1;
+    const size_t i1 = A.RowInd.at(i);
+    const size_t i2 = A.RowInd.at(i + 1) - 1;
     for (size_t j = i1; j <= i2; j++) {
-      Res[i * A.Lenght + A.Column[j]] = A.Values[j];
+      Res.at(i * A.Lenght + A.Column.at(j)) = A.Values.at(j);
     }
   }
   return Res;
@@ -41,39 +42,39 @@ Matrix GenerateCRS(const size_t lenght) {
   Res.VCount = VCount;
   Res.RowInd = std::vector<size_t>(lenght + 1);
   Res.Column = std::vector<size_t>(VCount);
-  Res.Values = std::vector<double>(VCount);
+  Res.Values = std::vector<std::complex<double>>(VCount);
 
   if (lenght > 1) {
     for (size_t i = 0; i < lenght; i++) {
       for (size_t j = 0; j < ValueInRow; j++) {
-        size_t my_Flag;
+        bool isValue = false;
         do {
-          Res.Column[i * ValueInRow + j] = 1 + generator() % (lenght - 1);
-          my_Flag = 0;
+          isValue = false;
+          Res.Column.at(i * ValueInRow + j) = 1 + generator() % (lenght - 1);
           for (size_t k = 0; k < j; k++) {
-            if (Res.Column[i * ValueInRow + j] ==
-                Res.Column[i * ValueInRow + k]) {
-              my_Flag = 1;
+            if (Res.Column.at(i * ValueInRow + j) ==
+                Res.Column.at(i * ValueInRow + k)) {
+              isValue = true;
             }
           }
-        } while (my_Flag == 1);
+        } while (isValue);
       }
       for (size_t j = 0; j < ValueInRow - 1; j++) {
         for (size_t k = 0; k < ValueInRow - 1; k++) {
-          if (Res.Column[i * ValueInRow + k] >
-              Res.Column[i * ValueInRow + k + 1]) {
-            std::swap(Res.Column[i * ValueInRow + k],
-                      Res.Column[i * ValueInRow + k + 1]);
+          if (Res.Column.at(i * ValueInRow + k) >
+              Res.Column.at(i * ValueInRow + k + 1)) {
+            std::swap(Res.Column.at(i * ValueInRow + k),
+                      Res.Column.at(i * ValueInRow + k + 1));
           }
         }
       }
     }
   } else {
-    Res.Column[0] = 0;
+    Res.Column.at(0) = 0;
   }
 
   for (auto& iter : Res.Values) {
-    iter = generator() % 110 + 10;
+    iter = std::complex<double>(generator() % 110, generator() % 110);
   }
 
   size_t Count = 0;
@@ -90,17 +91,17 @@ Matrix GenerateCRS(const size_t lenght) {
 // purpose  :
 //=======================================================================
 
-std::vector<double> MultNorm(const std::vector<double>& A,
-                             const std::vector<double>& B,
-                             const size_t lenght) {
-  std::vector<double> Res(A.size());
+std::vector<std::complex<double>> MultNorm(
+    const std::vector<std::complex<double>>& A,
+    const std::vector<std::complex<double>>& B, const size_t lenght) {
+  std::vector<std::complex<double>> Res(A.size());
   for (size_t i = 0; i < lenght; i++) {
     for (size_t j = 0; j < lenght; j++) {
-      double sum = 0;
+      std::complex<double> sum = 0;
       for (size_t k = 0; k < lenght; k++) {
-        sum += A[i * lenght + k] * B[k * lenght + j];
+        sum += A.at(i * lenght + k) * B.at(k * lenght + j);
       }
-      Res[i * lenght + j] = sum;
+      Res.at(i * lenght + j) = sum;
     }
   }
   return Res;
@@ -120,10 +121,10 @@ Matrix MultCRS(const Matrix& A, const Matrix& b) {
   B.VCount = b.VCount;
   B.Column = std::vector<size_t>(b.VCount);
   B.RowInd = std::vector<size_t>(b.Lenght + 1);
-  B.Values = std::vector<double>(b.VCount);
+  B.Values = std::vector<std::complex<double>>(b.VCount);
 
   for (const auto& iter : b.Column) {
-    B.RowInd[iter + 1]++;
+    B.RowInd.at(iter + 1)++;
   }
 
   size_t Index_tmp = 0;
@@ -134,16 +135,16 @@ Matrix MultCRS(const Matrix& A, const Matrix& b) {
   }
 
   for (size_t i = 0; i < b.Lenght; i++) {
-    size_t j1 = b.RowInd[i];
-    size_t j2 = b.RowInd[i + 1];
+    size_t j1 = b.RowInd.at(i);
+    size_t j2 = b.RowInd.at(i + 1);
     size_t Col = i;
     for (size_t j = j1; j < j2; j++) {
-      double V = b.Values[j];
-      size_t Row_index = b.Column[j];
-      size_t IIndex = B.RowInd[Row_index + 1];
-      B.Values[IIndex] = V;
-      B.Column[IIndex] = Col;
-      B.RowInd[Row_index + 1]++;
+      std::complex<double> V = b.Values.at(j);
+      size_t Row_index = b.Column.at(j);
+      size_t IIndex = B.RowInd.at(Row_index + 1);
+      B.Values.at(IIndex) = V;
+      B.Column.at(IIndex) = Col;
+      B.RowInd.at(Row_index + 1)++;
     }
   }
 
@@ -152,23 +153,23 @@ Matrix MultCRS(const Matrix& A, const Matrix& b) {
   for (size_t i = 0; i < N; i++) {
     size_t rowNZ = 0;
     for (size_t j = 0; j < N2; j++) {
-      double sum = 0.0;
-      for (size_t k = A.RowInd[i]; k < A.RowInd[i + 1]; k++) {
-        for (size_t l = B.RowInd[j]; l < B.RowInd[j + 1]; l++) {
-          if (A.Column[k] == B.Column[l]) {
-            sum += A.Values[k] * B.Values[l];
+      std::complex<double> sum = 0;
+      for (size_t k = A.RowInd.at(i); k < A.RowInd.at(i + 1); k++) {
+        for (size_t l = B.RowInd.at(j); l < B.RowInd.at(j + 1); l++) {
+          if (A.Column.at(k) == B.Column.at(l)) {
+            sum += A.Values.at(k) * B.Values.at(l);
             break;
           }
         }
       }
 
-      if (fabs(sum) > std::numeric_limits<double>::epsilon()) {
+      if (abs(sum) > std::numeric_limits<double>::epsilon()) {
         Res.Column.push_back(j);
         Res.Values.push_back(sum);
         rowNZ++;
       }
     }
-    Res.RowInd.push_back(rowNZ + Res.RowInd[i]);
+    Res.RowInd.push_back(rowNZ + Res.RowInd.at(i));
   }
   Res.VCount = Res.Column.size();
   return Res;
