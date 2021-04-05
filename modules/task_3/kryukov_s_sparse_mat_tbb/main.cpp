@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include "tbb/tick_count.h"
 #include "./sparsemat_tbb.h"
 
 TEST(tbb_version, correct_transpose_mat) {
@@ -70,6 +71,27 @@ TEST(tbb_version, check_multiplic2) {
     SparseMatResult = multiplicateMatrix(SparseMat1, SparseMat2);
     std::vector<std::complex<double>> rightVal = {};
     ASSERT_EQ(SparseMatResult.val, rightVal);
+}
+
+TEST(tbb_version, check_multiplic_time) {
+    int size = 2000;
+    crs_mat SparseMat1 = genDiagonalSparseMat(size);
+    crs_mat SparseMat2 = genDiagonalSparseMat(size);
+
+    auto begin = tbb::tick_count::now();
+    crs_mat SparseMatResult = multiplicateMatrix(SparseMat1, SparseMat2);
+    auto end = tbb::tick_count::now();
+    std::cout << "Seq time = " << (end - begin).seconds() << "\n";
+
+    begin = tbb::tick_count::now();
+    crs_mat SparseMatResult_tbb = multiplicateMatrixTBB(SparseMat1,
+        SparseMat2);
+    end = tbb::tick_count::now();
+    std::cout << "TBB time = " << (end - begin).seconds() << "\n";
+
+    EXPECT_EQ(SparseMatResult.val, SparseMatResult_tbb.val);
+    EXPECT_EQ(SparseMatResult.rowNum, SparseMatResult_tbb.rowNum);
+    EXPECT_EQ(SparseMatResult.colNum, SparseMatResult_tbb.colNum);
 }
 
 int main(int argc, char **argv) {
